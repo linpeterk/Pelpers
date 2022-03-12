@@ -1,5 +1,9 @@
 package com.pelp
+import com.google.android.gms.maps.GoogleMap
 
+
+
+import android.util.Log
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -21,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.rememberCameraPositionState
@@ -36,7 +41,8 @@ import com.google.maps.android.compose.rememberCameraPositionState
 @Composable
 fun MainScreen(){
 
-    Box(modifier = Modifier.fillMaxSize()
+    Box(modifier = Modifier
+        .fillMaxSize()
         .fillMaxHeight()
         .fillMaxWidth()
     ){
@@ -45,22 +51,29 @@ fun MainScreen(){
                 .weight(1f)
 
             ) {
-                val hit = LatLng(34.25, 118.24)
-                val cali = LatLng(34.05, 118.24)
+                val hit = LatLng(34.05, -118.24)
+                val cali = LatLng(34.05, -118.24)
                 val cameraPositionState = rememberCameraPositionState {
-                    position = CameraPosition.fromLatLngZoom(cali, 10f)
+                    position = CameraPosition.fromLatLngZoom(cali, 15f)
                 }
                 GoogleMap(
                     modifier = Modifier.fillMaxSize(),
                     cameraPositionState = cameraPositionState
                 ) {
-                    Marker(
+                    val markerClick: (Marker) -> Boolean = {
 
+                        false
+                    }
+
+                    Marker(
                         position = hit,
                         title = "California",
-                        snippet = "Marker in California"
+                        snippet = "Marker in California",
+                        onClick = markerClick
                     )
+
                 }
+
             }
             Box(modifier = Modifier
                 .weight(0.8f)
@@ -70,18 +83,20 @@ fun MainScreen(){
             }
         }
 
-
     }
-
-
-
-
 
 }
 
 @Composable
-fun Map(){
+fun makeMarkers(){
+    val hit = LatLng(34.25, 118.24)
+    Marker(
+        position = hit,
+        title = "California",
+        snippet = "Marker in California",
 
+
+    )
 }
 
 
@@ -96,11 +111,9 @@ fun testingScrolls(){
             //  .background(Color.Black)
             .padding(5.dp)
             .fillMaxHeight(1f)
-           // .offset(y=300.dp)
-            .verticalScroll(scrollState)
-
-            ,
-           // .offset(y = 500.dp)
+            // .offset(y=300.dp)
+            .verticalScroll(scrollState),
+        // .offset(y = 500.dp)
 
     ) {
 
@@ -114,7 +127,8 @@ fun testingScrolls(){
                 Card(
                     modifier = Modifier
                         .height(40.dp),
-                    shape = RoundedCornerShape(3.dp)
+                    shape = RoundedCornerShape(3.dp),
+
                     // .fillMaxWidth()
 
                 ) {

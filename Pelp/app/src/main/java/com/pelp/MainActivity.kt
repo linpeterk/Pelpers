@@ -21,6 +21,7 @@ import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.pelp.ui.theme.PelpTheme
+import Examples.*
 
 class MainActivity : ComponentActivity() {
 
