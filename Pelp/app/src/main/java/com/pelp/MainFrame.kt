@@ -35,25 +35,46 @@ import com.google.maps.android.compose.rememberCameraPositionState
 */
 @Composable
 fun MainScreen(){
-    Box(modifier = Modifier.fillMaxSize()){
-        val hit = LatLng(34.25, 118.24)
-        val cali = LatLng(34.05, 118.24)
-        val cameraPositionState = rememberCameraPositionState{
-            position= CameraPosition.fromLatLngZoom(cali, 10f)
-        }
-        GoogleMap(
-            modifier = Modifier.fillMaxSize(),
-            cameraPositionState = cameraPositionState
-        ){
-            Marker(
 
-                position=hit,
-                title="California",
-                snippet = "Marker in California"
-            )
+    Box(modifier = Modifier.fillMaxSize()
+        .fillMaxHeight()
+        .fillMaxWidth()
+    ){
+        Column() {
+            Box(modifier = Modifier
+                .weight(1f)
+
+            ) {
+                val hit = LatLng(34.25, 118.24)
+                val cali = LatLng(34.05, 118.24)
+                val cameraPositionState = rememberCameraPositionState {
+                    position = CameraPosition.fromLatLngZoom(cali, 10f)
+                }
+                GoogleMap(
+                    modifier = Modifier.fillMaxSize(),
+                    cameraPositionState = cameraPositionState
+                ) {
+                    Marker(
+
+                        position = hit,
+                        title = "California",
+                        snippet = "Marker in California"
+                    )
+                }
+            }
+            Box(modifier = Modifier
+                .weight(0.8f)
+
+            ){
+                testingScrolls()
+            }
         }
+
+
     }
-    testingScrolls()
+
+
+
 
 
 }
@@ -67,14 +88,16 @@ fun Map(){
 
 @Composable
 fun testingScrolls(){
-
+    var scrollState:ScrollState =  rememberScrollState()
     //val gradient = Brush.verticalGradient(0f to Color.Gray, 1000f to Color.White)
     Box(
+
         modifier = Modifier
-            //   .background(Color.Transparent)
+            //  .background(Color.Black)
             .padding(5.dp)
-            .offset(y=300.dp)
-            .verticalScroll(rememberScrollState())
+            .fillMaxHeight(1f)
+           // .offset(y=300.dp)
+            .verticalScroll(scrollState)
 
             ,
            // .offset(y = 500.dp)
