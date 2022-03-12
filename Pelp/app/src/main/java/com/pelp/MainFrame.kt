@@ -14,6 +14,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
@@ -22,7 +23,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
@@ -49,9 +53,18 @@ val church = LatLng(34.05693923331048, -118.23957346932366
 )
 
 val destList = listOf(caliMuseum, toyDistrict, brew,dodgerS,church)
-
+val destObject = mutableListOf<LocationsExample>()
+val strName = listOf("Japanese American National Museum " , "Toy District", "Brewery", "Dodger Stadium","Our Lady Queen of Angels" )
+@Composable
+fun init(){
+    for (i in destList.indices){
+        var a:LocationsExample = LocationsExample(strName[i], destList[i])
+        destObject.add(a)
+    }
+}
 @Composable
 fun MainScreen(){
+   init()
     cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(caliMuseum, 15f)
     }
@@ -136,6 +149,9 @@ fun repeatCard()
 
 }
 
+fun anotherFunction(){
+
+}
 @Composable
 fun testingScrolls(){
 
@@ -146,8 +162,9 @@ fun testingScrolls(){
 
         modifier = Modifier
             //  .background(Color.Black)
-            .padding(5.dp)
+            .fillMaxWidth()
             .fillMaxHeight(1f)
+            .padding(5.dp)
             // .offset(y=300.dp)
             .verticalScroll(scrollState),
         // .offset(y = 500.dp)
@@ -162,47 +179,51 @@ fun testingScrolls(){
           var  count:Int=0;
             repeat(
                times= destList.size,
-             //   action = { i:Int-> return count=i }
+
             ) {
                 Card(
                     modifier = Modifier
                         .height(40.dp)
-                        .clickable(onClick = { cameraPositionState!!.position=CameraPosition.fromLatLngZoom(caliMuseum, 15f) } ),
-
+                        .clickable(onClick = { cameraPositionState!!.position=CameraPosition.fromLatLngZoom(destObject[it].loc, 15f) } ),
 
                     // .fillMaxWidth()
 
                 ) {
                     Text(
-                        "Title Bar",
+                        text=destObject[it].name,
                         modifier = Modifier
                             .border(4.dp, Color.LightGray)
                             .background(Color.White)
                             .padding(5.dp)
                             .height(20.dp)
                             .fillMaxWidth()
-                            .clickable { cameraPositionState!!.position=CameraPosition.fromLatLngZoom(caliMuseum, 15f) }
+                            .clickable { cameraPositionState!!.position=CameraPosition.fromLatLngZoom(destObject[it].loc, 15f) },
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 18.sp,
+                        textAlign = TextAlign.Center
+
+
                     )
                 }
                 Card(
                     modifier = Modifier
                         .height(128.dp)
                                 //Toast.makeText(context, "TestA", Toast.LENGTH_LONG) toast syntax
-                    .clickable(onClick = { cameraPositionState!!.position=CameraPosition.fromLatLngZoom(caliMuseum, 15f) } ),
+                    .clickable(onClick = { cameraPositionState!!.position=CameraPosition.fromLatLngZoom(destObject[it].loc, 15f) } ),
                     shape = RoundedCornerShape(3.dp)
 
                     // .fillMaxWidth()
 
                 ) {
                     Text(
-                        "Generate Stuff Here",
+                        text="Stuff about ${destObject[it].name} ETC",
                         modifier = Modifier
                             .border(4.dp, Color.LightGray)
                             .background(Color.White)
-                            .padding(24.dp)
+                            .padding(14.dp)
                             .height(150.dp)
                             .fillMaxWidth()
-                            .clickable(onClick = { cameraPositionState!!.position=CameraPosition.fromLatLngZoom(caliMuseum, 15f) })
+                            .clickable(onClick = { cameraPositionState!!.position=CameraPosition.fromLatLngZoom(destObject[it].loc, 15f) })
                     )
                 }
             }
