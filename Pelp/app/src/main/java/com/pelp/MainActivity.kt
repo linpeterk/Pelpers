@@ -29,12 +29,11 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-<<<<<<< Updated upstream
-=======
+
             // A surface container using the 'background' color from the theme
             //navController = rememberNavController()
             //SetupNavGraph(navController = navController)
->>>>>>> Stashed changes
+
 
             // A surface container using the 'background' color from the theme
            // navController = rememberNavController()
@@ -42,12 +41,12 @@ class MainActivity : ComponentActivity() {
             //ExpertReview()
            // LandingPageScreen(navController = navController)
             // testingScrolls()
-<<<<<<< Updated upstream
+
             //MainScreen()
-=======
+
             //SortScreen()
             //SquareImage ()
->>>>>>> Stashed changes
+
             //LoginScreen(navController)
             // MainScreen()
             MainScreen()

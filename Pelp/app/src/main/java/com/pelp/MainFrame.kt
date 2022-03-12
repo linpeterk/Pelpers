@@ -4,6 +4,7 @@ import com.google.android.gms.maps.GoogleMap
 
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -26,6 +27,7 @@ import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
+import com.google.maps.android.compose.CameraPositionState
 import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.rememberCameraPositionState
@@ -38,9 +40,21 @@ import com.google.maps.android.compose.rememberCameraPositionState
         )
         TopAppBar(title= { }, Modifier.height(20.dp))
 */
+var cameraPositionState:CameraPositionState?=null
+val caliMuseum = LatLng(34.05, -118.24)
+val toyDistrict = LatLng(34.047, -118.243)
+val brew = LatLng(34.051, -118.234)
+val dodgerS = LatLng(34.073, -118.241)
+val church = LatLng(34.05693923331048, -118.23957346932366
+)
+
+val destList = listOf(caliMuseum, toyDistrict, brew,dodgerS,church)
+
 @Composable
 fun MainScreen(){
-
+    cameraPositionState = rememberCameraPositionState {
+        position = CameraPosition.fromLatLngZoom(caliMuseum, 15f)
+    }
     Box(modifier = Modifier
         .fillMaxSize()
         .fillMaxHeight()
@@ -51,26 +65,14 @@ fun MainScreen(){
                 .weight(1f)
 
             ) {
-                val hit = LatLng(34.05, -118.24)
-                val cali = LatLng(34.05, -118.24)
-                val cameraPositionState = rememberCameraPositionState {
-                    position = CameraPosition.fromLatLngZoom(cali, 15f)
-                }
+
+
                 GoogleMap(
                     modifier = Modifier.fillMaxSize(),
-                    cameraPositionState = cameraPositionState
+                    cameraPositionState = cameraPositionState!!,
+                    onMapLoaded = {}
                 ) {
-                    val markerClick: (Marker) -> Boolean = {
-
-                        false
-                    }
-
-                    Marker(
-                        position = hit,
-                        title = "California",
-                        snippet = "Marker in California",
-                        onClick = markerClick
-                    )
+                    makeMarkers()
 
                 }
 
@@ -87,23 +89,58 @@ fun MainScreen(){
 
 }
 
+
+
 @Composable
 fun makeMarkers(){
-    val hit = LatLng(34.25, 118.24)
+
+    val markerClick: (Marker) -> Boolean = {
+        false
+    }
     Marker(
-        position = hit,
+        position = caliMuseum,
+        title = "Japanese American National Museum",
+        snippet = "Marker in California",
+        onClick = markerClick
+    )
+    Marker(
+        position = toyDistrict,
         title = "California",
         snippet = "Marker in California",
+        onClick = markerClick
+    )
 
-
+    Marker(
+        position = brew,
+        title = "California",
+        snippet = "Marker in California",
+        onClick = markerClick
+    )
+    Marker(
+        position = dodgerS,
+        title = "California",
+        snippet = "Marker in California",
+        onClick = markerClick
+    )
+    Marker(
+        position = church,
+        title = "California",
+        snippet = "Marker in California",
+        onClick = markerClick
     )
 }
 
+@Composable
+fun repeatCard()
+{
 
+}
 
 @Composable
 fun testingScrolls(){
+
     var scrollState:ScrollState =  rememberScrollState()
+    val context = LocalContext.current
     //val gradient = Brush.verticalGradient(0f to Color.Gray, 1000f to Color.White)
     Box(
 
@@ -122,12 +159,16 @@ fun testingScrolls(){
                 //.verticalScroll(rememberScrollState())
 
                 ) {
-
-            repeat(10) {
+          var  count:Int=0;
+            repeat(
+               times= destList.size,
+             //   action = { i:Int-> return count=i }
+            ) {
                 Card(
                     modifier = Modifier
-                        .height(40.dp),
-                    shape = RoundedCornerShape(3.dp),
+                        .height(40.dp)
+                        .clickable(onClick = { cameraPositionState!!.position=CameraPosition.fromLatLngZoom(caliMuseum, 15f) } ),
+
 
                     // .fillMaxWidth()
 
@@ -140,12 +181,16 @@ fun testingScrolls(){
                             .padding(5.dp)
                             .height(20.dp)
                             .fillMaxWidth()
+                            .clickable { cameraPositionState!!.position=CameraPosition.fromLatLngZoom(caliMuseum, 15f) }
                     )
                 }
                 Card(
                     modifier = Modifier
-                        .height(128.dp),
+                        .height(128.dp)
+                                //Toast.makeText(context, "TestA", Toast.LENGTH_LONG) toast syntax
+                    .clickable(onClick = { cameraPositionState!!.position=CameraPosition.fromLatLngZoom(caliMuseum, 15f) } ),
                     shape = RoundedCornerShape(3.dp)
+
                     // .fillMaxWidth()
 
                 ) {
@@ -157,6 +202,7 @@ fun testingScrolls(){
                             .padding(24.dp)
                             .height(150.dp)
                             .fillMaxWidth()
+                            .clickable(onClick = { cameraPositionState!!.position=CameraPosition.fromLatLngZoom(caliMuseum, 15f) })
                     )
                 }
             }
