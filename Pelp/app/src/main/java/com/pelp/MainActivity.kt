@@ -44,10 +44,10 @@ class MainActivity : ComponentActivity() {
             //MainScreen()
 
             //SortScreen()
-            //SquareImage ()
+            SquareImage ()
 
             //LoginScreen(navController)
-             MainScreen()
+             //MainScreen()
 
 
         }

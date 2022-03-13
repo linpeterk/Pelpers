@@ -120,8 +120,8 @@ fun SquareImage () {
 
                     Column() {
                         FloatingActionButton(onClick = { /*TODO*/ },modifier=Modifier.scale(.8F),backgroundColor = MaterialTheme.colors.surface) {
-                            Image(painter = painterResource(R.drawable.runer_silhouette_running_fast),
-                                contentDescription ="Emergency!",
+                            Image(painter = painterResource(R.drawable.check),
+                                contentDescription ="Expert Verified!",
                                 modifier = Modifier.background(Color.Transparent).scale(.6F))
                         }
                         //Text(text = "Hello")
@@ -131,9 +131,9 @@ fun SquareImage () {
 
                     Column() {
                         FloatingActionButton(onClick = { /*TODO*/ },modifier=Modifier.scale(.8F),backgroundColor = MaterialTheme.colors.surface) {
-                            Image(painter = painterResource(R.drawable.check),
-                                contentDescription ="Expert Verified!",
-                                modifier = Modifier.background(Color.Transparent).scale(.6F))
+                            Image(painter = painterResource(R.drawable.runer_silhouette_running_fast),
+                                contentDescription ="Emergency!",
+                                modifier = Modifier.background(Color.Transparent).scale(.8F))
                         }
                         //Text(text = "Hello")
                     }

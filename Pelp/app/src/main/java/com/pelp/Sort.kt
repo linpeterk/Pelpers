@@ -21,7 +21,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.compose.CameraPositionState
+import com.google.maps.android.compose.GoogleMap
 import com.pelp.ui.theme.lightBlue
+
+
+
+
 
 @Preview
 @Composable
@@ -30,17 +37,19 @@ fun PreviewMap(){
 
 }
 
-
 @Composable
 fun SortScreen(){
 
-    Box(modifier= Modifier.fillMaxSize()){
-        Image(painter = painterResource(R.drawable.fakemap), contentDescription ="Fake Map",
-            modifier=Modifier.fillMaxSize()
-        )
+    Box(/*modifier= Modifier.fillMaxSize()*/){
+        GoogleMap(modifier=Modifier.fillMaxSize()){
+
+        }
+
+//        Image(painter = painterResource(R.drawable.fakemap), contentDescription ="Fake Map",
+//            modifier=Modifier.fillMaxSize())
         TopAppBar(title = {},Modifier.height(60.dp))
     }
-    //ScrollScreen()
+
     IconBox()
 }
 
@@ -60,18 +69,9 @@ fun IconBox(){
                     FloatingActionButton(onClick = { /*TODO*/ },modifier=Modifier.scale(.7F),backgroundColor = MaterialTheme.colors.surface) {
                         Image(painter = painterResource(R.drawable.sort_down),
                             contentDescription ="Sort!",
-                            modifier = Modifier.background(Color.Transparent).scale(.5F))
-                    }
-                    //Text(text = "Hello")
-                }
-
-                Spacer(modifier = Modifier.width(25.dp))
-
-                Column() {
-                    FloatingActionButton(onClick = { /*TODO*/ },modifier=Modifier.scale(.7F),backgroundColor = MaterialTheme.colors.surface) {
-                        Image(painter = painterResource(R.drawable.runer_silhouette_running_fast),
-                            contentDescription ="Emergency!",
-                            modifier = Modifier.background(Color.Transparent).scale(.5F))
+                            modifier = Modifier
+                                .background(Color.Transparent)
+                                .scale(.5F))
                     }
                     //Text(text = "Hello")
                 }
@@ -82,7 +82,22 @@ fun IconBox(){
                     FloatingActionButton(onClick = { /*TODO*/ },modifier=Modifier.scale(.7F),backgroundColor = MaterialTheme.colors.surface) {
                         Image(painter = painterResource(R.drawable.check),
                             contentDescription ="Expert Verified!",
-                            modifier = Modifier.background(Color.Transparent).scale(.5F))
+                            modifier = Modifier
+                                .background(Color.Transparent)
+                                .scale(.5F))
+                    }
+                    //Text(text = "Hello")
+                }
+
+                Spacer(modifier = Modifier.width(25.dp))
+
+                Column() {
+                    FloatingActionButton(onClick = { /*TODO*/ },modifier=Modifier.scale(.7F),backgroundColor = MaterialTheme.colors.surface) {
+                        Image(painter = painterResource(R.drawable.runer_silhouette_running_fast),
+                            contentDescription ="Emergency!",
+                            modifier = Modifier
+                                .background(Color.Transparent)
+                                .scale(.8F))
                     }
                     //Text(text = "Hello")
                 }
@@ -93,7 +108,9 @@ fun IconBox(){
                     FloatingActionButton(onClick = { /*TODO*/ },modifier = Modifier.scale(.7F),backgroundColor = MaterialTheme.colors.surface) {
                         Image(painter = painterResource(R.drawable.share),
                             contentDescription ="Expert Verified!",
-                            modifier = Modifier.background(Color.Transparent).scale(.5F))
+                            modifier = Modifier
+                                .background(Color.Transparent)
+                                .scale(.5F))
                     }
                     //Text(text = "Hello")
                 }
@@ -104,7 +121,9 @@ fun IconBox(){
                     FloatingActionButton(onClick = { /*TODO*/ },modifier=Modifier.scale(.7F),backgroundColor = MaterialTheme.colors.surface) {
                         Image(painter = painterResource(R.drawable.profile_user),
                             contentDescription ="Profile!",
-                            modifier = Modifier.background(Color.Transparent).scale(.5F))
+                            modifier = Modifier
+                                .background(Color.Transparent)
+                                .scale(.5F))
                     }
                     //Text(text = "Hello")
                 }
@@ -119,13 +138,15 @@ fun IconBox(){
             .fillMaxWidth(),
             shape = RoundedCornerShape(4.dp),
             Color.White){
-                val checkedState= remember { mutableStateOf(true) }
+            val checkedState= remember { mutableStateOf(true) }
             Column() {
                 Button(
                     onClick = {
                         //dialogState.value = true
                     },
-                    modifier = Modifier.padding(16.dp).fillMaxWidth(),
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .fillMaxWidth(),
                     shape = RoundedCornerShape(8.dp),
                     colors = ButtonDefaults.buttonColors(backgroundColor = lightBlue)
                 ) {
@@ -145,7 +166,9 @@ fun IconBox(){
                     onClick = {
                         //dialogState.value = true
                     },
-                    modifier = Modifier.padding(16.dp).fillMaxWidth(),
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .fillMaxWidth(),
                     shape = RoundedCornerShape(8.dp),
                     colors = ButtonDefaults.buttonColors(backgroundColor = lightBlue)
                 ) {
@@ -165,7 +188,9 @@ fun IconBox(){
                     onClick = {
                         //dialogState.value = true
                     },
-                    modifier = Modifier.padding(16.dp).fillMaxWidth(),
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .fillMaxWidth(),
                     shape = RoundedCornerShape(8.dp),
                     colors = ButtonDefaults.buttonColors(backgroundColor = lightBlue)
                 ) {
@@ -183,8 +208,8 @@ fun IconBox(){
 //                )
             }
 
-            
-            
+
+
         }
     }
 }
