@@ -41,14 +41,14 @@ class MainActivity : ComponentActivity() {
             //ExpertReview()
            // LandingPageScreen(navController = navController)
             // testingScrolls()
-
-            MainScreen()
+           // searchAddress()
+            //MainScreen()
 
             //SortScreen()
             //SquareImage ()
 
             //LoginScreen(navController)
-             //MainScreen()
+             MainScreen()
 
 
         }

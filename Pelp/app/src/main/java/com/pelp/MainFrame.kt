@@ -1,6 +1,8 @@
 package com.pelp
 
 
+import android.content.Context
+import android.location.Address
 import android.location.Geocoder
 import android.util.Log
 import android.widget.Toast
@@ -261,7 +263,7 @@ fun MakeGoogleMap( makeMarker: Boolean = false, obj:MutableList<LocationsExample
     cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(caliMuseum, 15f)
     }
-
+    val contex=LocalContext.current
 
     GoogleMap(
         modifier = Modifier.fillMaxSize(),
@@ -272,10 +274,12 @@ fun MakeGoogleMap( makeMarker: Boolean = false, obj:MutableList<LocationsExample
         },
         onMapLongClick = {
             Log.d(TAG, "lat is : ${it.latitude}")
-
-            var a:LocationsExample = LocationsExample(it.toString(), LatLng(it.latitude, it.longitude))
+            var str:String =  reverseGeocoder(contex, it.latitude, it.longitude)
+            var a:LocationsExample = LocationsExample( str, LatLng(it.latitude, it.longitude))
             destObject.add(a)
+
             cardCount.value++
+
         }
 
 
@@ -287,6 +291,48 @@ fun MakeGoogleMap( makeMarker: Boolean = false, obj:MutableList<LocationsExample
     }
 }
 
+fun reverseGeocoder(context:Context, lat:Double, lng:Double):String{
+
+    val mGeocoder = Geocoder(context, Locale.getDefault())
+    var addressString= ""
+
+    // Reverse-Geocoding starts
+    try {
+        val addressList: List<Address> = mGeocoder.getFromLocation(lat, lng, 1)
+
+        // use your lat, long value here
+        if (addressList != null && addressList.isNotEmpty()) {
+            val address = addressList[0]
+            var sb:String =""
+
+
+            return address.getAddressLine(0)
+
+            // Various Parameters of an Address are appended
+            // to generate a complete Address
+//            if (address.premises != null)
+//                sb.append(address.premises).append(", ")
+//
+//            sb.append(address.subAdminArea).append("\n")
+//            sb.append(address.locality).append(", ")
+//            sb.append(address.adminArea).append(", ")
+//            sb.append(address.countryName).append(", ")
+//            sb.append(address.postalCode)
+
+            // StringBuilder sb is converted into a string
+            // and this value is assigned to the
+            // initially declared addressString string.
+            addressString = sb.toString()
+
+        }
+    } catch (e: IOException) {
+        Toast.makeText(context,"Unable connect to Geocoder",Toast.LENGTH_LONG).show()
+    }
+
+    // Finally, the address string is posted in the textView with LatLng.
+    return addressString
+
+}
 //marketCount not in used, make marker base on size of init destObject
 @Composable
 fun makeMarkers(list:MutableList<LocationsExample> = destObject){
@@ -375,7 +421,9 @@ fun MakeScrollComponents(){
                 //.verticalScroll(rememberScrollState())
 
                 ) {
-          var  count:Int=0;
+            var  destObjSize:Int
+            if(destObject.count()>0){
+            destObjSize=destObject.count()-1}else destObjSize = 0
             repeat(
                times= cardCount.value,
 
@@ -385,7 +433,7 @@ fun MakeScrollComponents(){
                         .height(40.dp)
                         .clickable(onClick = {
                             cameraPositionState!!.position =
-                                CameraPosition.fromLatLngZoom(destObject[it].loc, 15f)
+                                CameraPosition.fromLatLngZoom(destObject[destObjSize - it].loc, 15f)
 
                         }),
 
@@ -394,7 +442,7 @@ fun MakeScrollComponents(){
 
                 ) {
                     Text(
-                        text=destObject[it].name,
+                        text=destObject[destObjSize-it].name,
                         modifier = Modifier
                             .border(4.dp, Color.LightGray)
                             .background(Color.White)
@@ -415,7 +463,7 @@ fun MakeScrollComponents(){
                         //Toast.makeText(context, "TestA", Toast.LENGTH_LONG) toast syntax
                         .clickable(onClick = {
                             cameraPositionState!!.position =
-                                CameraPosition.fromLatLngZoom(destObject[it].loc, 15f)
+                                CameraPosition.fromLatLngZoom(destObject[destObjSize - it].loc, 15f)
                         }),
 
                     shape = RoundedCornerShape(3.dp)
@@ -424,7 +472,7 @@ fun MakeScrollComponents(){
 
                 ) {
                     Text(
-                        text="Stuff about ${destObject[it].name} ETC",
+                        text="Stuff about ${destObject[destObjSize-it].name} ETC",
                         modifier = Modifier
                             .border(4.dp, Color.LightGray)
                             .background(Color.White)
