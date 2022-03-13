@@ -126,6 +126,8 @@ fun MenuTab(){
             Spacer(modifier = Modifier.width(10.dp))
             Column(modifier = Modifier
                 .padding(horizontal = 15.dp)
+
+
             ) {
                 FloatingActionButton(
                     onClick = { /*TODO*/ },
@@ -147,7 +149,10 @@ fun MenuTab(){
           //  Spacer(modifier = Modifier.width(25.dp))
 
             Column(modifier = Modifier
-                .padding(horizontal = 15.dp )) {
+                .padding(horizontal = 15.dp)
+
+
+            ) {
                 FloatingActionButton(
                     onClick = { /*TODO*/ },
                     modifier = Modifier.scale(.7F),
@@ -168,7 +173,9 @@ fun MenuTab(){
 
 
             Column(modifier = Modifier
-                .padding(horizontal = 15.dp )) {
+                .padding(horizontal = 15.dp )
+
+            ) {
                 FloatingActionButton(
                     onClick = { /*TODO*/ },
                     modifier = Modifier.scale(.7F),
@@ -188,7 +195,8 @@ fun MenuTab(){
 
 
             Column(modifier = Modifier
-                .padding(horizontal = 15.dp ) ) {
+                .padding(horizontal = 15.dp )
+                ) {
                 FloatingActionButton(
                     onClick = { /*TODO*/ },
                     modifier = Modifier.scale(.7F),
@@ -208,7 +216,8 @@ fun MenuTab(){
 
 
             Column(modifier = Modifier
-                .padding(horizontal = 15.dp )) {
+                .padding(horizontal = 15.dp )
+                ) {
                 FloatingActionButton(
                     onClick = { /*TODO*/ },
                     modifier = Modifier.scale(.7F),
@@ -225,7 +234,8 @@ fun MenuTab(){
                 //Text(text = "Hello")
             }
             Column(modifier = Modifier
-                .padding(horizontal = 15.dp )) {
+                .padding(horizontal = 15.dp )
+               ) {
                 FloatingActionButton(
                     onClick = { /*TODO*/ },
                     modifier = Modifier.scale(.7F),
