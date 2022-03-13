@@ -79,22 +79,14 @@ fun MainScreen(){
 
             ) {
 
-
-                GoogleMap(
-                    modifier = Modifier.fillMaxSize(),
-                    cameraPositionState = cameraPositionState!!,
-                    onMapLoaded = {}
-                ) {
-                    makeMarkers()
-
-                }
+                MakeGoogleMap(true)
 
             }
             Box(modifier = Modifier
                 .weight(0.8f)
 
             ){
-                testingScrolls()
+                MakeScrollComponents()
             }
         }
 
@@ -103,13 +95,37 @@ fun MainScreen(){
 }
 
 
-
 @Composable
-fun makeMarkers(){
+//pass in true if you want to make markers
+fun MakeGoogleMap(makeMarker:Boolean){
+
+    GoogleMap(
+        modifier = Modifier.fillMaxSize(),
+        cameraPositionState = cameraPositionState!!,
+        onMapLoaded = {}
+    ) {
+        if(makeMarker)
+        makeMarkers(destObject.count())
+
+    }
+}
+
+//marketCount not in used, make marker base on size of init destObject
+@Composable
+fun makeMarkers(markerCount:Int){
 
     val markerClick: (Marker) -> Boolean = {
         false
     }
+    for (obj in destObject){
+        Marker(
+            position = obj.loc,
+            title = obj.name,
+            snippet = "Marker in ${obj.name}",
+            onClick = markerClick
+        )
+    }
+    /*
     Marker(
         position = caliMuseum,
         title = "Japanese American National Museum",
@@ -141,6 +157,8 @@ fun makeMarkers(){
         snippet = "Marker in California",
         onClick = markerClick
     )
+    */
+
 }
 
 @Composable
@@ -153,7 +171,7 @@ fun anotherFunction(){
 
 }
 @Composable
-fun testingScrolls(){
+fun MakeScrollComponents(){
 
     var scrollState:ScrollState =  rememberScrollState()
     val context = LocalContext.current
