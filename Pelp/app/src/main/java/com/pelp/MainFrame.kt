@@ -1,25 +1,17 @@
 package com.pelp
-import com.google.android.gms.maps.GoogleMap
 
 
-
+import android.location.Geocoder
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -27,7 +19,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
@@ -35,6 +26,9 @@ import com.google.maps.android.compose.CameraPositionState
 import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.rememberCameraPositionState
+import java.io.IOException
+import java.util.*
+
 
 /*
         Image(
@@ -45,17 +39,20 @@ import com.google.maps.android.compose.rememberCameraPositionState
         TopAppBar(title= { }, Modifier.height(20.dp))
 */
 var cameraPositionState:CameraPositionState?=null
+
 val caliMuseum = LatLng(34.05, -118.24)
 val toyDistrict = LatLng(34.047, -118.243)
 val brew = LatLng(34.051, -118.234)
 val dodgerS = LatLng(34.073, -118.241)
 val church = LatLng(34.05693923331048, -118.23957346932366
 )
+private const val TAG = "MapSampleActivity"
 
 val destList = listOf(caliMuseum, toyDistrict, brew,dodgerS,church)
 val destObject = mutableListOf<LocationsExample>()
 val strName = listOf("Japanese American National Museum " , "Toy District", "Brewery", "Dodger Stadium","Our Lady Queen of Angels" )
-@Composable
+var cardCount:MutableState<Int> = mutableStateOf(destObject.count())
+
 fun init(){
     for (i in destList.indices){
         var a:LocationsExample = LocationsExample(strName[i], destList[i])
@@ -64,7 +61,7 @@ fun init(){
 }
 @Composable
 fun MainScreen(){
-
+    cardCount =  remember {  mutableStateOf(destObject.count()) }
 
     Box(modifier = Modifier
         .fillMaxSize()
@@ -255,32 +252,50 @@ fun MenuTab(){
     }
 }
 
+
+
+//val destObject = mutableListOf<LocationsExample>()
 @Composable
 //pass in true if you want to make markers
-fun MakeGoogleMap(makeMarker:Boolean){
+fun MakeGoogleMap( makeMarker: Boolean = false, obj:MutableList<LocationsExample> = destObject){
     cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(caliMuseum, 15f)
     }
-    init()
+
+
     GoogleMap(
         modifier = Modifier.fillMaxSize(),
         cameraPositionState = cameraPositionState!!,
-        onMapLoaded = {}
+        onMapLoaded = {},
+        onPOIClick = {
+            Log.d(TAG, "POI clicked: ${it.name}")
+        },
+        onMapLongClick = {
+            Log.d(TAG, "lat is : ${it.latitude}")
+
+            var a:LocationsExample = LocationsExample(it.toString(), LatLng(it.latitude, it.longitude))
+            destObject.add(a)
+            cardCount.value++
+        }
+
+
     ) {
         if(makeMarker)
-        makeMarkers(destObject.count())
+            makeMarkers(obj)
+
 
     }
 }
 
 //marketCount not in used, make marker base on size of init destObject
 @Composable
-fun makeMarkers(markerCount:Int){
+fun makeMarkers(list:MutableList<LocationsExample> = destObject){
 
     val markerClick: (Marker) -> Boolean = {
         false
     }
-    for (obj in destObject){
+    if(cardCount.value>0){}
+    for (obj in list){
         Marker(
             position = obj.loc,
             title = obj.name,
@@ -333,11 +348,14 @@ fun repeatCard()
 fun anotherFunction(){
 
 }
+
 @Composable
 fun MakeScrollComponents(){
 
     var scrollState:ScrollState =  rememberScrollState()
-    val context = LocalContext.current
+   // val context = LocalContext.current
+   // var textFieldCount by remember { mutableStateOf (destObject.count()) }
+
     //val gradient = Brush.verticalGradient(0f to Color.Gray, 1000f to Color.White)
     Box(
 
@@ -359,7 +377,7 @@ fun MakeScrollComponents(){
                 ) {
           var  count:Int=0;
             repeat(
-               times= destList.size,
+               times= cardCount.value,
 
             ) {
                 Card(
@@ -368,7 +386,9 @@ fun MakeScrollComponents(){
                         .clickable(onClick = {
                             cameraPositionState!!.position =
                                 CameraPosition.fromLatLngZoom(destObject[it].loc, 15f)
+
                         }),
+
 
                     // .fillMaxWidth()
 
@@ -379,12 +399,9 @@ fun MakeScrollComponents(){
                             .border(4.dp, Color.LightGray)
                             .background(Color.White)
                             .padding(5.dp)
-                            .height(20.dp)
                             .fillMaxWidth()
-                            .clickable {
-                                cameraPositionState!!.position =
-                                    CameraPosition.fromLatLngZoom(destObject[it].loc, 15f)
-                            },
+
+                            ,
                         fontWeight = FontWeight.Bold,
                         fontSize = 18.sp,
                         textAlign = TextAlign.Center
@@ -400,6 +417,7 @@ fun MakeScrollComponents(){
                             cameraPositionState!!.position =
                                 CameraPosition.fromLatLngZoom(destObject[it].loc, 15f)
                         }),
+
                     shape = RoundedCornerShape(3.dp)
 
                     // .fillMaxWidth()
@@ -411,12 +429,8 @@ fun MakeScrollComponents(){
                             .border(4.dp, Color.LightGray)
                             .background(Color.White)
                             .padding(14.dp)
-                            .height(150.dp)
                             .fillMaxWidth()
-                            .clickable(onClick = {
-                                cameraPositionState!!.position =
-                                    CameraPosition.fromLatLngZoom(destObject[it].loc, 15f)
-                            })
+
                     )
                 }
             }

@@ -38,7 +38,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.maps.android.compose.*
 import kotlinx.coroutines.launch
 
-private const val TAG = "MapSampleActivity"
+const val TAG = "MapSampleActivity"
 
 val singapore = LatLng(1.35, 103.87)
 val singapore2 = LatLng(1.40, 103.77)

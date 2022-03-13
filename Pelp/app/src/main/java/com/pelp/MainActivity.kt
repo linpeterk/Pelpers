@@ -28,23 +28,24 @@ class MainActivity : ComponentActivity() {
     lateinit var navController: NavHostController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        init() // Don't Comment this out!
         setContent {
-
+             // Don't Comment this out!
             // A surface container using the 'background' color from the theme
             //navController = rememberNavController()
             //SetupNavGraph(navController = navController)
 
             // A surface container using the 'background' color from the theme
-            navController = rememberNavController()
-            SetupNavGraph(navController = navController)
+           // navController = rememberNavController()
+            //SetupNavGraph(navController = navController)
             //ExpertReview()
            // LandingPageScreen(navController = navController)
             // testingScrolls()
 
-            //MainScreen()
+            MainScreen()
 
             //SortScreen()
-            SquareImage ()
+            //SquareImage ()
 
             //LoginScreen(navController)
              //MainScreen()
