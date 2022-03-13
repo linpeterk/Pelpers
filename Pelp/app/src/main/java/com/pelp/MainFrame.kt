@@ -64,10 +64,8 @@ fun init(){
 }
 @Composable
 fun MainScreen(){
-   init()
-    cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.fromLatLngZoom(caliMuseum, 15f)
-    }
+
+
     Box(modifier = Modifier
         .fillMaxSize()
         .fillMaxHeight()
@@ -98,7 +96,10 @@ fun MainScreen(){
 @Composable
 //pass in true if you want to make markers
 fun MakeGoogleMap(makeMarker:Boolean){
-
+    cameraPositionState = rememberCameraPositionState {
+        position = CameraPosition.fromLatLngZoom(caliMuseum, 15f)
+    }
+    init()
     GoogleMap(
         modifier = Modifier.fillMaxSize(),
         cameraPositionState = cameraPositionState!!,
