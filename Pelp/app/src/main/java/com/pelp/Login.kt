@@ -86,7 +86,14 @@ fun LoginScreen(
             shape = RoundedCornerShape(3.dp), modifier = Modifier.padding(10.dp)
 
         ) {
-            Button(onClick = { navController.navigate(route=Screen.Main.route) }, modifier = Modifier
+            Button(onClick = { navController.navigate(route=Screen.Main.route)
+            {
+                popUpTo(Screen.Main.route){
+                    inclusive=true
+
+                }
+            }
+                             }, modifier = Modifier
                 .width(350.dp)
                 .height(50.dp),
                 colors = ButtonDefaults.buttonColors(backgroundColor = lightBlue)
