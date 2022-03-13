@@ -9,15 +9,14 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
@@ -25,6 +24,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.android.gms.maps.MapView
@@ -77,9 +77,18 @@ fun MainScreen(){
 
             ) {
 
-                MakeGoogleMap(true)
+               MakeGoogleMap(true)
 
             }
+
+            Box(modifier = Modifier
+                .weight(0.15f)
+
+            ){
+                MenuTab()
+            }
+
+
             Box(modifier = Modifier
                 .weight(0.8f)
 
@@ -92,6 +101,149 @@ fun MainScreen(){
 
 }
 
+@Preview
+@Composable
+fun PreviewMainFrame()
+{
+    Box(modifier = Modifier
+
+        .fillMaxWidth(5f)
+    ){
+        MenuTab()
+    }
+}
+
+@Composable
+fun MenuTab(){
+    Box(modifier = Modifier
+
+    ) {
+        Row(
+            modifier = Modifier
+                .horizontalScroll(rememberScrollState())
+
+        ) {
+            Spacer(modifier = Modifier.width(10.dp))
+            Column(modifier = Modifier
+                .padding(horizontal = 15.dp)
+            ) {
+                FloatingActionButton(
+                    onClick = { /*TODO*/ },
+                    modifier = Modifier.scale(.7F),
+                    backgroundColor = MaterialTheme.colors.surface
+                ) {
+                    Image(
+                        painter = painterResource(R.drawable.sort_down),
+                        contentDescription = "Sort!",
+                        modifier = Modifier
+                            .background(Color.Transparent)
+                            .scale(.5F)
+                    )
+
+                }
+                //Text(text = "Hello")
+            }
+
+          //  Spacer(modifier = Modifier.width(25.dp))
+
+            Column(modifier = Modifier
+                .padding(horizontal = 15.dp )) {
+                FloatingActionButton(
+                    onClick = { /*TODO*/ },
+                    modifier = Modifier.scale(.7F),
+                    backgroundColor = MaterialTheme.colors.surface
+                ) {
+                    Image(
+                        painter = painterResource(R.drawable.runer_silhouette_running_fast),
+                        contentDescription = "Emergency!",
+                        modifier = Modifier
+                            .background(Color.Transparent)
+                            .scale(.5F)
+
+                    )
+                }
+                //Text(text = "Hello")
+            }
+
+
+
+            Column(modifier = Modifier
+                .padding(horizontal = 15.dp )) {
+                FloatingActionButton(
+                    onClick = { /*TODO*/ },
+                    modifier = Modifier.scale(.7F),
+                    backgroundColor = MaterialTheme.colors.surface
+                ) {
+                    Image(
+                        painter = painterResource(R.drawable.check),
+                        contentDescription = "Expert Verified!",
+                        modifier = Modifier
+                            .background(Color.Transparent)
+                            .scale(.5F)
+                    )
+                }
+                //Text(text = "Hello")
+            }
+
+
+
+            Column(modifier = Modifier
+                .padding(horizontal = 15.dp ) ) {
+                FloatingActionButton(
+                    onClick = { /*TODO*/ },
+                    modifier = Modifier.scale(.7F),
+                    backgroundColor = MaterialTheme.colors.surface
+                ) {
+                    Image(
+                        painter = painterResource(R.drawable.share),
+                        contentDescription = "Expert Verified!",
+                        modifier = Modifier
+                            .background(Color.Transparent)
+                            .scale(.5F)
+                    )
+                }
+                //Text(text = "Hello")
+            }
+
+
+
+            Column(modifier = Modifier
+                .padding(horizontal = 15.dp )) {
+                FloatingActionButton(
+                    onClick = { /*TODO*/ },
+                    modifier = Modifier.scale(.7F),
+                    backgroundColor = MaterialTheme.colors.surface
+                ) {
+                    Image(
+                        painter = painterResource(R.drawable.profile_user),
+                        contentDescription = "Profile!",
+                        modifier = Modifier
+                            .background(Color.Transparent)
+                            .scale(.5F)
+                    )
+                }
+                //Text(text = "Hello")
+            }
+            Column(modifier = Modifier
+                .padding(horizontal = 15.dp )) {
+                FloatingActionButton(
+                    onClick = { /*TODO*/ },
+                    modifier = Modifier.scale(.7F),
+                    backgroundColor = MaterialTheme.colors.surface
+                ) {
+                    Image(
+                        painter = painterResource(R.drawable.profile_user),
+                        contentDescription = "Profile!",
+                        modifier = Modifier
+                            .background(Color.Transparent)
+                            .scale(.5F)
+                    )
+                }
+                //Text(text = "Hello")
+            }
+        }
+    }
+}
 
 @Composable
 //pass in true if you want to make markers
@@ -203,7 +355,10 @@ fun MakeScrollComponents(){
                 Card(
                     modifier = Modifier
                         .height(40.dp)
-                        .clickable(onClick = { cameraPositionState!!.position=CameraPosition.fromLatLngZoom(destObject[it].loc, 15f) } ),
+                        .clickable(onClick = {
+                            cameraPositionState!!.position =
+                                CameraPosition.fromLatLngZoom(destObject[it].loc, 15f)
+                        }),
 
                     // .fillMaxWidth()
 
@@ -216,7 +371,10 @@ fun MakeScrollComponents(){
                             .padding(5.dp)
                             .height(20.dp)
                             .fillMaxWidth()
-                            .clickable { cameraPositionState!!.position=CameraPosition.fromLatLngZoom(destObject[it].loc, 15f) },
+                            .clickable {
+                                cameraPositionState!!.position =
+                                    CameraPosition.fromLatLngZoom(destObject[it].loc, 15f)
+                            },
                         fontWeight = FontWeight.Bold,
                         fontSize = 18.sp,
                         textAlign = TextAlign.Center
@@ -227,8 +385,11 @@ fun MakeScrollComponents(){
                 Card(
                     modifier = Modifier
                         .height(128.dp)
-                                //Toast.makeText(context, "TestA", Toast.LENGTH_LONG) toast syntax
-                    .clickable(onClick = { cameraPositionState!!.position=CameraPosition.fromLatLngZoom(destObject[it].loc, 15f) } ),
+                        //Toast.makeText(context, "TestA", Toast.LENGTH_LONG) toast syntax
+                        .clickable(onClick = {
+                            cameraPositionState!!.position =
+                                CameraPosition.fromLatLngZoom(destObject[it].loc, 15f)
+                        }),
                     shape = RoundedCornerShape(3.dp)
 
                     // .fillMaxWidth()
@@ -242,7 +403,10 @@ fun MakeScrollComponents(){
                             .padding(14.dp)
                             .height(150.dp)
                             .fillMaxWidth()
-                            .clickable(onClick = { cameraPositionState!!.position=CameraPosition.fromLatLngZoom(destObject[it].loc, 15f) })
+                            .clickable(onClick = {
+                                cameraPositionState!!.position =
+                                    CameraPosition.fromLatLngZoom(destObject[it].loc, 15f)
+                            })
                     )
                 }
             }
