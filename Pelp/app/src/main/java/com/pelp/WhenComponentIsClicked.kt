@@ -12,6 +12,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
@@ -24,7 +25,8 @@ import androidx.navigation.compose.rememberNavController
 @Preview
 @Composable
 fun Preview(){
-    SquareImage (navController = rememberNavController())
+
+   // SquareImage (navController)
 }
 
 @Composable
@@ -108,7 +110,7 @@ fun SquareImage (navController: NavController) {
                 .fillMaxWidth(),
                 shape = RoundedCornerShape(4.dp),
                 Color.LightGray){
-                MenuTab(navController = rememberNavController())
+                MenuTab(navController)
 
                 Spacer(modifier = Modifier.height(30.dp))
             }

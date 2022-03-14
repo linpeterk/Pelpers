@@ -15,6 +15,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
@@ -35,7 +36,8 @@ import com.pelp.ui.theme.lightBlue
 @Preview
 @Composable
 fun PreviewMap(){
-    SortScreen(navController = rememberNavController())
+
+  //  SortScreen(navController)
 
 }
 
@@ -52,11 +54,11 @@ fun SortScreen(navController: NavController){
         TopAppBar(title = {},Modifier.height(60.dp))
     }
 
-    IconBox()
+    IconBox(navController)
 }
 
 @Composable
-fun IconBox(){
+fun IconBox(navController: NavController){
     Column(){
         Card(modifier = Modifier
             .height(60.dp)
@@ -66,7 +68,7 @@ fun IconBox(){
             .fillMaxWidth(),
             shape = RoundedCornerShape(4.dp),
             Color.LightGray){
-            MenuTab(navController = rememberNavController())
+            MenuTab(navController)
 
 
         }

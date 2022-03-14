@@ -130,7 +130,11 @@ fun MenuTab(navController: NavController){
 
             ) {
                 FloatingActionButton(
-                    onClick = {navController.navigate(route=Screen.Sort.route)},
+                    onClick = {navController.navigate(route=Screen.Sort.route){
+                        popUpTo(Screen.Sort.route){
+                            inclusive=true
+                        }}
+                    },
                     modifier = Modifier.scale(.7F),
                     backgroundColor = MaterialTheme.colors.surface
                 ) {
