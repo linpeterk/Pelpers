@@ -18,7 +18,7 @@ fun SetupNavGraph(
         composable(
             route = Screen.Start.route
         ){
-            LandingPageScreen( navController = navController)
+            LandingPageScreen(navController = navController)
         }
 
         composable(
@@ -32,10 +32,23 @@ fun SetupNavGraph(
         ){
             MainScreen(navController = navController)
         }
+
         composable(
             route = Screen.Profile.route
-        ){
+        ) {
             ProfileScreen(navController = navController)
+        }
+        composable(
+            route = Screen.Sort.route
+        ){
+            SortScreen(navController = navController)
+
+        }
+        composable(
+            route = Screen.Review.route
+        ){
+            SquareImage (navController = navController)
+
         }
     }
 }
