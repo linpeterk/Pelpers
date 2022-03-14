@@ -31,15 +31,6 @@ import com.google.maps.android.compose.rememberCameraPositionState
 import java.io.IOException
 import java.util.*
 
-
-/*
-        Image(
-            painter = painterResource(id = R.drawAable.fakemap), contentDescription = "Fake_Map",
-                    modifier = Modifier
-                    .fillMaxSize()
-        )
-        TopAppBar(title= { }, Modifier.height(20.dp))
-*/
 var cameraPositionState:CameraPositionState?=null
 
 val caliMuseum = LatLng(34.05, -118.24)
@@ -264,7 +255,10 @@ fun MakeGoogleMap( makeMarker: Boolean = false, obj:MutableList<LocationsExample
         position = CameraPosition.fromLatLngZoom(caliMuseum, 15f)
     }
     val contex=LocalContext.current
+    var array=Array<Int>(5, init={i->i } )
+    var a= arrayOf<Int>()
 
+    println(a)
     GoogleMap(
         modifier = Modifier.fillMaxSize(),
         cameraPositionState = cameraPositionState!!,
@@ -308,20 +302,6 @@ fun reverseGeocoder(context:Context, lat:Double, lng:Double):String{
 
             return address.getAddressLine(0)
 
-            // Various Parameters of an Address are appended
-            // to generate a complete Address
-//            if (address.premises != null)
-//                sb.append(address.premises).append(", ")
-//
-//            sb.append(address.subAdminArea).append("\n")
-//            sb.append(address.locality).append(", ")
-//            sb.append(address.adminArea).append(", ")
-//            sb.append(address.countryName).append(", ")
-//            sb.append(address.postalCode)
-
-            // StringBuilder sb is converted into a string
-            // and this value is assigned to the
-            // initially declared addressString string.
             addressString = sb.toString()
 
         }
@@ -338,6 +318,7 @@ fun reverseGeocoder(context:Context, lat:Double, lng:Double):String{
 fun makeMarkers(list:MutableList<LocationsExample> = destObject){
 
     val markerClick: (Marker) -> Boolean = {
+
         false
     }
     if(cardCount.value>0){}

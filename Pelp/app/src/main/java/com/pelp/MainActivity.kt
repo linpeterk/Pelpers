@@ -48,7 +48,8 @@ class MainActivity : ComponentActivity() {
             //SquareImage ()
 
             //LoginScreen(navController)
-             MainScreen()
+            ProfileScreen()
+             //MainScreen()
 
 
         }
