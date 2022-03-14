@@ -291,11 +291,11 @@ fun reverseGeocoder(context:Context, lat:Double, lng:Double):String{
 
             return address.getAddressLine(0)
 
-            addressString = sb.toString()
+          //  addressString = sb.toString()
 
         }
     } catch (e: IOException) {
-        Toast.makeText(context,"Unable connect to Geocoder",Toast.LENGTH_LONG).show()
+        Toast.makeText(context,"Unable connect to Geocoder ${e.message}",Toast.LENGTH_LONG).show()
     }
 
     // Finally, the address string is posted in the textView with LatLng.
