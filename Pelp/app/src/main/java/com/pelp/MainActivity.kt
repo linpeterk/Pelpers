@@ -32,17 +32,17 @@ class MainActivity : ComponentActivity() {
         setContent {
              // Don't Comment this out!
             // A surface container using the 'background' color from the theme
-            //navController = rememberNavController()
-            //SetupNavGraph(navController = navController)
+            navController = rememberNavController()
+//            SetupNavGraph(navController = navController)
 
             // A surface container using the 'background' color from the theme
 //            navController = rememberNavController()
 //            SetupNavGraph(navController = navController)
-            //ExpertReview()
+//            ExpertReview()
            // LandingPageScreen(navController = navController)
             // testingScrolls()
 //            searchAddress()
-            emergency()
+            emergency(navController = navController)
             //MainScreen()
 
 //            SortScreen()

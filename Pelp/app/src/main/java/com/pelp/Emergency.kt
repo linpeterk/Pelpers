@@ -12,17 +12,23 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.google.maps.android.compose.GoogleMap
 
 @Composable
-fun emergency() {
+fun emergency(navController : NavController) {
 
-    Box(/*modifier= Modifier.fillMaxSize()*/){
-        GoogleMap(modifier=Modifier.size(400.dp)){
+    Column() {
+        Box(/*modifier= Modifier.fillMaxSize()*/){
+            GoogleMap(modifier=Modifier.size(400.dp)){
 
+            }
         }
-        
-    }
+        Box(modifier= Modifier.height(50.dp)) {
+            MenuTab(navController = navController)
+        }
 
+    }
 }
 
