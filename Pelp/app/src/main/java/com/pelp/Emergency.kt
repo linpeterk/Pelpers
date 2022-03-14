@@ -18,10 +18,10 @@ import com.google.maps.android.compose.GoogleMap
 fun emergency() {
 
     Box(/*modifier= Modifier.fillMaxSize()*/){
-        GoogleMap(modifier=Modifier.fillMaxSize()){
+        GoogleMap(modifier=Modifier.size(400.dp)){
 
         }
-        TopAppBar(title = {},Modifier.height(60.dp))
+        
     }
 
 }
