@@ -30,12 +30,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 @Composable
-fun ProfileScreen() {
+fun ProfileScreen( navController: NavController) {
     val notification = rememberSaveable{ (mutableStateOf(""))}
     if (notification.value.isNotEmpty()) {
         Toast.makeText(LocalContext.current, notification.value, Toast.LENGTH_LONG).show()
@@ -74,6 +76,38 @@ fun ProfileScreen() {
                 .fillMaxWidth()
         ) {
             RecentVisit()
+        }
+///PETER'S TEMPORARY BACK BUTTON
+        Spacer(modifier = Modifier.padding(100.dp))
+        Row(
+            modifier = Modifier
+                .size(70.dp)
+             //   .padding(10.dp)
+           // horizontalArrangement = Arrangement.Center
+
+        ) {
+            IconButton(
+
+                onClick = { navController.navigate(route=Screen.Main.route){
+                    popUpTo(Screen.Main.route){
+                        inclusive=true
+                    }
+                }  },
+                // Uses ButtonDefaults.ContentPadding by default
+                modifier=Modifier.fillMaxSize(),
+
+            ) {
+                // Inner content including an icon and a text label
+                Image(
+                    painter = painterResource(id = R.drawable.ic_sea_icon_round),
+                    contentDescription = "Back To Home",
+                    modifier = Modifier.fillMaxSize()
+
+
+
+                )
+
+            }
         }
     }
 }

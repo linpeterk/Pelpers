@@ -30,7 +30,12 @@ fun SetupNavGraph(
         composable(
             route = Screen.Main.route
         ){
-            MainScreen()
+            MainScreen(navController = navController)
+        }
+        composable(
+            route = Screen.Profile.route
+        ){
+            ProfileScreen(navController = navController)
         }
     }
 }

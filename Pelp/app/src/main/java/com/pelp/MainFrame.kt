@@ -21,6 +21,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
@@ -53,8 +54,9 @@ fun init(){
     }
 }
 @Composable
-fun MainScreen(){
+fun MainScreen(navController: NavController){
     cardCount =  remember {  mutableStateOf(destObject.count()) }
+
 
     Box(modifier = Modifier
         .fillMaxSize()
@@ -75,7 +77,7 @@ fun MainScreen(){
                 .weight(0.15f)
 
             ){
-                MenuTab()
+                MenuTab(navController)
             }
 
 
@@ -99,12 +101,12 @@ fun PreviewMainFrame()
 
         .fillMaxWidth(5f)
     ){
-        MenuTab()
+
     }
 }
 
 @Composable
-fun MenuTab(){
+fun MenuTab(navController:NavController){
     Box(modifier = Modifier
 
     ) {
@@ -209,7 +211,11 @@ fun MenuTab(){
                 .padding(horizontal = 15.dp )
                 ) {
                 FloatingActionButton(
-                    onClick = { /*TODO*/ },
+                    onClick = { navController.navigate(route=Screen.Profile.route){
+                        popUpTo(Screen.Profile.route){
+                            inclusive=true
+                        }
+                    } },
                     modifier = Modifier.scale(.7F),
                     backgroundColor = MaterialTheme.colors.surface
                 ) {
@@ -223,24 +229,7 @@ fun MenuTab(){
                 }
                 //Text(text = "Hello")
             }
-            Column(modifier = Modifier
-                .padding(horizontal = 15.dp )
-               ) {
-                FloatingActionButton(
-                    onClick = { /*TODO*/ },
-                    modifier = Modifier.scale(.7F),
-                    backgroundColor = MaterialTheme.colors.surface
-                ) {
-                    Image(
-                        painter = painterResource(R.drawable.profile_user),
-                        contentDescription = "Profile!",
-                        modifier = Modifier
-                            .background(Color.Transparent)
-                            .scale(.5F)
-                    )
-                }
-                //Text(text = "Hello")
-            }
+
         }
     }
 }
@@ -316,12 +305,13 @@ fun reverseGeocoder(context:Context, lat:Double, lng:Double):String{
 //marketCount not in used, make marker base on size of init destObject
 @Composable
 fun makeMarkers(list:MutableList<LocationsExample> = destObject){
+    val context = LocalContext.current
 
     val markerClick: (Marker) -> Boolean = {
 
         false
     }
-    if(cardCount.value>0){}
+    cardCount.value
     for (obj in list){
         Marker(
             position = obj.loc,
@@ -367,7 +357,7 @@ fun makeMarkers(list:MutableList<LocationsExample> = destObject){
 }
 
 @Composable
-fun repeatCard()
+fun updateComposable(context:Context)
 {
 
 }
