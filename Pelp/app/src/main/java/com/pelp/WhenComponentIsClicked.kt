@@ -18,15 +18,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.max
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 
 @Preview
 @Composable
 fun Preview(){
-    SquareImage ()
+    SquareImage (navController = rememberNavController())
 }
 
 @Composable
-fun SquareImage () {
+fun SquareImage (navController: NavController) {
     TopAppBar(title = {},Modifier.height(60.dp))
     //Spacer(modifier = Modifier.width(4.dp))
     Column(modifier= Modifier
@@ -106,60 +108,8 @@ fun SquareImage () {
                 .fillMaxWidth(),
                 shape = RoundedCornerShape(4.dp),
                 Color.LightGray){
-                Row() {
-                    Column() {
-                        FloatingActionButton(onClick = { /*TODO*/ },modifier=Modifier.scale(.8F),backgroundColor = MaterialTheme.colors.surface) {
-                            Image(painter = painterResource(R.drawable.sort_down),
-                                contentDescription ="Sort!",
-                                modifier = Modifier.background(Color.Transparent).scale(.6F))
-                        }
-                        //Text(text = "Hello")
-                    }
+                MenuTab(navController = rememberNavController())
 
-                    Spacer(modifier = Modifier.width(25.dp))
-
-                    Column() {
-                        FloatingActionButton(onClick = { /*TODO*/ },modifier=Modifier.scale(.8F),backgroundColor = MaterialTheme.colors.surface) {
-                            Image(painter = painterResource(R.drawable.check),
-                                contentDescription ="Expert Verified!",
-                                modifier = Modifier.background(Color.Transparent).scale(.6F))
-                        }
-                        //Text(text = "Hello")
-                    }
-
-                    Spacer(modifier = Modifier.width(25.dp))
-
-                    Column() {
-                        FloatingActionButton(onClick = { /*TODO*/ },modifier=Modifier.scale(.8F),backgroundColor = MaterialTheme.colors.surface) {
-                            Image(painter = painterResource(R.drawable.runer_silhouette_running_fast),
-                                contentDescription ="Emergency!",
-                                modifier = Modifier.background(Color.Transparent).scale(.8F))
-                        }
-                        //Text(text = "Hello")
-                    }
-
-                    Spacer(modifier = Modifier.width(25.dp))
-
-                    Column() {
-                        FloatingActionButton(onClick = { /*TODO*/ },modifier = Modifier.scale(.8F),backgroundColor = MaterialTheme.colors.surface) {
-                            Image(painter = painterResource(R.drawable.share),
-                                contentDescription ="Expert Verified!",
-                                modifier = Modifier.background(Color.Transparent).scale(.6F))
-                        }
-                        //Text(text = "Hello")
-                    }
-
-                    Spacer(modifier = Modifier.width(20.dp))
-
-                    Column() {
-                        FloatingActionButton(onClick = { /*TODO*/ },modifier=Modifier.scale(.8F),backgroundColor = MaterialTheme.colors.surface) {
-                            Image(painter = painterResource(R.drawable.profile_user),
-                                contentDescription ="Profile!",
-                                modifier = Modifier.background(Color.Transparent).scale(.7F))
-                        }
-                        //Text(text = "Hello")
-                    }
-                }
                 Spacer(modifier = Modifier.height(30.dp))
             }
             Column(modifier=Modifier.verticalScroll(rememberScrollState())) {

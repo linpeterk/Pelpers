@@ -22,6 +22,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
@@ -55,7 +57,9 @@ fun init(){
 }
 @Composable
 fun MainScreen(navController: NavController){
+
     cardCount =  remember {  mutableStateOf(destObject.count()) }
+
 
 
     Box(modifier = Modifier
@@ -102,11 +106,15 @@ fun PreviewMainFrame()
         .fillMaxWidth(5f)
     ){
 
+        //MenuTab(navController = rememberNavController())
+
     }
 }
 
 @Composable
-fun MenuTab(navController:NavController){
+
+fun MenuTab(navController: NavController){
+
     Box(modifier = Modifier
 
     ) {
@@ -122,7 +130,7 @@ fun MenuTab(navController:NavController){
 
             ) {
                 FloatingActionButton(
-                    onClick = { /*TODO*/ },
+                    onClick = {navController.navigate(route=Screen.Sort.route)},
                     modifier = Modifier.scale(.7F),
                     backgroundColor = MaterialTheme.colors.surface
                 ) {
@@ -155,7 +163,7 @@ fun MenuTab(navController:NavController){
                         contentDescription = "Emergency!",
                         modifier = Modifier
                             .background(Color.Transparent)
-                            .scale(.5F)
+                            .scale(.8F)
 
                     )
                 }
@@ -169,7 +177,7 @@ fun MenuTab(navController:NavController){
 
             ) {
                 FloatingActionButton(
-                    onClick = { /*TODO*/ },
+                    onClick = { navController.navigate(route=Screen.Review.route) },
                     modifier = Modifier.scale(.7F),
                     backgroundColor = MaterialTheme.colors.surface
                 ) {
@@ -196,7 +204,7 @@ fun MenuTab(navController:NavController){
                 ) {
                     Image(
                         painter = painterResource(R.drawable.share),
-                        contentDescription = "Expert Verified!",
+                        contentDescription = "Share!",
                         modifier = Modifier
                             .background(Color.Transparent)
                             .scale(.5F)

@@ -21,6 +21,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.CameraPositionState
 import com.google.maps.android.compose.GoogleMap
@@ -33,12 +35,12 @@ import com.pelp.ui.theme.lightBlue
 @Preview
 @Composable
 fun PreviewMap(){
-    SortScreen()
+    SortScreen(navController = rememberNavController())
 
 }
 
 @Composable
-fun SortScreen(){
+fun SortScreen(navController: NavController){
 
     Box(/*modifier= Modifier.fillMaxSize()*/){
         GoogleMap(modifier=Modifier.fillMaxSize()){
@@ -64,70 +66,8 @@ fun IconBox(){
             .fillMaxWidth(),
             shape = RoundedCornerShape(4.dp),
             Color.LightGray){
-            Row() {
-                Column() {
-                    FloatingActionButton(onClick = { /*TODO*/ },modifier=Modifier.scale(.7F),backgroundColor = MaterialTheme.colors.surface) {
-                        Image(painter = painterResource(R.drawable.sort_down),
-                            contentDescription ="Sort!",
-                            modifier = Modifier
-                                .background(Color.Transparent)
-                                .scale(.5F))
-                    }
-                    //Text(text = "Hello")
-                }
+            MenuTab(navController = rememberNavController())
 
-                Spacer(modifier = Modifier.width(25.dp))
-
-                Column() {
-                    FloatingActionButton(onClick = { /*TODO*/ },modifier=Modifier.scale(.7F),backgroundColor = MaterialTheme.colors.surface) {
-                        Image(painter = painterResource(R.drawable.check),
-                            contentDescription ="Expert Verified!",
-                            modifier = Modifier
-                                .background(Color.Transparent)
-                                .scale(.5F))
-                    }
-                    //Text(text = "Hello")
-                }
-
-                Spacer(modifier = Modifier.width(25.dp))
-
-                Column() {
-                    FloatingActionButton(onClick = { /*TODO*/ },modifier=Modifier.scale(.7F),backgroundColor = MaterialTheme.colors.surface) {
-                        Image(painter = painterResource(R.drawable.runer_silhouette_running_fast),
-                            contentDescription ="Emergency!",
-                            modifier = Modifier
-                                .background(Color.Transparent)
-                                .scale(.8F))
-                    }
-                    //Text(text = "Hello")
-                }
-
-                Spacer(modifier = Modifier.width(25.dp))
-
-                Column() {
-                    FloatingActionButton(onClick = { /*TODO*/ },modifier = Modifier.scale(.7F),backgroundColor = MaterialTheme.colors.surface) {
-                        Image(painter = painterResource(R.drawable.share),
-                            contentDescription ="Expert Verified!",
-                            modifier = Modifier
-                                .background(Color.Transparent)
-                                .scale(.5F))
-                    }
-                    //Text(text = "Hello")
-                }
-
-                Spacer(modifier = Modifier.width(25.dp))
-
-                Column() {
-                    FloatingActionButton(onClick = { /*TODO*/ },modifier=Modifier.scale(.7F),backgroundColor = MaterialTheme.colors.surface) {
-                        Image(painter = painterResource(R.drawable.profile_user),
-                            contentDescription ="Profile!",
-                            modifier = Modifier
-                                .background(Color.Transparent)
-                                .scale(.5F))
-                    }
-                    //Text(text = "Hello")
-                }
-            }
 
         }
         Card(modifier = Modifier
@@ -216,79 +156,3 @@ fun IconBox(){
 
 
 
-//@ExperimentalMaterialApi
-//@Composable
-//fun ExpandableCard(){
-//    var expandedState by remember{ mutableStateOf(false)}
-//    val rotationState by animateFloatAsState(targetValue = if(expandedState)180f else 0f)
-//
-//    Card(modifier= Modifier
-//        .offset(0.dp,700.dp)
-//        .fillMaxWidth()
-//        .animateContentSize(
-//            animationSpec = tween(
-//                durationMillis = 300,
-//                easing = LinearOutSlowInEasing
-//            )
-//        ),
-//        shape = Shapes.large,
-//        onClick = {
-//            expandedState=!expandedState
-//        }
-//    ) {
-//      Column(modifier= Modifier
-//          .fillMaxWidth()
-//          .padding(12.dp)
-//      ) {
-//          Row(verticalAlignment = Alignment.CenterVertically) {
-//              Text(
-//                  modifier=Modifier
-//                      .weight(6f),
-//                  text="My Title",
-//                  fontSize=MaterialTheme.typography.h6.fontSize,
-//                  fontWeight= FontWeight.Bold,
-//                  maxLines = 1,
-//                  overflow = TextOverflow.Ellipsis
-//              )
-//              IconButton(
-//                  modifier= Modifier
-//                      .alpha(ContentAlpha.medium)
-//                      .weight(1f)
-//                      .rotate(rotationState),
-//                      onClick = {
-//                          expandedState=!expandedState
-//                      }) {
-//                      Icon(
-//                          imageVector = Icons.Default.ArrowDropDown,
-//                          contentDescription = "DropDownArrow"
-//                      )
-//
-//              }
-//
-//          }
-//          if(expandedState){
-//              Column() {
-//                  Text(text = "Choice1")
-//                  Text(text = "Choice2")
-//                  Text(text = "Choice3")
-//                  Text(text = "Choice4")
-//              }
-//
-//          }
-//
-//      }
-//    }
-//    Box(modifier=Modifier.fillMaxSize()){
-//        Image(painter = painterResource(R.drawable.fakemap), contentDescription ="Fake Map",
-//            modifier=Modifier.fillMaxSize()
-//        )
-//        TopAppBar(title = {},Modifier.height(20.dp))
-//    }
-//}
-
-//@ExperimentalMaterialApi
-//@Preview
-//@Composable
-//fun ExpandandableCardPreview(){
-//    ExpandableCard()
-//}

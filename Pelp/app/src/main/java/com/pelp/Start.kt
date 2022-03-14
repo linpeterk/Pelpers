@@ -12,10 +12,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.center
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -102,19 +104,22 @@ fun LandingPageScreen(
             Column(
                 modifier = Modifier
             ) {
-                Surface() {
+                Surface(modifier=Modifier.offset(y=35.dp)) {
 
-                    Image(
-                        painter = painterResource(id = R.drawable.toilet),
-                        contentDescription = "Toilet House",
-                        modifier = Modifier
-                            //    .paddingFromBaseline(bottom = 150.dp)
-                            .fillMaxWidth()
-                            .clip(RectangleShape)
+                    Box(modifier=Modifier.offset(y=15.dp)){
+                        Image(
+                            painter = painterResource(id = R.drawable.pelplogo),
+                            contentDescription = "Toilet House",
+                            modifier = Modifier
+                                //    .paddingFromBaseline(bottom = 150.dp)
+                                .fillMaxWidth()
+                                .clip(RectangleShape)
+                                .scale(.7F)
+                        )
+                    }
 
-                    )
                 }
-                Column(modifier = Modifier.offset(y = 100.dp)) {
+                Column(modifier = Modifier.offset(y = 70.dp)) {
                     Text(
                         text = "I agree to Pelp's term of services and confirmed that I have read Pelp's Privacy Policy",
                         modifier = Modifier
