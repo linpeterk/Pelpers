@@ -3,6 +3,7 @@ package com.pelp
 import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -55,58 +56,67 @@ import org.intellij.lang.annotations.JdkConstants
        */
 
 @Composable
-fun LandingPageScreen(
+fun Start(
     navController: NavController
 ){
 
 
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colors.background
+    Box(
+        modifier = Modifier.fillMaxSize()
+            .background(MaterialTheme.colors.background)
+            .border(3.dp, Color.Yellow),
+       // color = MaterialTheme.colors.background
     ) {
         Column(
             Modifier
                 .background(Color.White)
+                .border(1.dp, Color.Blue).height(140.dp)
+                .fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+               // .border(1.dp, Color.Red)
         ) {
             Surface(
-                modifier = Modifier.size(60.dp),
+                modifier = Modifier.size(70.dp).border(1.dp, Color.Red),
                 shape = CircleShape
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.sea),
                     contentDescription = "piece",
                     modifier = Modifier
-                        .size(50.dp)
+                        .size(70.dp)
                         .clip(CircleShape)
                 )
             }
 
             Text(text = "Welcome to Pelp",
                 modifier = Modifier
-                    .padding(5.dp)
-                    .clickable { },
+                    .padding(4.dp)
+                    .clickable { }
+                    .border(2.dp, Color.Red),
                 fontSize = 28.sp,
                 fontWeight = FontWeight.Bold,
                 style = MaterialTheme.typography.body2
             )
 
 
-            Text(text = "We know just the place", modifier = Modifier.padding(5.dp))
+            Text(text = "We know just the place", modifier = Modifier.padding(2.dp))
 
 
         }
 
-        Row(
+       /* Row(
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
-        ) {
+        ) {*/
 
             Column(
-                modifier = Modifier
+                modifier = Modifier.fillMaxSize()
+                    .offset(y=160.dp)
+                    .border(2.dp, Color.Red)
             ) {
-                Surface(modifier=Modifier.offset(y=35.dp)) {
+                Surface(modifier=Modifier.height(300.dp)) {
 
-                    Box(modifier=Modifier.offset(y=15.dp)){
+                    Box(modifier=Modifier.border(2.dp, Color.Magenta)){
                         Image(
                             painter = painterResource(id = R.drawable.pelplogo),
                             contentDescription = "Toilet House",
@@ -114,17 +124,17 @@ fun LandingPageScreen(
                                 //    .paddingFromBaseline(bottom = 150.dp)
                                 .fillMaxWidth()
                                 .clip(RectangleShape)
-                                .scale(.7F)
+                                .scale(1F)
                         )
                     }
 
                 }
-                Column(modifier = Modifier.offset(y = 70.dp)) {
+                Column(modifier = Modifier.offset(y = 40.dp)) {
                     Text(
                         text = "I agree to Pelp's term of services and confirmed that I have read Pelp's Privacy Policy",
                         modifier = Modifier
                             .padding(5.dp),
-                        fontSize = 11.sp,
+                        fontSize = 12.sp,
                         fontWeight = FontWeight.Thin,
                         style = MaterialTheme.typography.subtitle1
                     )
@@ -153,7 +163,7 @@ fun LandingPageScreen(
             }
 
 
-        }
+      //  }
 
 
     }
@@ -171,7 +181,4 @@ fun Test(){
 fun Previews()
 {
 
-    LandingPageScreen(
-        navController = rememberNavController()
-    )
 }

@@ -32,7 +32,7 @@ fun Preview(){
 }
 
 @Composable
-fun SquareImage (navController: NavController, addressLoc:String) {
+fun SquareImage (navController: NavController, addressLoc:Int) {
     Log.d(Examples.TAG,"AddressLoc is $addressLoc")
    // val locationRestroom = dataBase [addressLoc]
     TopAppBar(title = {},Modifier.height(60.dp))
@@ -131,7 +131,8 @@ fun SquareImage (navController: NavController, addressLoc:String) {
                     .fillMaxWidth(),
                     shape = RoundedCornerShape(10.dp),
                     Color.White) {
-                    var str: String = dataBase[addressGlobal.loc]?.reviewArray!!.get(it)
+                  //  var str: String = dataBase[addressGlobal.loc]?.reviewArray!!.get(it)
+                      var str: String = dataBase[getKeyFromList(addressLoc)]?.reviewArray!!.get(it)
                   //  var a:Location_Restroom = dataBase[Brew]!!
 
                     Text(text = "Address coordinate is ${dataBase[addressGlobal.loc]!!.name} and the reviews are $str")

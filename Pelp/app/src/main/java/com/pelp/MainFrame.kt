@@ -474,7 +474,7 @@ fun MakeScrollComponents(navController: NavController){
 
                             addressGlobal = dataBase[getKeyFromList(dataBase.count()-1-(it%5))]!!
                       //      navController.navigate(Screen.Review.route)
-                           navController.navigate(Screen.Review.route + "/${addressGlobal.name}")
+                           navController.navigate(Screen.Review.route + "/${dataBase.count()-1-(it%5)}")
                   //          navController.navigate(Screen.Review.route + "/${"abcdef"}")
 
                         }),

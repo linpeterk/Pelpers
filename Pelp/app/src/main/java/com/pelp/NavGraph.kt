@@ -20,7 +20,7 @@ fun SetupNavGraph(
         composable(
             route = Screen.Start.route
         ){
-            LandingPageScreen(navController = navController)
+            Start(navController = navController)
         }
 
         composable(
@@ -50,9 +50,9 @@ fun SetupNavGraph(
         }
         composable(
             route = Screen.Review.route+"/{addressLoc}", // argument must be separated by "/{}"
-            arguments = listOf(navArgument("addressLoc"){defaultValue = "Hello World" })  //navigate pass with argument
+            arguments = listOf(navArgument("addressLoc"){NavType.IntType })  //navigate pass with argument
         ){
-            val str: String? = it.arguments?.getString("addressLoc")
+            val str: Int? = it.arguments?.getInt("addressLoc")
 
             SquareImage (navController = navController, str!!)
 

@@ -7,7 +7,7 @@ import java.util.Collections.reverse
 import kotlin.collections.LinkedHashMap
 
 val dataBase:LinkedHashMap<LatLng, Location_Restroom> = LinkedHashMap()
-lateinit var arrayKeys: MutableList<LatLng>
+ var arrayKeys: MutableList<LatLng> = mutableListOf()
 
 val caliMuseum = LatLng(34.05, -118.24)
 val toyDistrict = LatLng(34.047, -118.243)
@@ -24,13 +24,13 @@ fun init(){
     add(dodgerS, Location_Restroom("Dodger Stadium", LatLng(34.073,-118.241)))
     add(church, Location_Restroom("Our Lady Queen of Angels", LatLng(34.05693923331048,-118.23957346932366)))
 
-    arrayKeys= dataBase.keys.toMutableList()
+  //  arrayKeys= dataBase.keys.toMutableList()
  //   reverseHashMap()
 }
 
 fun add(loc:LatLng, restR:Location_Restroom){
     dataBase[loc] = restR
-
+    arrayKeys.add(loc)
 }
 
 fun reverseHashMap(){  //get database key of next iteration, in reverse order
