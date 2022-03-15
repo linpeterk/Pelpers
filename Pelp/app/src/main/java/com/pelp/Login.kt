@@ -31,7 +31,7 @@ import com.pelp.ui.theme.lightBlue
 fun LoginScreen(
     navController: NavController ,
 ) {
-
+    Log.d(Examples.TAG,"Hello from Login")
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(5.dp)) {
 
         Surface(

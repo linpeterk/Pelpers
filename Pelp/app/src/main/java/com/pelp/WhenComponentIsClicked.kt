@@ -131,10 +131,10 @@ fun SquareImage (navController: NavController, addressLoc:String) {
                     .fillMaxWidth(),
                     shape = RoundedCornerShape(10.dp),
                     Color.White) {
-                    var str: String = dataBase[addressCali.loc]?.reviewArray!!.get(it)
+                    var str: String = dataBase[addressGlobal.loc]?.reviewArray!!.get(it)
                   //  var a:Location_Restroom = dataBase[Brew]!!
 
-                    Text(text = "Address coordinate is ${dataBase[addressCali.loc]!!.name} and the reviews are $str")
+                    Text(text = "Address coordinate is ${dataBase[addressGlobal.loc]!!.name} and the reviews are $str")
                 }
             }
         }

@@ -50,11 +50,11 @@ fun SetupNavGraph(
         }
         composable(
             route = Screen.Review.route+"/{addressLoc}", // argument must be separated by "/{}"
-            arguments = listOf(navArgument("addressLoc"){type = NavType.StringType})  //navigate pass with argument
+            arguments = listOf(navArgument("addressLoc"){defaultValue = "Hello World" })  //navigate pass with argument
         ){
-            val str:String? = it.arguments?.getString("addressLoc")
-            if(str!=null)
-            SquareImage (navController = navController, str)
+            val str: String? = it.arguments?.getString("addressLoc")
+
+            SquareImage (navController = navController, str!!)
 
         }
     }

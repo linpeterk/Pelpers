@@ -4,7 +4,6 @@ package com.pelp
 import android.content.Context
 import android.location.Address
 import android.location.Geocoder
-import android.location.Location
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.*
@@ -23,8 +22,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
@@ -34,10 +31,9 @@ import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.rememberCameraPositionState
 import java.io.IOException
 import java.util.*
-import kotlin.collections.HashMap
 
 var cameraPositionState:CameraPositionState?=null
-var addressCali:Location_Restroom = Location_Restroom(loc=LatLng(100.0, 100.0))
+var addressGlobal:Location_Restroom = Location_Restroom(loc=LatLng(100.0, 100.0))
 private const val TAG = "MapSampleActivity"
 
 //val destList = listOf(caliMuseum, toyDistrict, brew,dodgerS,church)  //List of locations name
@@ -45,7 +41,7 @@ private const val TAG = "MapSampleActivity"
 //val strName = listOf("Japanese American National Museum " , "Toy District", "Brewery", "Dodger Stadium","Our Lady Queen of Angels" )
 
 
-var cardCount:MutableState<Int> = mutableStateOf(dataBase.count())
+//var cardCount:MutableState<Int> = mutableStateOf(dataBase.count())
 
 
 
@@ -54,9 +50,9 @@ var cardCount:MutableState<Int> = mutableStateOf(dataBase.count())
 @Composable
 fun MainScreen(navController: NavController){
 
-    cardCount =  remember {  mutableStateOf(dataBase.count()) }
+   // cardCount =  remember {  mutableStateOf(dataBase.count()) }
 
-
+    Log.d(Examples.TAG,"Hello from Main")
 
     Box(modifier = Modifier
         .fillMaxSize()
@@ -69,7 +65,7 @@ fun MainScreen(navController: NavController){
 
             ) {
 
-               MakeGoogleMap(true)
+              MakeGoogleMap(true)
 
             }
 
@@ -112,12 +108,42 @@ fun MenuTab(navController: NavController){
     Box(modifier = Modifier
 
     ) {
+        Log.d(TAG, "Hello From ")
+
         Row(
             modifier = Modifier
                 .horizontalScroll(rememberScrollState())
 
         ) {
-            Spacer(modifier = Modifier.width(10.dp))
+            Spacer(modifier = Modifier.width(20.dp))
+            //Home button
+            Column(modifier = Modifier
+                .padding(horizontal = 15.dp)
+
+
+            ) {
+                FloatingActionButton(
+                    onClick = {navController.navigate(route=Screen.Main.route){
+                        popUpTo(Screen.Main.route){
+                            inclusive=true
+                        }}
+                    },
+                    modifier = Modifier.scale(.7F),
+                    backgroundColor = MaterialTheme.colors.surface
+                ) {
+                    Image(
+                        painter = painterResource(R.drawable.ic_sea_icon_round),
+                        contentDescription = "Home!",
+                        modifier = Modifier
+                            .background(Color.Transparent)
+                            .scale(.8F)
+                    )
+
+                }
+                //Text(text = "Hello")
+            }
+
+
             Column(modifier = Modifier
                 .padding(horizontal = 15.dp)
 
@@ -269,7 +295,7 @@ fun MakeGoogleMap( makeMarker: Boolean = false, obj:HashMap<LatLng, Location_Res
 
             add(a.loc, a)
 
-            cardCount.value++
+          //  cardCount.value++ //force refresh
 
         }
 
@@ -377,7 +403,7 @@ fun anotherFunction(){
 @Composable
 fun MakeScrollComponents(navController: NavController){
 
-    var scrollState:ScrollState =  rememberScrollState()
+   // var scrollState:ScrollState =  rememberScrollState()
    // val context = LocalContext.current
    // var textFieldCount by remember { mutableStateOf (destObject.count()) }
 
@@ -390,7 +416,7 @@ fun MakeScrollComponents(navController: NavController){
             .fillMaxHeight(1f)
             .padding(5.dp)
             // .offset(y=300.dp)
-            .verticalScroll(scrollState),
+           .verticalScroll(rememberScrollState()),
         // .offset(y = 500.dp)
 
     ) {
@@ -400,33 +426,32 @@ fun MakeScrollComponents(navController: NavController){
                 //.verticalScroll(rememberScrollState())
 
                 ) {
-            var  destObjSize:Int
+            var  dataBaseIter:Int
+
             if(dataBase.count()>0){
-            destObjSize=dataBase.count()-1}else destObjSize = 0
+                dataBaseIter=dataBase.count()-1}else dataBaseIter = 0
+            var entry = dataBase.iterator().next()
+
+            var lastLoc = dataBase[getKeyFromList(dataBaseIter)]
+           // cardCount.value // force update components
 
             repeat(
-             //  times= cardCount.value,
-            3
+               times= 5
             ) {
                 Card(
                     modifier = Modifier
                         .height(40.dp)
                         .clickable(onClick = {
-                           // cameraPositionState!!.position =
-                            //    CameraPosition.fromLatLngZoom(destObject[destObjSize - it].loc, 15f)
-
-                                addressCali = dataBase[caliMuseum]!!
-
-                        //    dataBase[address.loc]=address
-                            navController.navigate(Screen.Review.route +"/${dataBase[caliMuseum]?.name}")
+//                            Log.d(TAG, "Name is ${lastLoc?.name}")
+                            cameraPositionState!!.position =
+                                CameraPosition.fromLatLngZoom(getKeyFromList(dataBase.count()-1-(it%5)), 15f)
+                            //destObject[destObjSize - it].loc
                         }),
-
-
                     // .fillMaxWidth()
 
                 ) {
                     Text(
-                        text=dataBase[caliMuseum]?.name!!,
+                        text=lastLoc?.name!!,
                         modifier = Modifier
                             .border(4.dp, Color.LightGray)
                             .background(Color.White)
@@ -446,8 +471,12 @@ fun MakeScrollComponents(navController: NavController){
                         .height(128.dp)
                         //Toast.makeText(context, "TestA", Toast.LENGTH_LONG) toast syntax
                         .clickable(onClick = {
-                         //   cameraPositionState!!.position =
-                          //      CameraPosition.fromLatLngZoom(destObject[destObjSize - it].loc, 15f)
+
+                            addressGlobal = dataBase[getKeyFromList(dataBase.count()-1-(it%5))]!!
+                      //      navController.navigate(Screen.Review.route)
+                           navController.navigate(Screen.Review.route + "/${addressGlobal.name}")
+                  //          navController.navigate(Screen.Review.route + "/${"abcdef"}")
+
                         }),
 
                     shape = RoundedCornerShape(3.dp)
@@ -456,7 +485,7 @@ fun MakeScrollComponents(navController: NavController){
 
                 ) {
                     Text(
-                        text="Stuff about ${dataBase[caliMuseum]?.name!!} ETC",
+                        text="Stuff about ${lastLoc?.name!!} ETC",
                         modifier = Modifier
                             .border(4.dp, Color.LightGray)
                             .background(Color.White)
@@ -464,8 +493,12 @@ fun MakeScrollComponents(navController: NavController){
                             .fillMaxWidth()
 
                     )
+               if((--dataBaseIter)>=0) {
+                   lastLoc= dataBase[getKeyFromList(dataBaseIter)]
+               }
                 }
             }
         }
     }
 }
+

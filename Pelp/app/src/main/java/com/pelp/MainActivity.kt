@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
     lateinit var navController: NavHostController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        init() // Don't Comment this out!
+        init() // Don't Comment this out! it's in database
         setContent {
              // Don't Comment this out!
             // A surface container using the 'background' color from the theme
