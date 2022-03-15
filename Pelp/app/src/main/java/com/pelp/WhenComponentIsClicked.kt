@@ -1,6 +1,7 @@
 package com.pelp
 
 import android.location.Location
+import android.util.Log
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
@@ -31,7 +32,9 @@ fun Preview(){
 }
 
 @Composable
-fun SquareImage (navController: NavController) {
+fun SquareImage (navController: NavController, addressLoc:String) {
+    Log.d(Examples.TAG,"AddressLoc is $addressLoc")
+   // val locationRestroom = dataBase [addressLoc]
     TopAppBar(title = {},Modifier.height(60.dp))
     //Spacer(modifier = Modifier.width(4.dp))
     Column(modifier= Modifier

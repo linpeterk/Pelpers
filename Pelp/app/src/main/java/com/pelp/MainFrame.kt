@@ -175,7 +175,7 @@ fun MenuTab(navController: NavController){
 
             ) {
                 FloatingActionButton(
-                    onClick = { navController.navigate(route=Screen.Review.route) },
+                    onClick = {  },
                     modifier = Modifier.scale(.7F),
                     backgroundColor = MaterialTheme.colors.surface
                 ) {
@@ -416,9 +416,9 @@ fun MakeScrollComponents(navController: NavController){
                             //    CameraPosition.fromLatLngZoom(destObject[destObjSize - it].loc, 15f)
 
                                 addressCali = dataBase[caliMuseum]!!
-                            Log.d(TAG, "AddressCali Check: ${addressCali.name} and ${addressCali.loc.longitude}")
+
                         //    dataBase[address.loc]=address
-                            navController.navigate(Screen.Review.route)
+                            navController.navigate(Screen.Review.route +"/${dataBase[caliMuseum]?.name}")
                         }),
 
 

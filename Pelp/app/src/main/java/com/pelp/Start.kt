@@ -136,7 +136,7 @@ fun LandingPageScreen(
                         val a:String = "Test arg"
                         Button(
 
-                            onClick = { navController.navigate(route=Screen.Login.route + "/$a")},
+                            onClick = { navController.navigate(route=Screen.Login.route)},
                             colors = ButtonDefaults.buttonColors(backgroundColor = Color.White)
                         ) {
                             Text(text = "Log in", modifier = Modifier.padding(5.dp), color = lightBlue)
