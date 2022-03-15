@@ -4,6 +4,7 @@ package com.pelp
 import android.content.Context
 import android.location.Address
 import android.location.Geocoder
+import android.location.Location
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.*
@@ -33,32 +34,27 @@ import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.rememberCameraPositionState
 import java.io.IOException
 import java.util.*
+import kotlin.collections.HashMap
 
 var cameraPositionState:CameraPositionState?=null
-
-val caliMuseum = LatLng(34.05, -118.24)
-val toyDistrict = LatLng(34.047, -118.243)
-val brew = LatLng(34.051, -118.234)
-val dodgerS = LatLng(34.073, -118.241)
-val church = LatLng(34.05693923331048, -118.23957346932366
-)
+var addressCali:Location_Restroom = Location_Restroom(loc=LatLng(100.0, 100.0))
 private const val TAG = "MapSampleActivity"
 
-val destList = listOf(caliMuseum, toyDistrict, brew,dodgerS,church)
-val destObject = mutableListOf<LocationsExample>()
-val strName = listOf("Japanese American National Museum " , "Toy District", "Brewery", "Dodger Stadium","Our Lady Queen of Angels" )
-var cardCount:MutableState<Int> = mutableStateOf(destObject.count())
+//val destList = listOf(caliMuseum, toyDistrict, brew,dodgerS,church)  //List of locations name
+//val destObject = mutableListOf<Location_Restroom>() //List of location object
+//val strName = listOf("Japanese American National Museum " , "Toy District", "Brewery", "Dodger Stadium","Our Lady Queen of Angels" )
 
-fun init(){
-    for (i in destList.indices){
-        var a:LocationsExample = LocationsExample(strName[i], destList[i])
-        destObject.add(a)
-    }
-}
+
+var cardCount:MutableState<Int> = mutableStateOf(dataBase.count())
+
+
+
+
+
 @Composable
 fun MainScreen(navController: NavController){
 
-    cardCount =  remember {  mutableStateOf(destObject.count()) }
+    cardCount =  remember {  mutableStateOf(dataBase.count()) }
 
 
 
@@ -89,7 +85,7 @@ fun MainScreen(navController: NavController){
                 .weight(0.8f)
 
             ){
-                MakeScrollComponents()
+                MakeScrollComponents(navController)
             }
         }
 
@@ -105,8 +101,6 @@ fun PreviewMainFrame()
 
         .fillMaxWidth(5f)
     ){
-
-        //MenuTab(navController = rememberNavController())
 
     }
 }
@@ -251,7 +245,7 @@ fun MenuTab(navController: NavController){
 //val destObject = mutableListOf<LocationsExample>()
 @Composable
 //pass in true if you want to make markers
-fun MakeGoogleMap( makeMarker: Boolean = false, obj:MutableList<LocationsExample> = destObject){
+fun MakeGoogleMap( makeMarker: Boolean = false, obj:HashMap<LatLng, Location_Restroom> = dataBase){
     cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(caliMuseum, 15f)
     }
@@ -270,8 +264,10 @@ fun MakeGoogleMap( makeMarker: Boolean = false, obj:MutableList<LocationsExample
         onMapLongClick = {
             Log.d(TAG, "lat is : ${it.latitude}")
             var str:String =  reverseGeocoder(contex, it.latitude, it.longitude)
-            var a:LocationsExample = LocationsExample( str, LatLng(it.latitude, it.longitude))
-            destObject.add(a)
+            var a:Location_Restroom = Location_Restroom( str, LatLng(it.latitude, it.longitude))
+          //  destObject.add(a)
+
+            add(a.loc, a)
 
             cardCount.value++
 
@@ -316,19 +312,19 @@ fun reverseGeocoder(context:Context, lat:Double, lng:Double):String{
 }
 //marketCount not in used, make marker base on size of init destObject
 @Composable
-fun makeMarkers(list:MutableList<LocationsExample> = destObject){
+fun makeMarkers(obj:HashMap<LatLng, Location_Restroom> = dataBase){
     val context = LocalContext.current
 
     val markerClick: (Marker) -> Boolean = {
-
+    //address.loc=it.position
         false
     }
-    cardCount.value
-    for (obj in list){
+   // cardCount.value
+    dataBase.forEach(){
         Marker(
-            position = obj.loc,
-            title = obj.name,
-            snippet = "Marker in ${obj.name}",
+            position = it.value.loc,
+            title = it.value.name,
+            snippet = "Marker in ${it.value.name}",
             onClick = markerClick
         )
     }
@@ -379,7 +375,7 @@ fun anotherFunction(){
 }
 
 @Composable
-fun MakeScrollComponents(){
+fun MakeScrollComponents(navController: NavController){
 
     var scrollState:ScrollState =  rememberScrollState()
    // val context = LocalContext.current
@@ -405,19 +401,24 @@ fun MakeScrollComponents(){
 
                 ) {
             var  destObjSize:Int
-            if(destObject.count()>0){
-            destObjSize=destObject.count()-1}else destObjSize = 0
-            repeat(
-               times= cardCount.value,
+            if(dataBase.count()>0){
+            destObjSize=dataBase.count()-1}else destObjSize = 0
 
+            repeat(
+             //  times= cardCount.value,
+            3
             ) {
                 Card(
                     modifier = Modifier
                         .height(40.dp)
                         .clickable(onClick = {
-                            cameraPositionState!!.position =
-                                CameraPosition.fromLatLngZoom(destObject[destObjSize - it].loc, 15f)
+                           // cameraPositionState!!.position =
+                            //    CameraPosition.fromLatLngZoom(destObject[destObjSize - it].loc, 15f)
 
+                                addressCali = dataBase[caliMuseum]!!
+                            Log.d(TAG, "AddressCali Check: ${addressCali.name} and ${addressCali.loc.longitude}")
+                        //    dataBase[address.loc]=address
+                            navController.navigate(Screen.Review.route)
                         }),
 
 
@@ -425,7 +426,7 @@ fun MakeScrollComponents(){
 
                 ) {
                     Text(
-                        text=destObject[destObjSize-it].name,
+                        text=dataBase[caliMuseum]?.name!!,
                         modifier = Modifier
                             .border(4.dp, Color.LightGray)
                             .background(Color.White)
@@ -445,8 +446,8 @@ fun MakeScrollComponents(){
                         .height(128.dp)
                         //Toast.makeText(context, "TestA", Toast.LENGTH_LONG) toast syntax
                         .clickable(onClick = {
-                            cameraPositionState!!.position =
-                                CameraPosition.fromLatLngZoom(destObject[destObjSize - it].loc, 15f)
+                         //   cameraPositionState!!.position =
+                          //      CameraPosition.fromLatLngZoom(destObject[destObjSize - it].loc, 15f)
                         }),
 
                     shape = RoundedCornerShape(3.dp)
@@ -455,7 +456,7 @@ fun MakeScrollComponents(){
 
                 ) {
                     Text(
-                        text="Stuff about ${destObject[destObjSize-it].name} ETC",
+                        text="Stuff about ${dataBase[caliMuseum]?.name!!} ETC",
                         modifier = Modifier
                             .border(4.dp, Color.LightGray)
                             .background(Color.White)

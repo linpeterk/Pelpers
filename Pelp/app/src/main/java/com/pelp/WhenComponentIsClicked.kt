@@ -1,5 +1,6 @@
 package com.pelp
 
+import android.location.Location
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
@@ -114,40 +115,26 @@ fun SquareImage (navController: NavController) {
 
                 Spacer(modifier = Modifier.height(30.dp))
             }
+
+
             Column(modifier=Modifier.verticalScroll(rememberScrollState())) {
-                Card(modifier = Modifier
-                    .height(300.dp)
-                    .offset(y = 9.dp)
-                    //.border(2.dp, Color.Black)
-                    .padding(10.dp)
-                    .fillMaxWidth(),
-                    shape = RoundedCornerShape(10.dp),
-                    Color.White){
-                    Text(text = "Hello")
-                }
-                Card(modifier = Modifier
+                repeat(3)
+                {
+                  Card(modifier = Modifier
                     .height(300.dp)
                     .offset(y = 9.dp)
                     //.border(1.dp, Color.LightGray)
                     .padding(10.dp)
                     .fillMaxWidth(),
                     shape = RoundedCornerShape(10.dp),
-                    Color.White){
-                    Text(text = "Hello")
-                }
-                Card(modifier = Modifier
-                    .height(300.dp)
-                    .offset(y = 9.dp)
-                    //.border(2.dp, Color.Black)
-                    .padding(10.dp)
-                    .fillMaxWidth(),
-                    shape = RoundedCornerShape(10.dp),
-                    Color.White){
-                    Text(text = "Hello")
-                }
+                    Color.White) {
+                    var str: String = dataBase[addressCali.loc]?.reviewArray!!.get(it)
+                  //  var a:Location_Restroom = dataBase[Brew]!!
 
-
+                    Text(text = "Address coordinate is ${dataBase[addressCali.loc]!!.name} and the reviews are $str")
+                }
             }
+        }
         }
     }
 }

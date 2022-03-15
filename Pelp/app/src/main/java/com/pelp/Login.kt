@@ -1,5 +1,6 @@
 package com.pelp
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -28,7 +29,7 @@ import com.pelp.ui.theme.lightBlue
 
 @Composable
 fun LoginScreen(
-    navController: NavController
+    navController: NavController ,
 ) {
 
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(5.dp)) {

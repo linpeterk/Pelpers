@@ -22,9 +22,11 @@ fun SetupNavGraph(
         }
 
         composable(
-            route = Screen.Login.route
+            route = Screen.Login.route,
+
+
         ){
-            LoginScreen(navController = navController)
+            LoginScreen(navController = navController )
         }
 
         composable(
@@ -45,7 +47,8 @@ fun SetupNavGraph(
 
         }
         composable(
-            route = Screen.Review.route
+            route = Screen.Review.route,
+            arguments =
         ){
             SquareImage (navController = navController)
 

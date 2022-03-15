@@ -133,8 +133,10 @@ fun LandingPageScreen(
                         modifier = Modifier.offset(x = 110.dp, y = 20.dp),
                        // horizontalArrangement = Arrangement.Center y no work
                     ) {
+                        val a:String = "Test arg"
                         Button(
-                            onClick = { navController.navigate(route=Screen.Login.route)},
+
+                            onClick = { navController.navigate(route=Screen.Login.route + "/$a")},
                             colors = ButtonDefaults.buttonColors(backgroundColor = Color.White)
                         ) {
                             Text(text = "Log in", modifier = Modifier.padding(5.dp), color = lightBlue)
