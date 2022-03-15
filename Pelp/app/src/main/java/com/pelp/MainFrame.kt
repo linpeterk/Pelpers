@@ -293,7 +293,7 @@ fun MakeGoogleMap( makeMarker: Boolean = false, obj:HashMap<LatLng, Location_Res
             var a:Location_Restroom = Location_Restroom( str, LatLng(it.latitude, it.longitude))
           //  destObject.add(a)
 
-            add(a.loc, a)
+            dataAdd(a.loc, a)
 
           //  cardCount.value++ //force refresh
 
