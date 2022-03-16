@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -35,110 +36,160 @@ fun Preview(){
 fun SquareImage (navController: NavController, addressLoc:Int) {
     Log.d(Examples.TAG,"AddressLoc is $addressLoc")
    // val locationRestroom = dataBase [addressLoc]
-    TopAppBar(title = {},Modifier.height(60.dp))
+    //TopAppBar(title = {},Modifier.height(60.dp))
     //Spacer(modifier = Modifier.width(4.dp))
-    Column(modifier= Modifier
-        .fillMaxSize()
-        .offset(y = 64.dp)) {
-        Row(modifier= Modifier
-            .offset(y = 0.dp)
-            .horizontalScroll(rememberScrollState())) {
+    Surface(/*color = MaterialTheme.colors.primary*/) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .offset(y = 15.dp)
+        ) {
+            Row(
+                modifier = Modifier
+                    .offset(y = 0.dp)
+                    .horizontalScroll(rememberScrollState())
+            ) {
 
-            Card(modifier = Modifier
-                .offset(y = 0.dp)
-                .fillMaxWidth()
-                .padding(4.dp),shape= RoundedCornerShape(15.dp),elevation=5.dp) {
-                Box(modifier = Modifier.height(200.dp)){
-                    Image(painter = painterResource(id = R.drawable.urbanbathroom),
-                        contentDescription ="Urban Bathroom",
-                        contentScale = ContentScale.Fit
-                    )
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(10.dp),
-                        contentAlignment = Alignment.BottomCenter){
-                        Text(text = "URBAN BATHROOM: Clean Grunge!",style = TextStyle(color = Color.White,fontSize = 16.sp))
+                Card(
+                    modifier = Modifier
+                        .offset(y = 0.dp)
+                        .fillMaxWidth()
+                        .padding(4.dp), shape = RoundedCornerShape(15.dp), elevation = 5.dp
+                ) {
+                    Box(modifier = Modifier.height(200.dp)) {
+                        Image(
+                            painter = painterResource(id = R.drawable.urbanbathroom),
+                            contentDescription = "Urban Bathroom",
+                            contentScale = ContentScale.Fit
+                        )
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(10.dp),
+                            contentAlignment = Alignment.BottomCenter
+                        ) {
+                            Text(
+                                text = "URBAN BATHROOM: Clean Grunge!",
+                                style = TextStyle(color = Color.White, fontSize = 16.sp)
+                            )
 
+                        }
+                    }
+                }
+
+                Card(
+                    modifier = Modifier
+                        .offset(y = 0.dp)
+                        .fillMaxWidth()
+                        .padding(4.dp), shape = RoundedCornerShape(15.dp), elevation = 5.dp
+                ) {
+                    Box(modifier = Modifier.height(200.dp)) {
+                        Image(
+                            painter = painterResource(id = R.drawable.cleanbathroom1),
+                            contentDescription = "Urban Bathroom",
+                            contentScale = ContentScale.Fit
+                        )
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(10.dp),
+                            contentAlignment = Alignment.BottomCenter
+                        ) {
+                            Text(
+                                text = "MODERN PUBLIC: Sterile!",
+                                style = TextStyle(color = Color.White, fontSize = 16.sp)
+                            )
+
+                        }
+                    }
+                }
+
+                Card(
+                    modifier = Modifier
+                        .offset(y = 0.dp)
+                        .fillMaxWidth()
+                        .padding(4.dp), shape = RoundedCornerShape(15.dp), elevation = 5.dp
+                ) {
+                    Box(modifier = Modifier.height(200.dp)) {
+                        Image(
+                            painter = painterResource(id = R.drawable.handicap),
+                            contentDescription = "Urban Bathroom",
+                            contentScale = ContentScale.Fit
+                        )
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(10.dp),
+                            contentAlignment = Alignment.BottomCenter
+                        ) {
+                            Text(
+                                text = "FULL ACCESS: Good Space!",
+                                style = TextStyle(color = Color.White, fontSize = 16.sp)
+                            )
+
+                        }
                     }
                 }
             }
+            Column() {
+                Card(
+                    modifier = Modifier
+                        .height(60.dp)
+                        .offset(y = 10.dp)
+                        //.border(1.dp, Color.Black)
+                        .height(10.dp)
+                        .padding(3.dp)
+                        .fillMaxWidth(),
+                    shape = RoundedCornerShape(4.dp),
+                    Color.LightGray
+                ) {
+                    MenuTab(navController)
 
-            Card(modifier = Modifier
-                .offset(y = 0.dp)
-                .fillMaxWidth()
-                .padding(4.dp),shape= RoundedCornerShape(15.dp),elevation=5.dp) {
-                Box(modifier = Modifier.height(200.dp)){
-                    Image(painter = painterResource(id = R.drawable.cleanbathroom1),
-                        contentDescription ="Urban Bathroom",
-                        contentScale = ContentScale.Fit
-                    )
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(10.dp),
-                        contentAlignment = Alignment.BottomCenter){
-                        Text(text = "MODERN PUBLIC: Sterile!",style = TextStyle(color = Color.White,fontSize = 16.sp))
+                    Spacer(modifier = Modifier.height(30.dp))
+                }
 
+                Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+                    repeat(3)
+                    {
+                        Card(
+                            modifier = Modifier
+                                .height(300.dp)
+                                .offset(y = 9.dp)
+                                //.border(1.dp, Color.LightGray)
+                                .padding(10.dp)
+                                .fillMaxWidth(),
+                            shape = RoundedCornerShape(10.dp),
+                            Color.White
+                        ) {
+                            Row(modifier = Modifier.fillMaxWidth()) {
+                                Surface(modifier = Modifier
+                                    /*.size(50.dp, 50.dp)*/
+                                    .padding(4.dp),shape= RoundedCornerShape(10.dp)) {
+                                    Image(
+                                        modifier=Modifier.size(50.dp,50.dp),
+                                        contentScale = ContentScale.Fit,
+                                        painter = painterResource(id = R.drawable.handicap),
+                                        contentDescription = "Urban Bathroom"
+                                        /*contentScale = ContentScale.Fit*/
+                                    )
+                                }
+
+                                Text(text = "Customer Name", modifier=Modifier.offset(4.dp,12.dp))
+                                //Spacer(modifier = Modifier.height(30.dp))
+                                //  var str: String = dataBase[addressGlobal.loc]?.reviewArray!!.get(it)
+                                Row(modifier=Modifier.fillMaxWidth().offset(-150.dp,60.dp)) {
+                                    var str: String =
+                                        dataBase[getKeyFromList(addressLoc)]?.reviewArray!!.get(it)
+                                    //  var a:Location_Restroom = dataBase[Brew]!!
+                                    //Spacer(modifier = Modifier.height(30.dp))
+                                    Text(text = "Address coordinate is ${dataBase[addressGlobal.loc]!!.name} and the reviews are $str")
+                                }
+
+                            }
+                        }
                     }
                 }
             }
-
-            Card(modifier = Modifier
-                .offset(y = 0.dp)
-                .fillMaxWidth()
-                .padding(4.dp),shape= RoundedCornerShape(15.dp),elevation=5.dp) {
-                Box(modifier = Modifier.height(200.dp)){
-                    Image(painter = painterResource(id = R.drawable.handicap),
-                        contentDescription ="Urban Bathroom",
-                        contentScale = ContentScale.Fit
-                    )
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(10.dp),
-                        contentAlignment = Alignment.BottomCenter){
-                        Text(text = "FULL ACCESS: Good Space!",style = TextStyle(color = Color.White,fontSize = 16.sp))
-
-                    }
-                }
-            }
-        }
-        Column() {
-            Card(modifier = Modifier
-                .height(60.dp)
-                .offset(y = 10.dp)
-                //.border(1.dp, Color.Black)
-                .height(10.dp)
-                .padding(3.dp)
-                .fillMaxWidth(),
-                shape = RoundedCornerShape(4.dp),
-                Color.LightGray){
-                MenuTab(navController)
-
-                Spacer(modifier = Modifier.height(30.dp))
-            }
-
-
-            Column(modifier=Modifier.verticalScroll(rememberScrollState())) {
-                repeat(3)
-                {
-                  Card(modifier = Modifier
-                    .height(300.dp)
-                    .offset(y = 9.dp)
-                    //.border(1.dp, Color.LightGray)
-                    .padding(10.dp)
-                    .fillMaxWidth(),
-                    shape = RoundedCornerShape(10.dp),
-                    Color.White) {
-                  //  var str: String = dataBase[addressGlobal.loc]?.reviewArray!!.get(it)
-                      var str: String = dataBase[getKeyFromList(addressLoc)]?.reviewArray!!.get(it)
-                  //  var a:Location_Restroom = dataBase[Brew]!!
-
-                    Text(text = "Address coordinate is ${dataBase[addressGlobal.loc]!!.name} and the reviews are $str")
-                }
-            }
-        }
         }
     }
 }

@@ -32,15 +32,6 @@ import com.pelp.ui.theme.lightBlue
 
 
 
-
-@Preview
-@Composable
-fun PreviewMap(){
-
-  //  SortScreen(navController)
-
-}
-
 @Composable
 fun SortScreen(navController: NavController){
 
@@ -51,7 +42,7 @@ fun SortScreen(navController: NavController){
 
 //        Image(painter = painterResource(R.drawable.fakemap), contentDescription ="Fake Map",
 //            modifier=Modifier.fillMaxSize())
-        TopAppBar(title = {},Modifier.height(60.dp))
+        //TopAppBar(title = {},Modifier.height(60.dp))
     }
 
     IconBox(navController)
