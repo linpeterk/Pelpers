@@ -1,6 +1,12 @@
-package com.pelp
+package com.pelp.model.data
 
 import com.google.android.gms.maps.model.LatLng
+
+val caliMuseum = LatLng(34.05, -118.24)
+val toyDistrict = LatLng(34.047, -118.243)
+val brew = LatLng(34.051, -118.234)
+val dodgerS = LatLng(34.073, -118.241)
+val church = LatLng(34.05693923331048, -118.23957346932366)
 
 class Location_Restroom (val name:String = "", var loc:LatLng) {
 

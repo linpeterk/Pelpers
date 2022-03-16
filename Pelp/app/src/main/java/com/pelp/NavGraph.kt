@@ -1,5 +1,6 @@
 package com.pelp
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHost
 import androidx.navigation.NavHostController
@@ -56,10 +57,11 @@ fun SetupNavGraph(
         }
         composable(
             route = Screen.Review.route+"/{addressLoc}", // argument must be separated by "/{}"
-            arguments = listOf(navArgument("addressLoc"){NavType.IntType })  //navigate pass with argument
+            arguments = listOf(navArgument("addressLoc"){type = NavType.IntType })  //navigate pass with argument
         ){
             val str: Int? = it.arguments?.getInt("addressLoc")
 
+        if(str!= null)
             SquareImage (navController = navController, str!!)
 
         }

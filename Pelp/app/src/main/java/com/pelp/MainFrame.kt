@@ -29,11 +29,13 @@ import com.google.maps.android.compose.CameraPositionState
 import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.rememberCameraPositionState
+import com.pelp.model.data.Location_Restroom
+import com.pelp.model.data.*
 import java.io.IOException
 import java.util.*
 
 var cameraPositionState:CameraPositionState?=null
-var addressGlobal:Location_Restroom = Location_Restroom(loc=LatLng(100.0, 100.0))
+var addressGlobal: Location_Restroom = Location_Restroom(loc=LatLng(100.0, 100.0))
 private const val TAG = "MapSampleActivity"
 
 //val destList = listOf(caliMuseum, toyDistrict, brew,dodgerS,church)  //List of locations name
@@ -290,7 +292,7 @@ fun MakeGoogleMap( makeMarker: Boolean = false, obj:HashMap<LatLng, Location_Res
         onMapLongClick = {
             Log.d(TAG, "lat is : ${it.latitude}")
             var str:String =  reverseGeocoder(contex, it.latitude, it.longitude)
-            var a:Location_Restroom = Location_Restroom( str, LatLng(it.latitude, it.longitude))
+            var a: Location_Restroom = Location_Restroom( str, LatLng(it.latitude, it.longitude))
           //  destObject.add(a)
 
             dataAdd(a.loc, a)
@@ -471,11 +473,14 @@ fun MakeScrollComponents(navController: NavController){
                         .height(128.dp)
                         //Toast.makeText(context, "TestA", Toast.LENGTH_LONG) toast syntax
                         .clickable(onClick = {
+                            Log.d(TAG, "B4address = ${dataBase.count()-1-(it%5)}")
 
-                            addressGlobal = dataBase[getKeyFromList(dataBase.count()-1-(it%5))]!!
+                       //     addressGlobal = dataBase[getKeyFromList(dataBase.count()-1-(it%5))]!!
                       //      navController.navigate(Screen.Review.route)
-                           navController.navigate(Screen.Review.route + "/${dataBase.count()-1-(it%5)}")
+                           navController.navigate(Screen.Review.route+"/${dataBase.count()-1-(it%5)}")
                   //          navController.navigate(Screen.Review.route + "/${"abcdef"}")
+
+                            //Screen.profile_screen.route+"/Peter/1234/5678")
 
                         }),
 

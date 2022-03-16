@@ -1,6 +1,4 @@
-package com.pelp
-
-import com.google.android.gms.maps.model.LatLng
+package com.pelp.model.data
 
 data class Person(
 

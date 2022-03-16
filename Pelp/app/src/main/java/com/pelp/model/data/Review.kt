@@ -1,4 +1,4 @@
-package com.pelp
+package com.pelp.model.data
 
 import com.google.android.gms.maps.model.LatLng
 
