@@ -39,7 +39,7 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
    // val locationRestroom = dataBase [addressLoc]
     //TopAppBar(title = {},Modifier.height(60.dp))
     //Spacer(modifier = Modifier.width(4.dp))
-    Surface(/*color = MaterialTheme.colors.primary*/) {
+    Surface(color = MaterialTheme.colors.primary) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
