@@ -42,17 +42,15 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .offset(y = 15.dp)
+                .offset(y = 3.dp)
         ) {
             Row(
                 modifier = Modifier
-                    .offset(y = 0.dp)
                     .horizontalScroll(rememberScrollState())
             ) {
 
                 Card(
                     modifier = Modifier
-                        .offset(y = 0.dp)
                         .fillMaxWidth()
                         .padding(4.dp), shape = RoundedCornerShape(15.dp), elevation = 5.dp
                 ) {
@@ -135,7 +133,7 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
                 Card(
                     modifier = Modifier
                         .height(60.dp)
-                        .offset(y = 10.dp)
+                        .offset(y = 5.dp)
                         //.border(1.dp, Color.Black)
                         .height(10.dp)
                         .padding(3.dp)
@@ -148,48 +146,53 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
                     Spacer(modifier = Modifier.height(30.dp))
                 }
 
-                Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+                Column(modifier = Modifier
+                    .verticalScroll(rememberScrollState())
+                    .offset(y = 8.dp)) {
                     repeat(3)
                     {
                         Card(
+                            elevation=10.dp,
                             modifier = Modifier
-                                .height(300.dp)
-                                .offset(y = 9.dp)
+                                .height(200.dp)
+                                .offset(y = 5.dp)
                                 //.border(1.dp, Color.LightGray)
                                 .padding(10.dp)
                                 .fillMaxWidth(),
                             shape = RoundedCornerShape(10.dp),
-                            Color.White
+                            contentColor = Color.White
                         ) {
-                            Row(modifier = Modifier.fillMaxWidth()) {
-                                Surface(modifier = Modifier
-                                    /*.size(50.dp, 50.dp)*/
-                                    .padding(4.dp),shape= RoundedCornerShape(10.dp)) {
-                                    Image(
-                                        modifier=Modifier.size(50.dp,50.dp),
-                                        contentScale = ContentScale.Fit,
-                                        painter = painterResource(id = R.drawable.handicap),
-                                        contentDescription = "Urban Bathroom"
-                                        /*contentScale = ContentScale.Fit*/
-                                    )
-                                }
-
-                                Text(text = "Customer Name", modifier=Modifier.offset(4.dp,12.dp))
+                            Card() {
+                                Text(text = "Customer Name",modifier=Modifier.offset(x=84.dp,y=24.dp))
                                 //Spacer(modifier = Modifier.height(30.dp))
                                 //  var str: String = dataBase[addressGlobal.loc]?.reviewArray!!.get(it)
-                                Row(modifier=Modifier.fillMaxWidth().offset(-150.dp,60.dp)) {
+                                Row(modifier=Modifier.offset(x=5.dp,y=74.dp)) {
                                     var str: String =
                                         dataBase[getKeyFromList(addressLoc)]?.reviewArray!!.get(it)
                                     //  var a:Location_Restroom = dataBase[Brew]!!
                                     //Spacer(modifier = Modifier.height(30.dp))
                                     Text(text = "Address coordinate is ${dataBase[addressGlobal.loc]!!.name} and the reviews are $str")
                                 }
+                            }
+                            Card(modifier=Modifier.padding(150.dp,60.dp,150.dp,60.dp).offset(-145.dp,-55.dp)) {
+                                Box() {
+                                    Image(
+                                        painter = painterResource(id = R.drawable.handicap),
+                                        contentScale = ContentScale.FillBounds,
+                                        contentDescription = "Urban Bathroom")
+                                }
 
                             }
+
+
                         }
                     }
+
                 }
             }
         }
     }
 }
+
+
+
