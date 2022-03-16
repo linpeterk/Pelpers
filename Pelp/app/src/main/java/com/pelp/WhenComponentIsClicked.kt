@@ -194,7 +194,7 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
                                         modifier = Modifier
                                             .fillMaxWidth()
                                             .height(60.dp)
-                                            .border(1.dp, Color.Yellow),
+                                            .border(2.dp, Color.Red),
 
 
                                         ) {
