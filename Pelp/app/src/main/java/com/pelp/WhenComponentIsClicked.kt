@@ -171,7 +171,7 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
                                 Row(
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .border(3.dp, Color.Black)
+
                                 ) {
                                     Surface(
                                         modifier = Modifier
@@ -190,15 +190,17 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
                                     }
                                     //  restRoomObj is the current component's location_restroom
 
-                                    Card(
+                                    Box(
                                         modifier = Modifier
                                             .fillMaxWidth()
-                                            .height(50.dp)
-                                            .border(3.dp, Color.Yellow),
+                                            .height(60.dp)
+                                            .border(1.dp, Color.Yellow),
+
 
                                         ) {
 
-                                        Text(text = restRoomObj!!.reviewArray[it].customerName)
+                                        Text(text = restRoomObj!!.reviewArray[it].customerName,
+                                        color = Color.Black)
                                         //Spacer(modifier = Modifier.height(30.dp))
                                         //  var str: String = dataBase[addressGlobal.loc]?.reviewArray!!.get(it)
 
