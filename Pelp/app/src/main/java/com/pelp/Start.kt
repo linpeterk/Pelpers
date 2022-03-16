@@ -152,7 +152,9 @@ fun Start(
                             Text(text = "Log in", modifier = Modifier.padding(5.dp), color = lightBlue)
                         }
                         Button(
-                            onClick = { /*TODO*/ },
+                            onClick = {
+                                      navController.navigate(Screen.Signup.route)
+                                      },
                             colors = ButtonDefaults.buttonColors(backgroundColor = lightBlue)
                         ) {
                             Text(text = "Sign up", modifier = Modifier.padding(5.dp), color = Color.White)

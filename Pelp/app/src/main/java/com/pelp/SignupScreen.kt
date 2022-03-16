@@ -14,9 +14,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 
 @Composable
-fun SignupScreen() {
+fun SignupScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .verticalScroll(rememberScrollState())
@@ -56,7 +57,9 @@ fun SignupScreen() {
                 .padding(8.dp),
             horizontalArrangement = Arrangement.Center
         ){
-            Button(onClick = { /*TODO*/ }) {
+            Button(onClick = {
+                navController.navigate(Screen.Login.route)
+            }) {
                 Text("Login with Email")
             }
         }
@@ -98,6 +101,7 @@ fun Fields() {
                 placeholder = { Text(text = "password")}
             )
         }
+
         Row {
             val zip = remember { mutableStateOf(TextFieldValue()) }
             TextField(
@@ -106,5 +110,7 @@ fun Fields() {
                 placeholder = { Text(text = "zip code") }
             )
         }
+
+
     }
 }

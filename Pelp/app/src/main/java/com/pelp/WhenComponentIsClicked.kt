@@ -34,6 +34,7 @@ fun Preview(){
 
 @Composable
 fun SquareImage (navController: NavController, addressLoc:Int) {
+    var restRoomObj = dataBase[getKeyFromList(addressLoc)]
     Log.d(Examples.TAG,"AddressLoc is $addressLoc")
    // val locationRestroom = dataBase [addressLoc]
     //TopAppBar(title = {},Modifier.height(60.dp))
@@ -149,7 +150,7 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
                 }
 
                 Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
-                    repeat(3)
+                    repeat(restRoomObj!!.reviewArray.count())
                     {
                         Card(
                             modifier = Modifier
@@ -173,16 +174,16 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
                                         /*contentScale = ContentScale.Fit*/
                                     )
                                 }
-
-                                Text(text = "Customer Name", modifier=Modifier.offset(4.dp,12.dp))
+                              //  restRoomObj is the current component's location_restroom
+                                Text(text = restRoomObj!!.reviewArray[it].customerName, modifier=Modifier.offset(4.dp,12.dp))
                                 //Spacer(modifier = Modifier.height(30.dp))
                                 //  var str: String = dataBase[addressGlobal.loc]?.reviewArray!!.get(it)
                                 Row(modifier=Modifier.fillMaxWidth().offset(-150.dp,60.dp)) {
                                     var str: String =
-                                        dataBase[getKeyFromList(addressLoc)]?.reviewArray!!.get(it)
+                                        restRoomObj?.reviewArray!!.get(it).comments
                                     //  var a:Location_Restroom = dataBase[Brew]!!
                                     //Spacer(modifier = Modifier.height(30.dp))
-                                    Text(text = "Address coordinate is ${dataBase[addressGlobal.loc]!!.name} and the reviews are $str")
+                                    Text(text = "Location: ${restRoomObj!!.name}  \n \n Reviews:\n $str")
                                 }
 
                             }

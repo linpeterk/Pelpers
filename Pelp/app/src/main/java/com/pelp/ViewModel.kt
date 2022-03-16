@@ -6,10 +6,10 @@ import java.util.*
 import java.util.Collections.reverse
 import kotlin.collections.LinkedHashMap
 //store restroom location data
-val dataBase:LinkedHashMap<LatLng, Location_Restroom> = LinkedHashMap()
+var dataBase: LinkedHashMap<LatLng, Location_Restroom> = LinkedHashMap()
 
 //store customers user
-val userBase:LinkedHashMap<String, Person> = LinkedHashMap()
+var  userBase:LinkedHashMap<String, Person> = LinkedHashMap()
  var arrayKeys: MutableList<LatLng> = mutableListOf()
 
 val caliMuseum = LatLng(34.05, -118.24)
@@ -27,25 +27,32 @@ fun init(){
     dataAdd(dodgerS, Location_Restroom("Dodger Stadium", LatLng(34.073,-118.241)))
     dataAdd(church, Location_Restroom("Our Lady Queen of Angels", LatLng(34.05693923331048,-118.23957346932366)))
 
-    customerAdd("peter", "12345")
+    customerAdd("peter", "12345", "peter")
     customerAddHistory("peter", locationRestroom = dataBase[brew]!!)
 
-   checkCustomerExist("peter")
+    customerAdd("admin", "admin", "admin")
+    customerAddHistory("admin", locationRestroom = dataBase[dodgerS]!!)
+
+  // checkCustomerExist("peter")
   //  arrayKeys= dataBase.keys.toMutableList()
  //   reverseHashMap()
+}
+fun loginVerify(userName:String, password:String):Boolean{
+
+    return (userBase[userName]!=null && userBase[userName]?.password ==password)
 }
 
 fun checkCustomerExist(name:String)
 {
-    Log.d("Tag", "Person exist? Name:${userBase["peter"]?.name} pass ${userBase["peter"]?.password} history ${userBase["peter"]?.history?.get(0)?.name}")
+    Log.d("Tag", "Person exist? Name:${userBase["peter"]?.userName} pass ${userBase["peter"]?.password} history ${userBase["peter"]?.history?.get(0)?.name}")
 }
 fun dataAdd(loc:LatLng, restR:Location_Restroom){
     dataBase[loc] = restR
     arrayKeys.add(loc)
 }
 
-fun customerAdd(name:String, password:String){
-    var p = Person(name, password)
+fun customerAdd(name:String, password:String, realName:String, zip:Int = 90001){
+    var p = Person(name, realName, password, zip)
    userBase[name] = p
 
 }

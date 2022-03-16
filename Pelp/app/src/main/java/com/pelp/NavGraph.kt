@@ -24,6 +24,12 @@ fun SetupNavGraph(
         }
 
         composable(
+            route = Screen.Signup.route
+        ){
+            SignupScreen(navController = navController)
+        }
+
+        composable(
             route = Screen.Login.route,
 
 

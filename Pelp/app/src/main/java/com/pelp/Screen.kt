@@ -8,5 +8,6 @@ sealed class Screen(val route:String){
     object Profile:Screen(route="profile_screen")
     object Sort:Screen(route="sort_screen")
     object Review:Screen(route="review_screen")
+    object Signup:Screen(route="signup_screen")
 
 }
