@@ -92,7 +92,7 @@ fun LoginScreen(
 
         ) {
             Button(onClick = { //userName
-                if(loginVerify(userName, password)){
+                if(Database.data.loginVerify(userName, password)){
                 navController.navigate(route=Screen.Main.route)}
               else{
                     result= "These credential does not match our record"

@@ -6,7 +6,7 @@ data class Person(
     var realName:String,
     var password:String,
     var zip:Int,
-    var history:MutableList<Location_Restroom> = mutableListOf()
+    var history:MutableList<Review> = mutableListOf()
 
 
 )

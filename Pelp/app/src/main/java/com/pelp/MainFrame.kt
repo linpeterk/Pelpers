@@ -273,7 +273,7 @@ fun MenuTab(navController: NavController){
 //val destObject = mutableListOf<LocationsExample>()
 @Composable
 //pass in true if you want to make markers
-fun MakeGoogleMap( makeMarker: Boolean = false, obj:HashMap<LatLng, Location_Restroom> = dataBase){
+fun MakeGoogleMap( makeMarker: Boolean = false, obj:HashMap<LatLng, Location_Restroom> = Database.dataBase){
     cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(caliMuseum, 15f)
     }
@@ -281,7 +281,7 @@ fun MakeGoogleMap( makeMarker: Boolean = false, obj:HashMap<LatLng, Location_Res
     var array=Array<Int>(5, init={i->i } )
     var a= arrayOf<Int>()
 
-    println(a)
+//
     GoogleMap(
         modifier = Modifier.fillMaxSize(),
         cameraPositionState = cameraPositionState!!,
@@ -295,7 +295,7 @@ fun MakeGoogleMap( makeMarker: Boolean = false, obj:HashMap<LatLng, Location_Res
             var a: Location_Restroom = Location_Restroom( str, LatLng(it.latitude, it.longitude))
           //  destObject.add(a)
 
-            dataAdd(a.loc, a)
+           // dataAdd(a.loc, a)
 
           //  cardCount.value++ //force refresh
 
@@ -340,7 +340,7 @@ fun reverseGeocoder(context:Context, lat:Double, lng:Double):String{
 }
 //marketCount not in used, make marker base on size of init destObject
 @Composable
-fun makeMarkers(obj:HashMap<LatLng, Location_Restroom> = dataBase){
+fun makeMarkers(obj:HashMap<LatLng, Location_Restroom> = Database.dataBase){
     val context = LocalContext.current
 
     val markerClick: (Marker) -> Boolean = {
@@ -348,7 +348,7 @@ fun makeMarkers(obj:HashMap<LatLng, Location_Restroom> = dataBase){
         false
     }
    // cardCount.value
-    dataBase.forEach(){
+    Database.dataBase.forEach(){
         Marker(
             position = it.value.loc,
             title = it.value.name,
@@ -430,11 +430,11 @@ fun MakeScrollComponents(navController: NavController){
                 ) {
             var  dataBaseIter:Int
 
-            if(dataBase.count()>0){
-                dataBaseIter=dataBase.count()-1}else dataBaseIter = 0
-            var entry = dataBase.iterator().next()
+            if(Database.dataBase.count()>0){
+                dataBaseIter=Database.dataBase.count()-1}else dataBaseIter = 0
+            var entry = Database.dataBase.iterator().next()
 
-            var lastLoc = dataBase[getKeyFromList(dataBaseIter)]
+            var lastLoc = Database.dataBase[Database.data.getKeyFromList(dataBaseIter)]
            // cardCount.value // force update components
 
             repeat(
@@ -446,7 +446,7 @@ fun MakeScrollComponents(navController: NavController){
                         .clickable(onClick = {
 //                            Log.d(TAG, "Name is ${lastLoc?.name}")
                             cameraPositionState!!.position =
-                                CameraPosition.fromLatLngZoom(getKeyFromList(dataBase.count()-1-(it%5)), 15f)
+                                CameraPosition.fromLatLngZoom(Database.data.getKeyFromList(Database.dataBase.count()-1-(it%5)), 15f)
                             //destObject[destObjSize - it].loc
                         }),
                     // .fillMaxWidth()
@@ -473,11 +473,11 @@ fun MakeScrollComponents(navController: NavController){
                         .height(128.dp)
                         //Toast.makeText(context, "TestA", Toast.LENGTH_LONG) toast syntax
                         .clickable(onClick = {
-                            Log.d(TAG, "B4address = ${dataBase.count()-1-(it%5)}")
+                            Log.d(TAG, "B4address = ${Database.dataBase.count()-1-(it%5)}")
 
-                       //     addressGlobal = dataBase[getKeyFromList(dataBase.count()-1-(it%5))]!!
+                       //     addressGlobal = dataBase[Database.data.getKeyFromList(dataBase.count()-1-(it%5))]!!
                       //      navController.navigate(Screen.Review.route)
-                           navController.navigate(Screen.Review.route+"/${dataBase.count()-1-(it%5)}")
+                           navController.navigate(Screen.Review.route+"/${Database.dataBase.count()-1-(it%5)}")
                   //          navController.navigate(Screen.Review.route + "/${"abcdef"}")
 
                             //Screen.profile_screen.route+"/Peter/1234/5678")
@@ -499,7 +499,7 @@ fun MakeScrollComponents(navController: NavController){
 
                     )
                if((--dataBaseIter)>=0) {
-                   lastLoc= dataBase[getKeyFromList(dataBaseIter)]
+                   lastLoc= Database.dataBase[Database.data.getKeyFromList(dataBaseIter)]
                }
                 }
             }

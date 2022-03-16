@@ -34,7 +34,7 @@ fun Preview(){
 
 @Composable
 fun SquareImage (navController: NavController, addressLoc:Int) {
-    var restRoomObj = dataBase[getKeyFromList(addressLoc)]
+    var restRoomObj = Database.dataBase[Database.data.getKeyFromList(addressLoc)]
     Log.d(Examples.TAG,"AddressLoc is $addressLoc")
    // val locationRestroom = dataBase [addressLoc]
     //TopAppBar(title = {},Modifier.height(60.dp))
