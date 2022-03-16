@@ -449,6 +449,7 @@ fun MakeScrollComponents(navController: NavController){
                                 CameraPosition.fromLatLngZoom(Database.data.getKeyFromList(Database.dataBase.count()-1-(it%5)), 15f)
                             //destObject[destObjSize - it].loc
                         }),
+                    RoundedCornerShape(15.dp)
                     // .fillMaxWidth()
 
                 ) {
@@ -484,7 +485,7 @@ fun MakeScrollComponents(navController: NavController){
 
                         }),
 
-                    shape = RoundedCornerShape(3.dp)
+                    RoundedCornerShape(15.dp)
 
                     // .fillMaxWidth()
 

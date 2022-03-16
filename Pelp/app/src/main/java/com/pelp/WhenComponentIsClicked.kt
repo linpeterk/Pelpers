@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -35,6 +36,8 @@ fun Preview(){
 @Composable
 fun SquareImage (navController: NavController, addressLoc:Int) {
     var restRoomObj = Database.dataBase[Database.data.getKeyFromList(addressLoc)]
+
+
     Log.d(Examples.TAG,"AddressLoc is $addressLoc")
    // val locationRestroom = dataBase [addressLoc]
     //TopAppBar(title = {},Modifier.height(60.dp))
@@ -57,10 +60,12 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
                 ) {
                     Box(modifier = Modifier.height(200.dp)) {
                         Image(
-                            painter = painterResource(id = R.drawable.urbanbathroom),
+
+                            painter = painterResource(restRoomObj?.image_URL?.get(0)!!),
                             contentDescription = "Urban Bathroom",
                             contentScale = ContentScale.Fit
                         )
+
                         Box(
                             modifier = Modifier
                                 .fillMaxSize()
@@ -84,7 +89,7 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
                 ) {
                     Box(modifier = Modifier.height(200.dp)) {
                         Image(
-                            painter = painterResource(id = R.drawable.cleanbathroom1),
+                            painter = painterResource(id = restRoomObj?.image_URL?.get(1)!!),
                             contentDescription = "Urban Bathroom",
                             contentScale = ContentScale.Fit
                         )
@@ -111,7 +116,7 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
                 ) {
                     Box(modifier = Modifier.height(200.dp)) {
                         Image(
-                            painter = painterResource(id = R.drawable.handicap),
+                            painter = painterResource(id = restRoomObj?.image_URL?.get(2)!!),
                             contentDescription = "Urban Bathroom",
                             contentScale = ContentScale.Fit
                         )

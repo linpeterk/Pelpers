@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
              // Don't Comment this out!
             // A surface container using the 'background' color from the theme
             navController = rememberNavController()
-           SetupNavGraph(navController = navController)
+        //   SetupNavGraph(navController = navController)
 
             // A surface container using the 'background' color from the theme
 //            navController = rememberNavController()
@@ -49,7 +49,7 @@ class MainActivity : ComponentActivity() {
             //MainScreen()
 
 //            SortScreen()
-            //SquareImage ()
+            SquareImage (navController, 2)
 
             //LoginScreen(navController)
           //  ProfileScreen(navController = navController)
