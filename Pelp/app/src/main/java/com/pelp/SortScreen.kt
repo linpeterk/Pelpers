@@ -58,7 +58,8 @@ fun IconBox(navController: NavController){
             .padding(3.dp)
             .fillMaxWidth(),
             shape = RoundedCornerShape(4.dp),
-            Color.LightGray){
+            Color.White,
+            elevation = 4.dp){
             MenuTab(navController)
 
 
@@ -70,7 +71,8 @@ fun IconBox(navController: NavController){
             .padding(3.dp)
             .fillMaxWidth(),
             shape = RoundedCornerShape(4.dp),
-            Color.White){
+            Color.White,
+            elevation=4.dp){
             val checkedState= remember { mutableStateOf(true) }
             Column() {
                 Button(

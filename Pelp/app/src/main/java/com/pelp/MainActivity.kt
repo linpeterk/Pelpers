@@ -32,7 +32,19 @@ class MainActivity : ComponentActivity() {
         setContent {
              // Don't Comment this out!
             // A surface container using the 'background' color from the theme
-            navController = rememberNavController()
+            PelpTheme {
+                navController = rememberNavController()
+                SetupNavGraph(navController = navController)
+//                Surface(
+//                    modifier = Modifier.fillMaxSize(),
+//                    color = MaterialTheme.colors.background
+//                ) {
+//
+//                }
+            }
+
+
+            //SquareImage (navController, 2)
         //   SetupNavGraph(navController = navController)
 
             // A surface container using the 'background' color from the theme
@@ -49,7 +61,7 @@ class MainActivity : ComponentActivity() {
             //MainScreen()
 
 //            SortScreen()
-            SquareImage (navController, 2)
+
 
             //LoginScreen(navController)
           //  ProfileScreen(navController = navController)

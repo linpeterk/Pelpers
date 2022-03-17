@@ -14,6 +14,7 @@ class Location_Restroom (val name:String = "", var loc:LatLng) {
 
     val reviewArray:ArrayList<Review> = ArrayList<Review>()
     val image_URL:ArrayList<Int> = ArrayList<Int>()
+    val userIMG_URL:ArrayList<Int> = ArrayList<Int>()
     init{
         reviewArray.add(Review("Peter", restroomLoc=loc, "The best bathroom in town"))
         reviewArray.add(Review("Carlos", loc, "It's craptacular"))
@@ -24,6 +25,10 @@ class Location_Restroom (val name:String = "", var loc:LatLng) {
         addImage(R.drawable.urbanbathroom)
         addImage(R.drawable.handicap)
         addImage(R.drawable.cleanbathroom1)
+        addPeopleImage(R.drawable.man)
+        addPeopleImage(R.drawable.old_lady)
+        addPeopleImage(R.drawable.girl)
+        addPeopleImage(R.drawable.weird_hair)
 
     }
 
@@ -34,5 +39,9 @@ class Location_Restroom (val name:String = "", var loc:LatLng) {
     fun addImage(reviewImage:Int){
        image_URL.add(reviewImage)
     }
+    fun addPeopleImage(reviewImage:Int){
+        userIMG_URL.add(reviewImage)
+    }
+
 
 }

@@ -11,6 +11,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
@@ -42,7 +43,7 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
    // val locationRestroom = dataBase [addressLoc]
     //TopAppBar(title = {},Modifier.height(60.dp))
     //Spacer(modifier = Modifier.width(4.dp))
-    Surface(color = MaterialTheme.colors.primary) {
+    Surface(color = MaterialTheme.colors.primaryVariant) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -60,7 +61,6 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
                 ) {
                     Box(modifier = Modifier.height(200.dp)) {
                         Image(
-
                             painter = painterResource(restRoomObj?.image_URL?.get(0)!!),
                             contentDescription = "Urban Bathroom",
                             contentScale = ContentScale.Fit
@@ -145,7 +145,7 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
                         .padding(3.dp)
                         .fillMaxWidth(),
                     shape = RoundedCornerShape(4.dp),
-                    Color.LightGray
+                    Color.White
                 ) {
                     MenuTab(navController)
 
@@ -155,7 +155,7 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
 
                 Column(modifier = Modifier
                     .verticalScroll(rememberScrollState())
-                    .border(3.dp, Color.Red)
+                    //.border(3.dp, Color.Red)
                 ) {
                     repeat(restRoomObj!!.reviewArray.count())
                     {
@@ -181,14 +181,14 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
                                     Surface(
                                         modifier = Modifier
                                             /*.size(50.dp, 50.dp)*/
-                                            .padding(4.dp)
-                                            .border(2.dp, Color.Blue),
+                                            .padding(4.dp),
+                                            /*.border(2.dp, Color.Blue),*/
                                         shape = RoundedCornerShape(10.dp)
                                     ) {
                                         Image(
                                             modifier = Modifier.size(50.dp, 50.dp),
                                             contentScale = ContentScale.Fit,
-                                            painter = painterResource(id = R.drawable.handicap),
+                                            painter = painterResource(id = restRoomObj?.userIMG_URL?.get(it)!!),
                                             contentDescription = "Urban Bathroom"
                                             /*contentScale = ContentScale.Fit*/
                                         )
@@ -199,13 +199,13 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
                                         modifier = Modifier
                                             .fillMaxWidth()
                                             .height(60.dp)
-                                            .border(2.dp, Color.Red),
+                                            //.border(2.dp, Color.Red),
 
 
                                         ) {
 
                                         Text(text = restRoomObj!!.reviewArray[it].customerName,
-                                        color = Color.Black)
+                                        color = Color.Black,modifier = Modifier.offset(x=4.dp,y=13.dp))
                                         //Spacer(modifier = Modifier.height(30.dp))
                                         //  var str: String = dataBase[addressGlobal.loc]?.reviewArray!!.get(it)
 
@@ -213,13 +213,13 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
                                 }
                                 Card(
                                     modifier = Modifier
-                                        .border(3.dp, Color.Green)
+                                        //.border(3.dp, Color.Green)
                                         .fillMaxSize()
                                 ) {
                                     var str: String = restRoomObj?.reviewArray!!.get(it).comments
                                     //  var a:Location_Restroom = dataBase[Brew]!!
                                     //Spacer(modifier = Modifier.height(30.dp))
-                                    Text(text = "Location: ${restRoomObj!!.name}  \n \n Reviews:\n $str")
+                                    Text(text = "Location: ${restRoomObj!!.name}  \n \n Reviews:\n $str",modifier=Modifier.offset(x=6.dp))
                                 }
 
 //                            Card(modifier=Modifier.padding(150.dp,60.dp,150.dp,60.dp).offset(-145.dp,-55.dp)) {
