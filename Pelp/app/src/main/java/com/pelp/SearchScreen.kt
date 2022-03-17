@@ -82,8 +82,9 @@ fun searchAddress() {
         }
 
         Surface(
-            shape = RoundedCornerShape(3.dp), modifier = Modifier.padding(10.dp)
-
+            shape = RoundedCornerShape(3.dp),
+            modifier = Modifier.padding(10.dp)
+            ,
         ) {
             Button(onClick = { /*TODO*/ }, modifier = Modifier
                 .width(350.dp)

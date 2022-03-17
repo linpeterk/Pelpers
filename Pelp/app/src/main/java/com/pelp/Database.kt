@@ -1,6 +1,8 @@
 package com.pelp
 
 import android.util.Log
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import com.google.android.gms.maps.model.LatLng
 import com.pelp.model.data.Location_Restroom
 import com.pelp.model.data.*
@@ -19,10 +21,12 @@ private const val TAG = "DatabaseFile"
 class Database(){
 
     companion object{
+
         val data = Database()
         var dataBase: LinkedHashMap<LatLng, Location_Restroom> = LinkedHashMap()
         var userBase:LinkedHashMap<String, Person> = LinkedHashMap()
         var arrayKeys: MutableList<LatLng> = mutableListOf()
+
     }
 
     fun init(){

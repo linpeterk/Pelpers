@@ -1,6 +1,10 @@
 package com.pelp
 
 import android.util.Log
+import androidx.compose.animation.core.FastOutLinearInEasing
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.keyframes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -8,24 +12,20 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.pelp.R
+import com.pelp.model.data.loginAnimation
 import com.pelp.ui.theme.lightBlue
 
 
@@ -33,7 +33,10 @@ import com.pelp.ui.theme.lightBlue
 fun LoginScreen(
     navController: NavController ,
 ) {
+    var userName by rememberSaveable { mutableStateOf("")}
     Log.d(Examples.TAG,"Hello from Login")
+    var alert by rememberSaveable { mutableStateOf(false)}
+    var sizeState by remember { mutableStateOf(0.dp) }
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(5.dp)) {
 
         Surface(
@@ -60,7 +63,7 @@ fun LoginScreen(
             fontStyle = FontStyle.Italic,
             fontWeight = FontWeight.Light
             )
-        var userName by rememberSaveable { mutableStateOf("")}
+
         var result by rememberSaveable {mutableStateOf("admin/admin")}
 
         var password by rememberSaveable {mutableStateOf("")}
@@ -75,6 +78,7 @@ fun LoginScreen(
                 modifier = Modifier.width(350.dp)
 
                 )
+
         }
         Surface(
             shape = RoundedCornerShape(3.dp)
@@ -91,9 +95,14 @@ fun LoginScreen(
             shape = RoundedCornerShape(3.dp), modifier = Modifier.padding(10.dp)
 
         ) {
-            Button(onClick = { //userName
+
+
+            Button(onClick = {
                 if(Database.data.loginVerify(userName, password)){
-                navController.navigate(route=Screen.Main.route)}
+                  //  alert = true
+                    sizeState += 450.dp
+             //   navController.navigate(route=Screen.Main.route)
+                }
               else{
                     result= "These credential does not match our record"
                 }
@@ -140,4 +149,57 @@ fun LoginScreen(
 
         }
     }
+/*
+    if(alert) {
+        alert = false
+        loginAnimation(sizeState)
+    }
+    else {
+        loginAnimation()
+    }
+
+ */
+
+    val size by animateDpAsState(targetValue = sizeState,
+        keyframes {
+            durationMillis = 4000
+            sizeState at 0 with FastOutLinearInEasing
+            sizeState * 1.5f at 1000 with FastOutLinearInEasing
+            sizeState * 2f at 4000
+
+        }
+    )
+
+Log.d(Examples.TAG, "Size is $size")
+    if(size>800.dp) {
+        navController.navigate(Screen.Main.route) {
+            popUpTo(Screen.Main.route) {
+                //           inclusive=true
+            }
+        }
+    }
+
+        Box(
+            modifier = Modifier
+                .size(size)
+                .background(Color.Red)
+                .wrapContentSize(),
+
+
+            contentAlignment = Alignment.Center
+
+        ) {
+            Text(
+                text = "Welcome $userName!", modifier = Modifier
+                    .fillMaxWidth(),
+                fontSize = 28.sp,
+                fontWeight = FontWeight.Bold,
+                fontStyle= FontStyle.Normal,
+                color = Color.White,
+                textAlign = TextAlign.Center
+               )
+
+        }
+
+
 }

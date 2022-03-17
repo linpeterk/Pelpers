@@ -9,6 +9,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -32,55 +35,30 @@ import com.pelp.ui.theme.lightBlue
 import org.intellij.lang.annotations.JdkConstants
 
 
-/*
-       .drawBehind {
-       val path = Path()
-       val x = size.width
-       val y = size.height
-       val center = size.center
-       path.apply {
-           moveTo(0f, 0f)
-           lineTo(x, 0f)
-           cubicTo(
-                    x,
-                center.y/2,
-                    x,
-                    center.y,
-                0f,
-                   center.y
-                )
-           }
-
-           drawPath(path, orange)
-       }
-       */
-
 @Composable
 fun Start(
     navController: NavController
 ){
 
-
     Box(
         modifier = Modifier.fillMaxSize()
             .background(MaterialTheme.colors.background)
-            .border(3.dp, Color.Yellow),
+
        // color = MaterialTheme.colors.background
     ) {
         Column(
             Modifier
                 .background(Color.White)
-                .border(1.dp, Color.Blue).height(140.dp)
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
                // .border(1.dp, Color.Red)
         ) {
             Surface(
-                modifier = Modifier.size(70.dp).border(1.dp, Color.Red),
+                modifier = Modifier.size(70.dp),
                 shape = CircleShape
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.sea),
+                    painter = painterResource(id = R.drawable.ic_sea_icon_round),
                     contentDescription = "piece",
                     modifier = Modifier
                         .size(70.dp)
@@ -91,8 +69,7 @@ fun Start(
             Text(text = "Welcome to Pelp",
                 modifier = Modifier
                     .padding(4.dp)
-                    .clickable { }
-                    .border(2.dp, Color.Red),
+                    .clickable { },
                 fontSize = 28.sp,
                 fontWeight = FontWeight.Bold,
                 style = MaterialTheme.typography.body2
@@ -112,11 +89,10 @@ fun Start(
             Column(
                 modifier = Modifier.fillMaxSize()
                     .offset(y=160.dp)
-                    .border(2.dp, Color.Red)
             ) {
                 Surface(modifier=Modifier.height(300.dp)) {
 
-                    Box(modifier=Modifier.border(2.dp, Color.Magenta)){
+                    Box(modifier=Modifier){
                         Image(
                             painter = painterResource(id = R.drawable.pelplogo),
                             contentDescription = "Toilet House",
@@ -143,7 +119,7 @@ fun Start(
                         modifier = Modifier.offset(x = 110.dp, y = 20.dp),
                        // horizontalArrangement = Arrangement.Center y no work
                     ) {
-                        val a:String = "Test arg"
+
                         Button(
 
                             onClick = { navController.navigate(route=Screen.Login.route)},

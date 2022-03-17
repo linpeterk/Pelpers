@@ -11,17 +11,20 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
@@ -87,10 +90,37 @@ fun MainScreen(navController: NavController){
             }
         }
 
-    }
 
+
+    }
+    makeAddressButton()
 }
 
+
+@Composable
+fun makeAddressButton(){
+    Column(modifier = Modifier
+        .offset(x = 132.dp)
+        .padding(5.dp)
+        .wrapContentSize())
+    {
+
+        Box(
+            modifier = Modifier
+                .wrapContentSize()
+                .padding(2.dp),
+        ) {
+            FloatingActionButton(
+                onClick = { /*TODO*/ },
+                modifier = Modifier
+                    .size(100.dp, 35.dp),
+                backgroundColor = Color.Transparent
+            ) {
+                Text(text="Address", color=Color.DarkGray ,modifier = Modifier, fontStyle = FontStyle.Normal, fontWeight = FontWeight.Bold)
+            }
+        }
+    }
+}
 @Preview
 @Composable
 fun PreviewMainFrame()
@@ -104,7 +134,6 @@ fun PreviewMainFrame()
 }
 
 @Composable
-
 fun MenuTab(navController: NavController){
 
     Box(modifier = Modifier
@@ -174,13 +203,18 @@ fun MenuTab(navController: NavController){
 
           //  Spacer(modifier = Modifier.width(25.dp))
 
+
             Column(modifier = Modifier
                 .padding(horizontal = 15.dp)
 
 
             ) {
+
+                var test by rememberSaveable { mutableStateOf(0)}
+
                 FloatingActionButton(
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                                test++},
                     modifier = Modifier.scale(.7F),
                     backgroundColor = MaterialTheme.colors.surface
                 ) {
@@ -418,7 +452,7 @@ fun MakeScrollComponents(navController: NavController){
             .fillMaxHeight(1f)
             .padding(5.dp)
             // .offset(y=300.dp)
-           .verticalScroll(rememberScrollState()),
+            .verticalScroll(rememberScrollState()),
         // .offset(y = 500.dp)
 
     ) {
@@ -446,7 +480,10 @@ fun MakeScrollComponents(navController: NavController){
                         .clickable(onClick = {
 //                            Log.d(TAG, "Name is ${lastLoc?.name}")
                             cameraPositionState!!.position =
-                                CameraPosition.fromLatLngZoom(Database.data.getKeyFromList(Database.dataBase.count()-1-(it%5)), 15f)
+                                CameraPosition.fromLatLngZoom(
+                                    Database.data.getKeyFromList(Database.dataBase.count() - 1 - (it % 5)),
+                                    15f
+                                )
                             //destObject[destObjSize - it].loc
                         }),
                     RoundedCornerShape(15.dp)
@@ -474,12 +511,12 @@ fun MakeScrollComponents(navController: NavController){
                         .height(128.dp)
                         //Toast.makeText(context, "TestA", Toast.LENGTH_LONG) toast syntax
                         .clickable(onClick = {
-                            Log.d(TAG, "B4address = ${Database.dataBase.count()-1-(it%5)}")
+                            Log.d(TAG, "B4address = ${Database.dataBase.count() - 1 - (it % 5)}")
 
-                       //     addressGlobal = dataBase[Database.data.getKeyFromList(dataBase.count()-1-(it%5))]!!
-                      //      navController.navigate(Screen.Review.route)
-                           navController.navigate(Screen.Review.route+"/${Database.dataBase.count()-1-(it%5)}")
-                  //          navController.navigate(Screen.Review.route + "/${"abcdef"}")
+                            //     addressGlobal = dataBase[Database.data.getKeyFromList(dataBase.count()-1-(it%5))]!!
+                            //      navController.navigate(Screen.Review.route)
+                            navController.navigate(Screen.Review.route + "/${Database.dataBase.count() - 1 - (it % 5)}")
+                            //          navController.navigate(Screen.Review.route + "/${"abcdef"}")
 
                             //Screen.profile_screen.route+"/Peter/1234/5678")
 
@@ -508,3 +545,9 @@ fun MakeScrollComponents(navController: NavController){
     }
 }
 
+@Preview
+@Composable
+fun prev(){
+
+
+}
