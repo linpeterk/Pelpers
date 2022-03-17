@@ -36,9 +36,11 @@ class MainActivity : ComponentActivity() {
 
             PelpTheme {
                 navController = rememberNavController()
-                SetupNavGraph(navController = navController)
+//                SetupNavGraph(navController = navController)
 
             }
+            
+
 
 
             //SquareImage (navController, 2)
@@ -50,10 +52,10 @@ class MainActivity : ComponentActivity() {
 //            ExpertReview()
            // LandingPageScreen(navController = navController)
             // testingScrolls()
-//            searchAddress()
-     //   SquareImage(navController = navController, addressLoc =2 )
-     //       emergency(navController = navController)
 
+     //   SquareImage(navController = navController, addressLoc =2 )
+//            emergency(navController = navController)
+//            searchAddress(navController = navController)
 
             //MainScreen()
 
@@ -62,7 +64,7 @@ class MainActivity : ComponentActivity() {
 
             //LoginScreen(navController)
           //  ProfileScreen(navController = navController)
-          //   MainScreen(navController = navController)
+             MainScreen(navController = navController)
 
 
         }
