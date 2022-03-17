@@ -62,7 +62,7 @@ class MainActivity : ComponentActivity() {
 
             //MainScreen()
 
-//            SortScreen()
+//            SortScreen(navController = navController)
 
    //         SquareImage (navController, 2)
 
