@@ -35,7 +35,7 @@ import com.pelp.ui.theme.lightBlue
 @Composable
 fun SortScreen(navController: NavController){
 
-    Box(/*modifier= Modifier.fillMaxSize()*/){
+    Box(){
         GoogleMap(modifier=Modifier.fillMaxSize()){
 
         }
@@ -69,7 +69,7 @@ fun IconBox(navController: NavController){
             
             Column(modifier= Modifier
                 .fillMaxSize()
-                .border(1.dp, Color.Black)) {
+                /*.border(1.dp, Color.Black)*/) {
                 Row(modifier=Modifier.fillMaxWidth()) {
                     Button(onClick = { /*dialogState.value = true*/ },
                         modifier = Modifier.padding(10.dp,8.dp,4.dp,8.dp)
