@@ -12,9 +12,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
@@ -84,7 +86,7 @@ fun MainScreen(navController: NavController){
 
             Box(modifier = Modifier
                 .weight(0.8f)
-
+                .background(MaterialTheme.colors.primaryVariant)
             ){
                 MakeScrollComponents(navController)
             }
@@ -472,8 +474,9 @@ fun MakeScrollComponents(navController: NavController){
            // cardCount.value // force update components
 
             repeat(
-               times= 5
+               times= Database.dataBase.count()
             ) {
+                Spacer(modifier = Modifier.padding(5.dp))
                 Card(
                     modifier = Modifier
                         .height(40.dp)
@@ -524,21 +527,66 @@ fun MakeScrollComponents(navController: NavController){
 
                     RoundedCornerShape(15.dp)
 
-                    // .fillMaxWidth()
-
                 ) {
-                    Text(
-                        text="Stuff about ${lastLoc?.name!!} ETC",
-                        modifier = Modifier
-                            .border(4.dp, Color.LightGray)
-                            .background(Color.White)
-                            .padding(14.dp)
-                            .fillMaxWidth()
 
-                    )
-               if((--dataBaseIter)>=0) {
-                   lastLoc= Database.dataBase[Database.data.getKeyFromList(dataBaseIter)]
-               }
+////////////////////////////////////////////////////////////////
+
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .border(5.dp, Color.Magenta),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            Surface(
+                                modifier = Modifier
+                                    /*.size(50.dp, 50.dp)*/
+                                    .padding(4.dp)
+                                    .weight(1f)
+                                    .fillMaxHeight()
+                                    .border(2.dp, Color.Red)
+                                ,
+                                /*.border(2.dp, Color.Blue),*/
+                                shape = RoundedCornerShape(10.dp)
+                            ) {
+                                Image(
+                                    modifier = Modifier.size(50.dp, 50.dp),
+                                    contentScale = ContentScale.Fit,
+                                    painter = painterResource(id = R.drawable.ic_sea_icon_round),
+                                  //  painter = painterResource(id = restRoomObj?.userIMG_URL?.get(it)!!),
+                                    contentDescription = "Urban Bathroom"
+                                    /*contentScale = ContentScale.Fit*/
+                                )
+                            }
+                            //  restRoomObj is the current component's location_restroom
+
+                            Box(
+                                modifier = Modifier
+                                    .weight(0.8f)
+                                    .fillMaxHeight()
+                                    .border(2.dp, Color.Green)
+                                //.border(2.dp, Color.Red),
+
+
+                            ) {
+
+                             //   Text(text = restRoomObj!!.reviewArray[it].customerName,
+                                Text(text = "Things",
+                                    color = Color.Black,modifier = Modifier.offset(x=4.dp,y=13.dp))
+                                //Spacer(modifier = Modifier.height(30.dp))
+                                //  var str: String = dataBase[addressGlobal.loc]?.reviewArray!!.get(it)
+
+                            }
+                        }
+
+
+
+
+////////////////////////////////////////////////////////////////////////////
+                }
+
+                if((--dataBaseIter)>=0) {
+                    lastLoc= Database.dataBase[Database.data.getKeyFromList(dataBaseIter)]
                 }
             }
         }

@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
 
             PelpTheme {
                 navController = rememberNavController()
-//                SetupNavGraph(navController = navController)
+                SetupNavGraph(navController = navController)
 
             }
             
