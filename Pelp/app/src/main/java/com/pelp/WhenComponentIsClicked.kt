@@ -57,7 +57,7 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(4.dp), shape = RoundedCornerShape(15.dp), elevation = 5.dp
+                        .padding(4.dp), shape = RoundedCornerShape(15.dp), elevation = 8.dp
                 ) {
                     Box(modifier = Modifier.height(200.dp)) {
                         Image(
@@ -85,7 +85,7 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
                     modifier = Modifier
                         .offset(y = 0.dp)
                         .fillMaxWidth()
-                        .padding(4.dp), shape = RoundedCornerShape(15.dp), elevation = 5.dp
+                        .padding(4.dp), shape = RoundedCornerShape(15.dp), elevation = 8.dp
                 ) {
                     Box(modifier = Modifier.height(200.dp)) {
                         Image(
@@ -112,7 +112,7 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
                     modifier = Modifier
                         .offset(y = 0.dp)
                         .fillMaxWidth()
-                        .padding(4.dp), shape = RoundedCornerShape(15.dp), elevation = 5.dp
+                        .padding(4.dp), shape = RoundedCornerShape(15.dp), elevation = 8.dp
                 ) {
                     Box(modifier = Modifier.height(200.dp)) {
                         Image(

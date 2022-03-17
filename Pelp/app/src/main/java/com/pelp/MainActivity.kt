@@ -32,15 +32,12 @@ class MainActivity : ComponentActivity() {
         setContent {
              // Don't Comment this out!
             // A surface container using the 'background' color from the theme
+
+
             PelpTheme {
                 navController = rememberNavController()
                 SetupNavGraph(navController = navController)
-//                Surface(
-//                    modifier = Modifier.fillMaxSize(),
-//                    color = MaterialTheme.colors.background
-//                ) {
-//
-//                }
+
             }
 
 

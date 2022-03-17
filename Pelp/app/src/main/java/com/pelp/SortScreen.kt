@@ -39,10 +39,6 @@ fun SortScreen(navController: NavController){
         GoogleMap(modifier=Modifier.fillMaxSize()){
 
         }
-
-//        Image(painter = painterResource(R.drawable.fakemap), contentDescription ="Fake Map",
-//            modifier=Modifier.fillMaxSize())
-        //TopAppBar(title = {},Modifier.height(60.dp))
     }
 
     IconBox(navController)
@@ -55,95 +51,161 @@ fun IconBox(navController: NavController){
             .height(60.dp)
             .offset(y = 444.dp)
             //.border(1.dp, Color.Black)
-            .padding(3.dp)
+            .padding(4.dp)
             .fillMaxWidth(),
             shape = RoundedCornerShape(4.dp),
             Color.White,
             elevation = 4.dp){
             MenuTab(navController)
-
-
         }
         Card(modifier = Modifier
             .height(211.dp)
             .offset(y = 445.dp)
-            //.border(1.dp, Color.Black)
-            .padding(3.dp)
+            .padding(4.dp)
             .fillMaxWidth(),
             shape = RoundedCornerShape(4.dp),
             Color.White,
             elevation=4.dp){
-            val checkedState= remember { mutableStateOf(true) }
-            Column() {
-                Button(
-                    onClick = {
-                        //dialogState.value = true
-                    },
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .fillMaxWidth(),
-                    shape = RoundedCornerShape(8.dp),
-                    colors = ButtonDefaults.buttonColors(backgroundColor = lightBlue)
-                ) {
-                    Text(
-                        text = "Single Click Selection 1",
-                        textAlign = TextAlign.Center,
-                        color = Color.White
-                    )
+            
+            Column(modifier= Modifier
+                .fillMaxSize()
+                .border(1.dp, Color.Black)) {
+                Row(modifier=Modifier.fillMaxWidth()) {
+                    Button(onClick = { /*dialogState.value = true*/ },
+                        modifier = Modifier.padding(10.dp,8.dp,4.dp,8.dp)
+                            .width(116.dp)
+                            .height(50.dp),
+                        shape = RoundedCornerShape(8.dp),
+                        colors = ButtonDefaults.buttonColors(backgroundColor = lightBlue)
+                    ) {
+                        Text(
+                            text = "Cleanliness",
+                            textAlign = TextAlign.Center,
+                            color = Color.White
+                        )
+                    }
+                    //Spacer(modifier = Modifier.width(10.dp))
+                    Button(onClick = { /*dialogState.value = true*/ },
+                        modifier = Modifier.padding(4.dp,8.dp,4.dp,8.dp)
+                            .width(116.dp)
+                            .height(50.dp),
+                        shape = RoundedCornerShape(8.dp),
+                        colors = ButtonDefaults.buttonColors(backgroundColor = lightBlue)
+                    ) {
+                        Text(
+                            text = "Proximity",
+                            textAlign = TextAlign.Center,
+                            color = Color.White
+                        )
+                    }
+                    //Spacer(modifier = Modifier.width(10.dp))
+                    Button(onClick = { /*dialogState.value = true*/ },
+                        modifier = Modifier.padding(4.dp,8.dp,8.dp,8.dp)
+                            .width(116.dp)
+                            .height(50.dp),
+                        shape = RoundedCornerShape(8.dp),
+                        colors = ButtonDefaults.buttonColors(backgroundColor = lightBlue)
+                    ) {
+                        Text(
+                            text = "Popularity",
+                            textAlign = TextAlign.Center,
+                            color = Color.White
+                        )
+                    }
+
                 }
-                Divider(color = Color.Black)
-//                Text(
-//                    //text = selectedCountry.value,
-//                    textAlign = TextAlign.Center,
-//                    color = Color.Black
-//                )
-                Button(
-                    onClick = {
-                        //dialogState.value = true
-                    },
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .fillMaxWidth(),
-                    shape = RoundedCornerShape(8.dp),
-                    colors = ButtonDefaults.buttonColors(backgroundColor = lightBlue)
-                ) {
-                    Text(
-                        text = "Single Click Selection 2",
-                        textAlign = TextAlign.Center,
-                        color = Color.White
-                    )
+
+                Row(modifier=Modifier.fillMaxWidth()) {
+                    Button(onClick = { /*dialogState.value = true*/ },
+                        modifier = Modifier.padding(10.dp,8.dp,4.dp,8.dp)
+                            .width(116.dp)
+                            .height(50.dp),
+                        shape = RoundedCornerShape(8.dp),
+                        colors = ButtonDefaults.buttonColors(backgroundColor = lightBlue)
+                    ) {
+                        Text(
+                            text = "Safety",
+                            textAlign = TextAlign.Center,
+                            color = Color.White
+                        )
+                    }
+                    //Spacer(modifier = Modifier.width(10.dp))
+                    Button(onClick = { /*dialogState.value = true*/ },
+                        modifier = Modifier.padding(4.dp,8.dp,4.dp,8.dp)
+                            .width(116.dp)
+                            .height(50.dp),
+                        shape = RoundedCornerShape(8.dp),
+                        colors = ButtonDefaults.buttonColors(backgroundColor = lightBlue)
+                    ) {
+                        Text(
+                            text = "Scenery",
+                            textAlign = TextAlign.Center,
+                            color = Color.White
+                        )
+                    }
+                    //Spacer(modifier = Modifier.width(10.dp))
+                    Button(onClick = { /*dialogState.value = true*/ },
+                        modifier = Modifier.padding(4.dp,8.dp,8.dp,8.dp)
+                            .width(116.dp)
+                            .height(50.dp),
+                        shape = RoundedCornerShape(8.dp),
+                        colors = ButtonDefaults.buttonColors(backgroundColor = lightBlue)
+                    ) {
+                        Text(
+                            text = "Smell",
+                            textAlign = TextAlign.Center,
+                            color = Color.White
+                        )
+                    }
+
                 }
-                Divider(color = Color.Black)
-//                Text(
-//                    //text = selectedCountry.value,
-//                    textAlign = TextAlign.Center,
-//                    color = Color.Black
-//                )
-                Button(
-                    onClick = {
-                        //dialogState.value = true
-                    },
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .fillMaxWidth(),
-                    shape = RoundedCornerShape(8.dp),
-                    colors = ButtonDefaults.buttonColors(backgroundColor = lightBlue)
-                ) {
-                    Text(
-                        text = "Single Click Selection 3",
-                        textAlign = TextAlign.Center,
-                        color = Color.White
-                    )
+
+                Row(modifier=Modifier.fillMaxWidth()) {
+                    Button(onClick = { /*dialogState.value = true*/ },
+                        modifier = Modifier.padding(10.dp,8.dp,4.dp,8.dp)
+                            .width(116.dp)
+                            .height(50.dp),
+                        shape = RoundedCornerShape(8.dp),
+                        colors = ButtonDefaults.buttonColors(backgroundColor = lightBlue)
+                    ) {
+                        Text(
+                            text = "Handicap",
+                            textAlign = TextAlign.Center,
+                            color = Color.White
+                        )
+                    }
+                    //Spacer(modifier = Modifier.width(10.dp))
+                    Button(onClick = { /*dialogState.value = true*/ },
+                        modifier = Modifier.padding(4.dp,8.dp,4.dp,8.dp)
+                            .width(116.dp)
+                            .height(50.dp),
+                        shape = RoundedCornerShape(8.dp),
+                        colors = ButtonDefaults.buttonColors(backgroundColor = lightBlue)
+                    ) {
+                        Text(
+                            text = "Private",
+                            textAlign = TextAlign.Center,
+                            color = Color.White
+                        )
+                    }
+                    //Spacer(modifier = Modifier.width(10.dp))
+                    Button(onClick = { /*dialogState.value = true*/ },
+                        modifier = Modifier.padding(4.dp,8.dp,8.dp,8.dp)
+                            .width(116.dp)
+                            .height(50.dp),
+                        shape = RoundedCornerShape(8.dp),
+                        colors = ButtonDefaults.buttonColors(backgroundColor = lightBlue)
+                    ) {
+                        Text(
+                            text = "Public",
+                            textAlign = TextAlign.Center,
+                            color = Color.White
+                        )
+                    }
+
                 }
-                Divider(color = Color.Black)
-//                Text(
-//                    //text = selectedCountry.value,
-//                    textAlign = TextAlign.Center,
-//                    color = Color.Black
-//                )
+                
             }
-
-
 
         }
     }
