@@ -20,6 +20,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.max
@@ -207,7 +208,7 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
                                         ) {
 
                                         Text(text = restRoomObj!!.reviewArray[it].customerName,
-                                        color = Color.Black,modifier = Modifier.offset(x=4.dp,y=13.dp))
+                                        color = Color.Black,fontWeight = FontWeight.Bold,modifier = Modifier.offset(x=4.dp,y=13.dp))
                                         //Spacer(modifier = Modifier.height(30.dp))
                                         //  var str: String = dataBase[addressGlobal.loc]?.reviewArray!!.get(it)
 
@@ -221,7 +222,7 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
                                     var str: String = restRoomObj?.reviewArray!!.get(it).comments
                                     //  var a:Location_Restroom = dataBase[Brew]!!
                                     //Spacer(modifier = Modifier.height(30.dp))
-                                    Text(text = "Location: ${restRoomObj!!.name}  \n \n Reviews:\n $str",modifier=Modifier.offset(x=6.dp))
+                                    Text(text = "LOCATION: ${restRoomObj!!.name}  \n \n REVIEWS:\n $str",modifier=Modifier.offset(x=6.dp))
                                 }
 
 //                            Card(modifier=Modifier.padding(150.dp,60.dp,150.dp,60.dp).offset(-145.dp,-55.dp)) {
