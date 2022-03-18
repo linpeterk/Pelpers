@@ -56,7 +56,7 @@ fun SetupNavGraph(
             emergency(navController = navController)
         }
         composable( //ExpertReviewScreen.kt
-            route = Screen.Emergency.route
+            route = Screen.Review.route
         ) {
             ExpertReview(navController = navController)
         }

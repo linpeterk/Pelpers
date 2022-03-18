@@ -10,7 +10,6 @@ sealed class Screen(val route:String){
     object Review:Screen(route="review_screen")
     object Signup:Screen(route="signup_screen")
     object Emergency:Screen(route = "emergency_screen")
-    object ExpertReview:Screen(route = "expertReview_screen")
-
+//    object ExpertReview:Screen(route = "expertReview_screen")
 
 }
