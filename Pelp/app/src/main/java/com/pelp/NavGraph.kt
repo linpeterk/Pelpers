@@ -71,6 +71,7 @@ fun SetupNavGraph(
             SortScreen(navController = navController)
 
         }
+
         composable(
             route = Screen.Review.route+"/{addressLoc}", // argument must be separated by "/{}"
             arguments = listOf(navArgument("addressLoc"){type = NavType.IntType })  //navigate pass with argument

@@ -22,6 +22,7 @@ import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.pelp.ui.theme.PelpTheme
 import Examples.*
+import com.pelp.model.data.writeFile
 
 class MainActivity : ComponentActivity() {
 
@@ -30,6 +31,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         Database.data.init() // Don't Comment this out! it's in database
         setContent {
+            writeFile()
              // Don't Comment this out!
             // A surface container using the 'background' color from the theme
 
@@ -40,7 +42,7 @@ class MainActivity : ComponentActivity() {
                 SetupNavGraph(navController = navController)
 
             }
-            
+
 
 
 //        SignupScreen(navController = navController)

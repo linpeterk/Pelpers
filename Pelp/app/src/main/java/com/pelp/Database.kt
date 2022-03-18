@@ -1,14 +1,12 @@
 package com.pelp
 
 import android.util.Log
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.platform.LocalContext
 import com.google.android.gms.maps.model.LatLng
-import com.pelp.model.data.Location_Restroom
 import com.pelp.model.data.*
+import java.io.FileOutputStream
 import java.util.Collections.reverse
-import kotlin.collections.LinkedHashMap
+
 //store restroom location data
 //var dataBase: LinkedHashMap<LatLng, Location_Restroom> = LinkedHashMap()
 
@@ -27,7 +25,7 @@ class Database(){
         var dataBase: LinkedHashMap<LatLng, Location_Restroom> = LinkedHashMap()
         var userBase:LinkedHashMap<String, Person> = LinkedHashMap()
 
-        var arrayKeys: MutableList<LatLng> = mutableListOf() // Not used
+        var arrayKeys: MutableList<LatLng> = mutableListOf() // Not used except for mainframe
 
     }
 
@@ -92,6 +90,9 @@ class Database(){
         checkRestRoomExist(brew)
         checkRestRoomExist(church)
         checkRestRoomExist(caliMuseum)
+
+       // serializeOut(dataBase, Serialize.db)
+
 /*
         dataAdd(caliMuseum, Location_Restroom(name="Japanese American National Museum", caliMuseum))
         dataAdd(toyDistrict, Location_Restroom(name= "Toy District", toyDistrict))
@@ -151,7 +152,7 @@ class Database(){
         dataBase[locRestRoom]?.image_URL?.add(restRoomImage)
 
         //add to customer images
-        dataBase[locRestRoom]?.userIMG_URL?.add(personImage)
+        dataBase[locRestRoom]?.userIMG_URL?.add(personImage) /*Don't need this*/
 
         // add to person history list
         customerAddHistory(userName, review)
