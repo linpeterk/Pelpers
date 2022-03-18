@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.google.android.gms.maps.GoogleMap
 import com.pelp.ui.theme.lightBlue
 
@@ -22,7 +23,7 @@ import com.pelp.ui.theme.lightBlue
 var mMap: GoogleMap? = null
 
 @Composable
-fun ExpertReview(){
+fun ExpertReview(navController: NavController){
 
 
     Box(

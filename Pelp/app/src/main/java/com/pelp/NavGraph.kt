@@ -50,10 +50,15 @@ fun SetupNavGraph(
         ) {
             ProfileScreen(navController = navController)
         }
-        composable(
+        composable( //EmergencyScreen.kt
             route = Screen.Emergency.route
         ) {
             emergency(navController = navController)
+        }
+        composable( //ExpertReviewScreen.kt
+            route = Screen.Emergency.route
+        ) {
+            ExpertReview(navController = navController)
         }
         composable(
             route = Screen.Sort.route
