@@ -63,8 +63,8 @@ class Database(){
 
         addReviewPersonRest("peter", toyDistrict, "Some people have all the luck.", personImage = R.drawable.man,restRoomImage = R.drawable.futurebathroom )
         addReviewPersonRest("carlos", toyDistrict, "That’s a wrap for me", personImage = R.drawable.weird_hair,restRoomImage = R.drawable.green_bathroom )
-        addReviewPersonRest("lyle", toyDistrict, "The big sofa is really not suitable for a small room.", personImage = R.drawable.old_lady,restRoomImage = R.drawable.bustedbathroom )
-        addReviewPersonRest("aidan", toyDistrict, "This is going on the list.", personImage = R.drawable.girl,restRoomImage = R.drawable.luxury_bathroom )
+        addReviewPersonRest("lyle", toyDistrict, "The big sofa is really not suitable for a small room.", personImage = R.drawable.old_lady,restRoomImage = R.drawable.plant_bathroom )
+        addReviewPersonRest("aidan", toyDistrict, "This is going on the list.", personImage = R.drawable.girl,restRoomImage = R.drawable.luxury1)
 
         addReviewPersonRest("peter", brew, "The box is three times as big as that one.", personImage = R.drawable.man,restRoomImage = R.drawable.handicap )
         addReviewPersonRest("carlos", brew, "Any day will do.", personImage = R.drawable.weird_hair,restRoomImage = R.drawable.green_bathroom )
@@ -72,11 +72,11 @@ class Database(){
         addReviewPersonRest("aidan", brew, "Bigger is not always better.", personImage = R.drawable.girl,restRoomImage = R.drawable.futurebathroom )
 
         addReviewPersonRest("peter", dodgerS, "I'm not a big fan of blueberry pancakes.", personImage = R.drawable.man,restRoomImage = R.drawable.cleanbathroom1 )
-        addReviewPersonRest("carlos", dodgerS, "I learned this recipe from my grandma, who learned it from hers.", personImage = R.drawable.weird_hair,restRoomImage = R.drawable.bustedbathroom )
+        addReviewPersonRest("carlos", dodgerS, "I learned this recipe from my grandma, who learned it from hers.", personImage = R.drawable.weird_hair,restRoomImage = R.drawable.plant_bathroom )
         addReviewPersonRest("lyle", dodgerS, "Our competitors don't normally ask us for advice, but when an airline leader reached out, we couldn't ignore it.", personImage = R.drawable.old_lady,restRoomImage = R.drawable.handicap )
-        addReviewPersonRest("aidan", dodgerS, "She tried to make chicken but she must have put the wrong thing in because it came out of the oven bright green.", personImage = R.drawable.girl,restRoomImage = R.drawable.cloggedtoilet )
+        addReviewPersonRest("aidan", dodgerS, "She tried to make chicken but she must have put the wrong thing in because it came out of the oven bright green.", personImage = R.drawable.girl,restRoomImage = R.drawable.outdoorbathroom )
 
-        addReviewPersonRest("peter", church, "He uses the snorkel to breathe under water.", personImage = R.drawable.man,restRoomImage = R.drawable.luxury_bathroom )
+        addReviewPersonRest("peter", church, "He uses the snorkel to breathe under water.", personImage = R.drawable.man,restRoomImage = R.drawable.outdoorbathroom2 )
         addReviewPersonRest("carlos", church, "If I could recommend anything to try, it's this", personImage = R.drawable.weird_hair,restRoomImage = R.drawable.urbanbathroom )
         addReviewPersonRest("lyle", church, "The puzzle was taking me so long to put together that I gave up and threw it in the garbage.", personImage = R.drawable.old_lady,restRoomImage = R.drawable.handicap )
         addReviewPersonRest("aidan", church, "The laptop light was the only one light on the room.", personImage = R.drawable.girl,restRoomImage = R.drawable.cleanbathroom1 )
