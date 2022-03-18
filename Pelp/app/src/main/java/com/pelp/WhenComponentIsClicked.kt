@@ -207,7 +207,7 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
 
                                         ) {
 
-                                        Text(text = restRoomObj!!.reviewArray[it].customerName,
+                                        Text(text = restRoomObj!!.reviewArray[it].customerName.uppercase(),
                                         color = Color.Black,fontWeight = FontWeight.Bold,modifier = Modifier.offset(x=4.dp,y=13.dp))
                                         //Spacer(modifier = Modifier.height(30.dp))
                                         //  var str: String = dataBase[addressGlobal.loc]?.reviewArray!!.get(it)
