@@ -24,6 +24,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -77,7 +78,8 @@ fun Start(
             )
 
 
-            Text(text = "We know just the place", modifier = Modifier.padding(2.dp))
+            Text(text = "We know just the place", modifier = Modifier,
+            fontStyle = FontStyle.Italic)
 
 
         }
@@ -89,7 +91,7 @@ fun Start(
 
             Column(
                 modifier = Modifier.fillMaxSize()
-                    .offset(y=160.dp)
+                    .offset(y=210.dp)
             ) {
                 Surface(modifier=Modifier.height(300.dp)) {
 
@@ -106,9 +108,9 @@ fun Start(
                     }
 
                 }
-                Column(modifier = Modifier.offset(y = 40.dp)) {
+                Column(modifier = Modifier.offset(y = 50.dp)) {
                     Text(
-                        text = "This product can lead you to exposure to biological hazards which is known to the state of California to cause cancer",
+                        text = "This product can lead to biological hazards exposure which is known to the State of California to cause cancer",
                         modifier = Modifier
                             .padding(5.dp),
                         fontSize = 14.sp,
@@ -117,18 +119,21 @@ fun Start(
                         textAlign = TextAlign.Center
 
                     )
-                    //  Spacer(modifier = Modifier.height(150.dp))
+                      Spacer(modifier = Modifier.padding(10.dp))
                     Row(
-                        modifier = Modifier.offset(x = 110.dp, y = 20.dp),
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Center
                        // horizontalArrangement = Arrangement.Center y no work
                     ) {
 
                         Button(
 
                             onClick = { navController.navigate(route=Screen.Login.route)},
-                            colors = ButtonDefaults.buttonColors(backgroundColor = Color.White)
+                            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Red),
+                            modifier = Modifier
                         ) {
-                            Text(text = "Log in", modifier = Modifier.padding(5.dp), color = lightBlue)
+                            Text(text = "Log in", modifier = Modifier.padding(5.dp), color = Color.White)
                         }
                         Button(
                             onClick = {

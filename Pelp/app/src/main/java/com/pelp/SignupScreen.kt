@@ -1,20 +1,31 @@
 package com.pelp
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
+import android.util.Log
+import androidx.compose.animation.core.FastOutLinearInEasing
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.keyframes
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.saveable.rememberSaveableStateHolder
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.pelp.model.data.loginAnimation
+import com.pelp.ui.theme.lightBlue
 
 @Composable
 fun SignupScreen(navController: NavController) {
@@ -29,16 +40,6 @@ fun SignupScreen(navController: NavController) {
                 .padding(8.dp)
         ) {
             Fields()
-        }
-        Row (
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp),
-            horizontalArrangement = Arrangement.Center
-        ) {
-            Button(onClick = { /*TODO*/ }) {
-                Text("Sign Up")
-            }
         }
         Row (
             modifier = Modifier
@@ -68,49 +69,79 @@ fun SignupScreen(navController: NavController) {
 
 @Composable
 fun Fields() {
-    Column(Modifier.padding(16.dp)) {
-        Row {
-            val firstName = remember { mutableStateOf(TextFieldValue())}
-            TextField(
-                value = firstName.value,
-                onValueChange = {firstName.value = it},
-                placeholder = { Text(text = "First Name")}
+    var username by rememberSaveable { mutableStateOf("") }
+    var password by rememberSaveable { mutableStateOf("") }
+    var realName by rememberSaveable { mutableStateOf("") }
+    var zip by rememberSaveable { mutableStateOf("") }
+    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(5.dp)) {
+        Surface(
+            modifier = Modifier.size(60.dp),
+            shape = CircleShape
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.sea),
+                contentDescription = "Sea World",
+                modifier = Modifier
+                    .size(60.dp)
+                    .clip(CircleShape)
             )
         }
-        Row {
-            val lastName = remember { mutableStateOf(TextFieldValue())}
-            TextField (
-                value = lastName.value,
-                onValueChange = {lastName.value = it},
-                placeholder = {Text(text = "Last Name")}
+        Spacer(modifier = Modifier.padding(10.dp))
+        Surface (
+            shape = RoundedCornerShape(3.dp)
+        ) {
+            OutlinedTextField(
+                value = username,
+                onValueChange = {username = it},
+                shape = RoundedCornerShape(3.dp),
+                label = { Text(text = "username")},
+                modifier = Modifier.width(350.dp)
             )
         }
-        Row {
-            val email = remember { mutableStateOf(TextFieldValue())}
-            TextField(
-                value = email.value,
-                onValueChange = {email.value = it},
-                placeholder = { Text(text = "Email Address")}
+        Surface (
+            shape = RoundedCornerShape(3.dp)
+        ){
+            OutlinedTextField(
+                value = password,
+                onValueChange = {password = it},
+                shape = RoundedCornerShape(3.dp),
+                label = { Text(text = "password")},
+                modifier = Modifier.width(350.dp)
             )
         }
-        Row {
-            val password = remember { mutableStateOf(TextFieldValue())}
-            TextField(
-                value = password.value,
-                onValueChange = {password.value = it},
-                placeholder = { Text(text = "password")}
+        Surface (
+            shape = RoundedCornerShape(3.dp)
+        ){
+            OutlinedTextField(
+                value = realName,
+                onValueChange = {realName = it},
+                shape = RoundedCornerShape(3.dp),
+                label = { Text(text = "First and Last Name")},
+                modifier = Modifier.width(350.dp)
             )
         }
-
-        Row {
-            val zip = remember { mutableStateOf(TextFieldValue()) }
-            TextField(
-                value = zip.value,
-                onValueChange = { zip.value = it },
-                placeholder = { Text(text = "zip code") }
+        Surface (
+            shape = RoundedCornerShape(3.dp)
+        ){
+            OutlinedTextField(
+                value = zip,
+                onValueChange = {zip = it},
+                shape = RoundedCornerShape(3.dp),
+                label = { Text(text = "zip code")},
+                modifier = Modifier.width(350.dp)
             )
         }
-
-
+        Surface (
+            shape = RoundedCornerShape(3.dp), modifier = Modifier.padding(10.dp)
+        ){
+            Button(
+                onClick ={
+                    Database.data.customerAdd(username, password, realName, zip.toInt())
+                    Database.data.checkCustomerExist(username)
+                }
+            ){
+                Text(text = "Sign Up", modifier = Modifier.padding(2.dp),color=Color.White)
+            }
+        }
     }
 }
