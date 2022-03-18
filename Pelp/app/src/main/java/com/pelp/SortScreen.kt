@@ -36,9 +36,10 @@ import com.pelp.ui.theme.lightBlue
 fun SortScreen(navController: NavController){
 
     Box(){
-        GoogleMap(modifier=Modifier.fillMaxSize()){
-
-        }
+        MakeGoogleMap(true, modifier = Modifier.fillMaxSize())
+//        GoogleMap(modifier=Modifier.fillMaxSize()){
+//
+//        }
     }
 
     IconBox(navController)
@@ -72,7 +73,8 @@ fun IconBox(navController: NavController){
                 /*.border(1.dp, Color.Black)*/) {
                 Row(modifier=Modifier.fillMaxWidth()) {
                     Button(onClick = { /*dialogState.value = true*/ },
-                        modifier = Modifier.padding(10.dp,8.dp,4.dp,8.dp)
+                        modifier = Modifier
+                            .padding(10.dp, 8.dp, 4.dp, 8.dp)
                             .width(116.dp)
                             .height(50.dp),
                         shape = RoundedCornerShape(8.dp),
@@ -86,7 +88,8 @@ fun IconBox(navController: NavController){
                     }
                     //Spacer(modifier = Modifier.width(10.dp))
                     Button(onClick = { /*dialogState.value = true*/ },
-                        modifier = Modifier.padding(4.dp,8.dp,4.dp,8.dp)
+                        modifier = Modifier
+                            .padding(4.dp, 8.dp, 4.dp, 8.dp)
                             .width(116.dp)
                             .height(50.dp),
                         shape = RoundedCornerShape(8.dp),
@@ -100,7 +103,8 @@ fun IconBox(navController: NavController){
                     }
                     //Spacer(modifier = Modifier.width(10.dp))
                     Button(onClick = { /*dialogState.value = true*/ },
-                        modifier = Modifier.padding(4.dp,8.dp,8.dp,8.dp)
+                        modifier = Modifier
+                            .padding(4.dp, 8.dp, 8.dp, 8.dp)
                             .width(116.dp)
                             .height(50.dp),
                         shape = RoundedCornerShape(8.dp),
@@ -117,7 +121,8 @@ fun IconBox(navController: NavController){
 
                 Row(modifier=Modifier.fillMaxWidth()) {
                     Button(onClick = { /*dialogState.value = true*/ },
-                        modifier = Modifier.padding(10.dp,8.dp,4.dp,8.dp)
+                        modifier = Modifier
+                            .padding(10.dp, 8.dp, 4.dp, 8.dp)
                             .width(116.dp)
                             .height(50.dp),
                         shape = RoundedCornerShape(8.dp),
@@ -131,7 +136,8 @@ fun IconBox(navController: NavController){
                     }
                     //Spacer(modifier = Modifier.width(10.dp))
                     Button(onClick = { /*dialogState.value = true*/ },
-                        modifier = Modifier.padding(4.dp,8.dp,4.dp,8.dp)
+                        modifier = Modifier
+                            .padding(4.dp, 8.dp, 4.dp, 8.dp)
                             .width(116.dp)
                             .height(50.dp),
                         shape = RoundedCornerShape(8.dp),
@@ -145,7 +151,8 @@ fun IconBox(navController: NavController){
                     }
                     //Spacer(modifier = Modifier.width(10.dp))
                     Button(onClick = { /*dialogState.value = true*/ },
-                        modifier = Modifier.padding(4.dp,8.dp,8.dp,8.dp)
+                        modifier = Modifier
+                            .padding(4.dp, 8.dp, 8.dp, 8.dp)
                             .width(116.dp)
                             .height(50.dp),
                         shape = RoundedCornerShape(8.dp),
@@ -162,7 +169,8 @@ fun IconBox(navController: NavController){
 
                 Row(modifier=Modifier.fillMaxWidth()) {
                     Button(onClick = { /*dialogState.value = true*/ },
-                        modifier = Modifier.padding(10.dp,8.dp,4.dp,8.dp)
+                        modifier = Modifier
+                            .padding(10.dp, 8.dp, 4.dp, 8.dp)
                             .width(116.dp)
                             .height(50.dp),
                         shape = RoundedCornerShape(8.dp),
@@ -176,7 +184,8 @@ fun IconBox(navController: NavController){
                     }
                     //Spacer(modifier = Modifier.width(10.dp))
                     Button(onClick = { /*dialogState.value = true*/ },
-                        modifier = Modifier.padding(4.dp,8.dp,4.dp,8.dp)
+                        modifier = Modifier
+                            .padding(4.dp, 8.dp, 4.dp, 8.dp)
                             .width(116.dp)
                             .height(50.dp),
                         shape = RoundedCornerShape(8.dp),
@@ -190,7 +199,8 @@ fun IconBox(navController: NavController){
                     }
                     //Spacer(modifier = Modifier.width(10.dp))
                     Button(onClick = { /*dialogState.value = true*/ },
-                        modifier = Modifier.padding(4.dp,8.dp,8.dp,8.dp)
+                        modifier = Modifier
+                            .padding(4.dp, 8.dp, 8.dp, 8.dp)
                             .width(116.dp)
                             .height(50.dp),
                         shape = RoundedCornerShape(8.dp),

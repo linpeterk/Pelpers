@@ -26,7 +26,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
@@ -72,7 +71,7 @@ fun MainScreen(navController: NavController){
 
             ) {
 
-              MakeGoogleMap(true)
+              MakeGoogleMap(true, modifier = Modifier.fillMaxSize())
 
             }
 
@@ -309,7 +308,11 @@ fun MenuTab(navController: NavController){
 //val destObject = mutableListOf<LocationsExample>()
 @Composable
 //pass in true if you want to make markers
-fun MakeGoogleMap( makeMarker: Boolean = false, obj:HashMap<LatLng, Location_Restroom> = Database.dataBase){
+fun MakeGoogleMap(
+    makeMarker: Boolean = false,
+    obj: HashMap<LatLng, Location_Restroom> = Database.dataBase,
+    modifier: Modifier
+){
     cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(caliMuseum, 15f)
     }
