@@ -268,7 +268,11 @@ fun MenuTab(navController: NavController){
                 .padding(horizontal = 15.dp )
                 ) {
                 FloatingActionButton(
-                    onClick = { /*TODO*/ },
+                    onClick = {navController.navigate(route=Screen.Search.route){
+                        popUpTo(Screen.Search.route){
+                            inclusive=true
+                        }}
+                    },
                     modifier = Modifier.scale(.7F),
                     backgroundColor = MaterialTheme.colors.surface
                 ) {

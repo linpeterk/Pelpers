@@ -55,6 +55,11 @@ fun SetupNavGraph(
         ) {
             emergency(navController = navController)
         }
+        composable( //SearchScreen
+            route = Screen.Search.route
+        ) {
+            searchAddress(navController = navController)
+        }
         composable( //ExpertReviewScreen.kt
             route = Screen.Review.route
         ) {
