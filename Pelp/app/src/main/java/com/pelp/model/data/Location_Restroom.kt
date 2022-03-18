@@ -14,7 +14,7 @@ class Location_Restroom (val name:String = "", var loc:LatLng) {
 
     val reviewArray:ArrayList<Review> = ArrayList<Review>()
     val image_URL:ArrayList<Int> = ArrayList<Int>()
-    //val userIMG_URL:ArrayList<Int> = ArrayList<Int>()
+    val userIMG_URL:ArrayList<Int> = ArrayList<Int>()
     init{
 /*
         reviewArray.add(Review("Carlos", loc, "It's craptacular",R.drawable.old_lady))

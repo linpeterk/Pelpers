@@ -157,7 +157,7 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
                     .verticalScroll(rememberScrollState())
                     //.border(3.dp, Color.Red)
                 ) {
-                    repeat(restRoomObj!!.reviewArray.count())
+                    repeat(restRoomObj!!.userIMG_URL.count())
                     {
                         Card(
                             elevation = 10.dp,
@@ -189,7 +189,7 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
                                             modifier = Modifier.size(50.dp, 50.dp),
                                             contentScale = ContentScale.Fit,
                                            // painter = painterResource(id = restRoomObj?.userIMG_URL?.get(it)!!),
-                                            painter = painterResource(id = restRoomObj?.image_URL[0]!!),
+                                            painter = painterResource(id = restRoomObj?.userIMG_URL[it]!!),
                                             contentDescription = "Urban Bathroom"
                                             /*contentScale = ContentScale.Fit*/
                                         )

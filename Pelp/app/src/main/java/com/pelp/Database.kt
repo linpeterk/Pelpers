@@ -59,24 +59,24 @@ class Database(){
         addReviewPersonRest("peter", caliMuseum, "The Best Restroom in Town", personImage = R.drawable.man,restRoomImage = R.drawable.cleanbathroom1 )
         addReviewPersonRest("carlos", caliMuseum, "It's Craptacular", personImage = R.drawable.weird_hair,restRoomImage = R.drawable.urbanbathroom )
         addReviewPersonRest("lyle", caliMuseum, "Would poop here again", personImage = R.drawable.old_lady,restRoomImage = R.drawable.handicap )
-        addReviewPersonRest("aidan", caliMuseum, "Bewarn: Risky Business", personImage = R.drawable.girl,restRoomImage = R.drawable.ic_sea_icon_round )
+        addReviewPersonRest("aidan", caliMuseum, "Bewarn: Risky Business", personImage = R.drawable.girl,restRoomImage = R.drawable.green_bathroom )
 
         addReviewPersonRest("peter", toyDistrict, "The Best Restroom in Town", personImage = R.drawable.man,restRoomImage = R.drawable.urbanbathroom )
         addReviewPersonRest("carlos", toyDistrict, "It's Craptacular", personImage = R.drawable.weird_hair,restRoomImage = R.drawable.cleanbathroom1 )
         addReviewPersonRest("lyle", toyDistrict, "Would poop here again", personImage = R.drawable.old_lady,restRoomImage = R.drawable.handicap )
-        addReviewPersonRest("aidan", toyDistrict, "Bewarn: Risky Business", personImage = R.drawable.girl,restRoomImage = R.drawable.ic_sea_icon_round )
+        addReviewPersonRest("aidan", toyDistrict, "Bewarn: Risky Business", personImage = R.drawable.girl,restRoomImage = R.drawable.green_bathroom )
 
         addReviewPersonRest("peter", brew, "The Best Restroom in Town", personImage = R.drawable.man,restRoomImage = R.drawable.handicap )
         addReviewPersonRest("carlos", brew, "It's Craptacular", personImage = R.drawable.weird_hair,restRoomImage = R.drawable.urbanbathroom )
         addReviewPersonRest("lyle", brew, "Would poop here again", personImage = R.drawable.old_lady,restRoomImage = R.drawable.cleanbathroom1 )
-        addReviewPersonRest("aidan", brew, "Bewarn: Risky Business", personImage = R.drawable.girl,restRoomImage = R.drawable.ic_sea_icon_round )
+        addReviewPersonRest("aidan", brew, "Bewarn: Risky Business", personImage = R.drawable.girl,restRoomImage = R.drawable.green_bathroom )
 
         addReviewPersonRest("peter", dodgerS, "The Best Restroom in Town", personImage = R.drawable.man,restRoomImage = R.drawable.cleanbathroom1 )
         addReviewPersonRest("carlos", dodgerS, "It's Craptacular", personImage = R.drawable.weird_hair,restRoomImage = R.drawable.urbanbathroom )
         addReviewPersonRest("lyle", dodgerS, "Would poop here again", personImage = R.drawable.old_lady,restRoomImage = R.drawable.handicap )
-        addReviewPersonRest("aidan", dodgerS, "Bewarn: Risky Business", personImage = R.drawable.girl,restRoomImage = R.drawable.ic_sea_icon_round )
+        addReviewPersonRest("aidan", dodgerS, "Bewarn: Risky Business", personImage = R.drawable.girl,restRoomImage = R.drawable.green_bathroom )
 
-        addReviewPersonRest("peter", church, "The Best Restroom in Town", personImage = R.drawable.man,restRoomImage = R.drawable.ic_sea_icon_round )
+        addReviewPersonRest("peter", church, "The Best Restroom in Town", personImage = R.drawable.man,restRoomImage = R.drawable.green_bathroom )
         addReviewPersonRest("carlos", church, "It's Craptacular", personImage = R.drawable.weird_hair,restRoomImage = R.drawable.urbanbathroom )
         addReviewPersonRest("lyle", church, "Would poop here again", personImage = R.drawable.old_lady,restRoomImage = R.drawable.handicap )
         addReviewPersonRest("aidan", church, "Bewarn: Risky Business", personImage = R.drawable.girl,restRoomImage = R.drawable.cleanbathroom1 )
@@ -149,9 +149,11 @@ class Database(){
         //add to restroom images
         dataBase[locRestRoom]?.image_URL?.add(restRoomImage)
 
+        //add to customer images
+        dataBase[locRestRoom]?.userIMG_URL?.add(personImage)
+
         // add to person history list
         customerAddHistory(userName, review)
-
 
 
     }
