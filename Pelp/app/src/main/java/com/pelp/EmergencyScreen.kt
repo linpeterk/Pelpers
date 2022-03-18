@@ -38,6 +38,10 @@ fun emergency(navController : NavController) {
         }
     }
 
+
+
+
+
    
 }
 
