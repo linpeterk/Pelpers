@@ -548,20 +548,23 @@ fun MakeScrollComponents(navController: NavController){
                 ) {
 
 //////////////////////SECOND CARD COTENTS//////////////////////////////////////////
-
+                    val rndsImage = (0..(currentRestRoom!!.image_URL.count()-1)).random()
+                    val rndsComment = (0..(currentRestRoom!!.reviewArray.count()-1)).random()
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
 
                                 ,
                             verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.Center
+
                         ) {
+
                                 Surface(
                                     modifier = Modifier
                                         /*.size(50.dp, 50.dp)*/
-                                        .weight(.7f)
-                                        .fillMaxHeight(),
+                                        .weight(.5f)
+                                        .fillMaxHeight()
+                                      ,
 
                                     /*.border(2.dp, Color.Blue),*/
                                     shape = RoundedCornerShape(10.dp)
@@ -572,7 +575,7 @@ fun MakeScrollComponents(navController: NavController){
                                             //.size(50.dp, 50.dp),
                                             .fillMaxSize(),
                                         contentScale = ContentScale.Crop,
-                                        painter = painterResource(id = currentRestRoom!!.image_URL[0]),
+                                        painter = painterResource(id = currentRestRoom!!.image_URL[rndsImage]),
                                         //  painter = painterResource(id = restRoomObj?.userIMG_URL?.get(it)!!),
                                         contentDescription = "Urban Bathroom"
                                         /*contentScale = ContentScale.Fit*/
@@ -585,16 +588,17 @@ fun MakeScrollComponents(navController: NavController){
                                 Box(
                                     modifier = Modifier
                                         .weight(1.0f)
-                                        .fillMaxHeight(),
+                                        .fillMaxHeight()
+                                        .padding(2.dp),
                                     contentAlignment = Alignment.Center
                                     //.border(2.dp, Color.Red),
                                 ) {
 
                                     //   Text(text = restRoomObj!!.reviewArray[it].customerName,
                                     Text(
-                                        text = currentRestRoom!!.reviewArray[0].comments,
-                                        color = Color.Black,
-                                        modifier = Modifier
+                                        text = "${currentRestRoom!!.reviewArray[rndsComment].customerName.uppercase()}:\n\n\"${currentRestRoom!!.reviewArray[rndsComment].comments}\"",
+                                       fontSize= 14.sp,
+                                        modifier = Modifier.fillMaxWidth()
                                     )
                                     //Spacer(modifier = Modifier.height(30.dp))
                                     //  var str: String = dataBase[addressGlobal.loc]?.reviewArray!!.get(it)

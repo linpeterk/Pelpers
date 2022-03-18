@@ -40,12 +40,13 @@ fun LoginScreen(
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(5.dp)) {
 
         Surface(
-            modifier = Modifier.size(60.dp),
+            modifier = Modifier.size(120.dp)
+                    .padding(15.dp),
             shape = CircleShape
         ) {
 
             Image(
-                painter = painterResource(id = R.drawable.sea),
+                painter = painterResource(id = R.drawable.ic_sea_icon_round),
                 contentDescription = "Sea World",
                 modifier = Modifier
                     .size(60.dp)
@@ -55,13 +56,15 @@ fun LoginScreen(
 
         }
         Spacer(modifier = Modifier.padding(10.dp))
-        Text(text="Disclaimers and privacy policy. There are words below, and here are some more words. There are words above too",
-            fontSize = 11.sp,
+        Text(text="Disclaimers: A statement that denies something, especially responsibility." ,
+            fontSize = 12.sp,
             modifier = Modifier
                 .height(50.dp)
-                .width(300.dp),
+                .fillMaxWidth(),
             fontStyle = FontStyle.Italic,
-            fontWeight = FontWeight.Light
+            fontWeight = FontWeight.Normal,
+            textAlign = TextAlign.Center,
+            color=Color.Black
             )
 
         var result by rememberSaveable {mutableStateOf("admin/admin")}
@@ -115,32 +118,35 @@ fun LoginScreen(
                              }, modifier = Modifier
                 .width(350.dp)
                 .height(50.dp),
-                colors = ButtonDefaults.buttonColors(backgroundColor = lightBlue)
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Red)
 
             ){
-                Text(text = "Log in with Email", modifier = Modifier.padding(2.dp),color=Color.White)
+                Text(text = "Log in with Email", fontSize = 15.sp, fontStyle = FontStyle.Normal, modifier = Modifier.padding(2.dp),color=Color.White)
             }
 
         }
         Text(text=result)
        Spacer(modifier = Modifier.padding(100.dp))
         Row() {
-            Text(
-                text = "Already have a Pelp Account?",
-                fontSize = 15.sp,
-                modifier = Modifier
-                    .height(50.dp)
-                    .width(220.dp),
-                fontStyle = FontStyle.Italic,
-                fontWeight = FontWeight.Normal
-            )
+            Box(modifier = Modifier.fillMaxHeight(), contentAlignment = Alignment.TopStart) {
+                Text(
+                    text = "Already have a Pelp Account?",
+                    color=Color.Black,
+                    fontSize = 15.sp,
+                    modifier = Modifier
+                       ,
+                    fontStyle = FontStyle.Italic,
+                    fontWeight = FontWeight.Normal,
+
+                )
+            }
             Button(onClick = {
                              navController.navigate(Screen.Signup.route)
             }, modifier = Modifier
                 .height(40.dp)
                 .width(100.dp)
                 ,
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Red)
+                colors = ButtonDefaults.buttonColors(backgroundColor = lightBlue)
 
             ){
                 Text(text = "Sign Up", modifier = Modifier.padding(2.dp),color=Color.White)
