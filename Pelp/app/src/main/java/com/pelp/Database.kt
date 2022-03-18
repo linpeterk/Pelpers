@@ -72,7 +72,7 @@ class Database(){
         addReviewPersonRest("aidan", brew, "Bigger is not always better.", personImage = R.drawable.girl,restRoomImage = R.drawable.futurebathroom )
 
         addReviewPersonRest("peter", dodgerS, "I'm not a big fan of blueberry pancakes.", personImage = R.drawable.man,restRoomImage = R.drawable.cleanbathroom1 )
-        addReviewPersonRest("carlos", dodgerS, "I learned this recipe from my grandma, who learned it from hers.", personImage = R.drawable.weird_hair,restRoomImage = R.drawable.plant_bathroom )
+        addReviewPersonRest("carlos", dodgerS, "I learned this recipe from my grandma, who learned it from hers.", personImage = R.drawable.weird_hair,restRoomImage = R.drawable.outdoorbathroom )
         addReviewPersonRest("lyle", dodgerS, "Our competitors don't normally ask us for advice, but when an airline leader reached out, we couldn't ignore it.", personImage = R.drawable.old_lady,restRoomImage = R.drawable.handicap )
         addReviewPersonRest("aidan", dodgerS, "She tried to make chicken but she must have put the wrong thing in because it came out of the oven bright green.", personImage = R.drawable.girl,restRoomImage = R.drawable.outdoorbathroom )
 
