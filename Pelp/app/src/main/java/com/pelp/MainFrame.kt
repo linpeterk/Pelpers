@@ -35,6 +35,8 @@ import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.pelp.model.data.Location_Restroom
 import com.pelp.model.data.*
+import com.pelp.ui.theme.Blue300
+import com.pelp.ui.theme.lightBlue
 import java.io.IOException
 import java.util.*
 
@@ -462,9 +464,11 @@ fun MakeScrollComponents(navController: NavController){
             //  .background(Color.Black)
             .fillMaxWidth()
             .fillMaxHeight(1f)
-            .padding(5.dp)
             // .offset(y=300.dp)
-            .verticalScroll(rememberScrollState()),
+            .verticalScroll(rememberScrollState())
+            .background(Blue300)
+
+        ,
         // .offset(y = 500.dp)
 
     ) {
@@ -472,21 +476,25 @@ fun MakeScrollComponents(navController: NavController){
         Column (
             modifier = Modifier
                 //.verticalScroll(rememberScrollState())
+                .padding(horizontal = 10.dp)
 
                 ) {
             var  dataBaseIter:Int
 
             if(Database.dataBase.count()>0){
                 dataBaseIter=Database.dataBase.count()-1}else dataBaseIter = 0
-            var entry = Database.dataBase.iterator().next()
+      //      var entry = Database.dataBase.iterator().next()
 
-            var lastLoc = Database.dataBase[Database.data.getKeyFromList(dataBaseIter)]
+
            // cardCount.value // force update components
 
+            //////////////////////MAKING ALL THE CARDS//////////////////////////////////////////
             repeat(
                times= Database.dataBase.count()
             ) {
-                Spacer(modifier = Modifier.padding(5.dp))
+                var currentRestRoom = Database.dataBase[Database.data.getKeyFromList(dataBaseIter)]
+                Spacer(modifier = Modifier.padding(10.dp))
+                //FIRST CARDS
                 Card(
                     modifier = Modifier
                         .height(40.dp)
@@ -499,14 +507,14 @@ fun MakeScrollComponents(navController: NavController){
                                 )
                             //destObject[destObjSize - it].loc
                         }),
-                    RoundedCornerShape(15.dp)
+                    RoundedCornerShape(15.dp),
+                    elevation = 10.dp
                     // .fillMaxWidth()
 
                 ) {
                     Text(
-                        text=lastLoc?.name!!,
+                        text=currentRestRoom?.name!!,
                         modifier = Modifier
-                            .border(4.dp, Color.LightGray)
                             .background(Color.White)
                             .padding(5.dp)
                             .fillMaxWidth()
@@ -519,84 +527,90 @@ fun MakeScrollComponents(navController: NavController){
 
                     )
                 }
+                //SECOND CARD
+                Spacer(modifier = Modifier.padding(1.dp))
                 Card(
                     modifier = Modifier
-                        .height(128.dp)
+                        .height(133.dp)
                         //Toast.makeText(context, "TestA", Toast.LENGTH_LONG) toast syntax
                         .clickable(onClick = {
                             Log.d(TAG, "B4address = ${Database.dataBase.count() - 1 - (it % 5)}")
 
-                            //     addressGlobal = dataBase[Database.data.getKeyFromList(dataBase.count()-1-(it%5))]!!
-                            //      navController.navigate(Screen.Review.route)
                             navController.navigate(Screen.Review.route + "/${Database.dataBase.count() - 1 - (it % 5)}")
-                            //          navController.navigate(Screen.Review.route + "/${"abcdef"}")
 
-                            //Screen.profile_screen.route+"/Peter/1234/5678")
+                        }
 
-                        }),
+                        ),
 
-                    RoundedCornerShape(15.dp)
+                   shape= RoundedCornerShape(15.dp),
+                    elevation = 10.dp
 
                 ) {
 
-////////////////////////////////////////////////////////////////
+//////////////////////SECOND CARD COTENTS//////////////////////////////////////////
 
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .border(5.dp, Color.Magenta),
+
+                                ,
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.Center
                         ) {
-                            Surface(
-                                modifier = Modifier
-                                    /*.size(50.dp, 50.dp)*/
-                                    .padding(4.dp)
-                                    .weight(1f)
-                                    .fillMaxHeight()
-                                    .border(2.dp, Color.Red)
-                                ,
-                                /*.border(2.dp, Color.Blue),*/
-                                shape = RoundedCornerShape(10.dp)
-                            ) {
-                                Image(
-                                    modifier = Modifier.size(50.dp, 50.dp),
-                                    contentScale = ContentScale.Fit,
-                                    painter = painterResource(id = R.drawable.ic_sea_icon_round),
-                                  //  painter = painterResource(id = restRoomObj?.userIMG_URL?.get(it)!!),
-                                    contentDescription = "Urban Bathroom"
-                                    /*contentScale = ContentScale.Fit*/
-                                )
-                            }
-                            //  restRoomObj is the current component's location_restroom
+                                Surface(
+                                    modifier = Modifier
+                                        /*.size(50.dp, 50.dp)*/
+                                        .weight(.7f)
+                                        .fillMaxHeight(),
 
-                            Box(
-                                modifier = Modifier
-                                    .weight(0.8f)
-                                    .fillMaxHeight()
-                                    .border(2.dp, Color.Green)
-                                //.border(2.dp, Color.Red),
+                                    /*.border(2.dp, Color.Blue),*/
+                                    shape = RoundedCornerShape(10.dp)
+                                ) {
+
+                                    Image(
+                                        modifier = Modifier
+                                            //.size(50.dp, 50.dp),
+                                            .fillMaxSize(),
+                                        contentScale = ContentScale.Crop,
+                                        painter = painterResource(id = currentRestRoom!!.image_URL[0]),
+                                        //  painter = painterResource(id = restRoomObj?.userIMG_URL?.get(it)!!),
+                                        contentDescription = "Urban Bathroom"
+                                        /*contentScale = ContentScale.Fit*/
+                                    )
 
 
-                            ) {
+                                }
+                                //  restRoomObj is the current component's location_restroom
 
-                             //   Text(text = restRoomObj!!.reviewArray[it].customerName,
-                                Text(text = "Things",
-                                    color = Color.Black,modifier = Modifier.offset(x=4.dp,y=13.dp))
-                                //Spacer(modifier = Modifier.height(30.dp))
-                                //  var str: String = dataBase[addressGlobal.loc]?.reviewArray!!.get(it)
+                                Box(
+                                    modifier = Modifier
+                                        .weight(1.0f)
+                                        .fillMaxHeight(),
+                                    contentAlignment = Alignment.Center
+                                    //.border(2.dp, Color.Red),
+                                ) {
 
-                            }
+                                    //   Text(text = restRoomObj!!.reviewArray[it].customerName,
+                                    Text(
+                                        text = currentRestRoom!!.reviewArray[0].comments,
+                                        color = Color.Black,
+                                        modifier = Modifier
+                                    )
+                                    //Spacer(modifier = Modifier.height(30.dp))
+                                    //  var str: String = dataBase[addressGlobal.loc]?.reviewArray!!.get(it)
+
+                                }
+
                         }
-
 
 
 
 ////////////////////////////////////////////////////////////////////////////
                 }
 
-                if((--dataBaseIter)>=0) {
-                    lastLoc= Database.dataBase[Database.data.getKeyFromList(dataBaseIter)]
+                if(dataBaseIter>0) {
+                    --dataBaseIter
+                  //  currentRestRoom= Database.dataBase[Database.data.getKeyFromList(dataBaseIter)]
                 }
             }
         }

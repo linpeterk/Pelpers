@@ -25,6 +25,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -107,12 +108,14 @@ fun Start(
                 }
                 Column(modifier = Modifier.offset(y = 40.dp)) {
                     Text(
-                        text = "I agree to Pelp's term of services and confirmed that I have read Pelp's Privacy Policy",
+                        text = "This product can lead you to exposure to biological hazards which is known to the state of California to cause cancer",
                         modifier = Modifier
                             .padding(5.dp),
-                        fontSize = 12.sp,
-                        fontWeight = FontWeight.Thin,
-                        style = MaterialTheme.typography.subtitle1
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Normal,
+                        style = MaterialTheme.typography.subtitle1,
+                        textAlign = TextAlign.Center
+
                     )
                     //  Spacer(modifier = Modifier.height(150.dp))
                     Row(

@@ -48,7 +48,11 @@ class MainActivity : ComponentActivity() {
         //   SetupNavGraph(navController = navController)
 
 
+
 //            MainScreen(navController = navController)
+
+           //MainScreen(navController = navController)
+
             // A surface container using the 'background' color from the theme
 //            navController = rememberNavController()
 //            SetupNavGraph(navController = navController)

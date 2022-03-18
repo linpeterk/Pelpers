@@ -121,7 +121,6 @@ fun LoginScreen(
                 Text(text = "Log in with Email", modifier = Modifier.padding(2.dp),color=Color.White)
             }
 
-
         }
         Text(text=result)
        Spacer(modifier = Modifier.padding(100.dp))
@@ -184,7 +183,6 @@ Log.d(Examples.TAG, "Size is $size")
                 .size(size)
                 .background(Color.Red)
                 .wrapContentSize(),
-
 
             contentAlignment = Alignment.Center
 

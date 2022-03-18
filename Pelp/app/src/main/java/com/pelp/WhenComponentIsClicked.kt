@@ -188,7 +188,8 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
                                         Image(
                                             modifier = Modifier.size(50.dp, 50.dp),
                                             contentScale = ContentScale.Fit,
-                                            painter = painterResource(id = restRoomObj?.userIMG_URL?.get(it)!!),
+                                           // painter = painterResource(id = restRoomObj?.userIMG_URL?.get(it)!!),
+                                            painter = painterResource(id = restRoomObj?.image_URL[0]!!),
                                             contentDescription = "Urban Bathroom"
                                             /*contentScale = ContentScale.Fit*/
                                         )
@@ -198,7 +199,8 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
                                     Box(
                                         modifier = Modifier
                                             .fillMaxWidth()
-                                            .height(60.dp)
+                                            .height(60.dp),
+
                                             //.border(2.dp, Color.Red),
 
 

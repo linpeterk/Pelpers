@@ -14,33 +14,37 @@ class Location_Restroom (val name:String = "", var loc:LatLng) {
 
     val reviewArray:ArrayList<Review> = ArrayList<Review>()
     val image_URL:ArrayList<Int> = ArrayList<Int>()
-    val userIMG_URL:ArrayList<Int> = ArrayList<Int>()
+    //val userIMG_URL:ArrayList<Int> = ArrayList<Int>()
     init{
-        reviewArray.add(Review("Peter", restroomLoc=loc, "The best bathroom in town"))
-        reviewArray.add(Review("Carlos", loc, "It's craptacular"))
-        reviewArray.add(Review("Lyle", loc, "Would poop here again"))
-        reviewArray.add(Review("Aidan", loc, "Risky Business"))
+/*
+        reviewArray.add(Review("Carlos", loc, "It's craptacular",R.drawable.old_lady))
+        reviewArray.add(Review("Lyle", loc, "Would poop here again", R.drawable.girl))
+        reviewArray.add(Review("Aidan", loc, "Risky Business", R.drawable.weird_hair))
+        reviewArray.add(Review("Peter", restroomLoc=loc, "The best bathroom in town", R.drawable.man))
 
-
+        addImage(R.drawable.cleanbathroom1)
         addImage(R.drawable.urbanbathroom)
         addImage(R.drawable.handicap)
-        addImage(R.drawable.cleanbathroom1)
-        addPeopleImage(R.drawable.man)
-        addPeopleImage(R.drawable.old_lady)
-        addPeopleImage(R.drawable.girl)
-        addPeopleImage(R.drawable.weird_hair)
+*/
+
 
     }
 
-    fun addReview(userName:String, review:String){
-        reviewArray.add(Review(userName, loc, review))
+    fun addReview(userName:String, review:String, imageId:Int){
+        reviewArray.add(Review(userName, loc, review, imageId))
     }
 
     fun addImage(reviewImage:Int){
        image_URL.add(reviewImage)
     }
+    /*
     fun addPeopleImage(reviewImage:Int){
         userIMG_URL.add(reviewImage)
+    }
+*/
+    fun findReviewCustomerImageId(index:Int):Int{
+
+        return reviewArray[index].imageID
     }
 
 
