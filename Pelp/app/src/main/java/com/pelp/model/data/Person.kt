@@ -8,7 +8,7 @@ data class Person(
     var realName:String,
     var password:String,
     var zip:Int,
-    var imageId:Int = R.drawable.man,
+    var imageId:Int = R.drawable.admin,
     var history:MutableList<Review> = mutableListOf()
 
 

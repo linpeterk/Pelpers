@@ -35,11 +35,11 @@ class Database(){
         /*
         Initalize some plebs
          */
-        customerAdd("peter", "12345", "KC", 90001)
-        customerAdd("carlos", "12345", "carlos", 90002)
-        customerAdd("lyle", "12345", "lyle", 90003)
-        customerAdd("aidan", "12345", "aidan", 90004)
-        customerAdd("admin", "admin", "admin", 90005)
+        customerAdd("peter", "12345", "KC", R.drawable.man ,zip=90001)
+        customerAdd("carlos", "12345", "carlos", R.drawable.weird_hair, 90002)
+        customerAdd("lyle", "12345", "lyle", R.drawable.old_lady, 90003)
+        customerAdd("aidan", "12345", "aidan", R.drawable.girl, 90004)
+        customerAdd("admin", "admin", "admin", R.drawable.admin, 90005)
 
         /*
         initalize some poopers
@@ -60,23 +60,23 @@ class Database(){
         addReviewPersonRest("carlos", caliMuseum, "It's Craptacular", personImage = R.drawable.weird_hair,restRoomImage = R.drawable.urbanbathroom )
         addReviewPersonRest("lyle", caliMuseum, "Would poop here again", personImage = R.drawable.old_lady,restRoomImage = R.drawable.handicap )
         addReviewPersonRest("aidan", caliMuseum, "Bewarn: Risky Business", personImage = R.drawable.girl,restRoomImage = R.drawable.green_bathroom )
-        
-        addReviewPersonRest("peter", toyDistrict, "Some people have all the luck.", personImage = R.drawable.man,restRoomImage = R.drawable.urbanbathroom )
-        addReviewPersonRest("carlos", toyDistrict, "That’s a wrap for me", personImage = R.drawable.weird_hair,restRoomImage = R.drawable.cleanbathroom1 )
-        addReviewPersonRest("lyle", toyDistrict, "The big sofa is really not suitable for a small room.", personImage = R.drawable.old_lady,restRoomImage = R.drawable.handicap )
-        addReviewPersonRest("aidan", toyDistrict, "This is going on the list.", personImage = R.drawable.girl,restRoomImage = R.drawable.ic_sea_icon_round )
+
+        addReviewPersonRest("peter", toyDistrict, "Some people have all the luck.", personImage = R.drawable.man,restRoomImage = R.drawable.futurebathroom )
+        addReviewPersonRest("carlos", toyDistrict, "That’s a wrap for me", personImage = R.drawable.weird_hair,restRoomImage = R.drawable.green_bathroom )
+        addReviewPersonRest("lyle", toyDistrict, "The big sofa is really not suitable for a small room.", personImage = R.drawable.old_lady,restRoomImage = R.drawable.bustedbathroom )
+        addReviewPersonRest("aidan", toyDistrict, "This is going on the list.", personImage = R.drawable.girl,restRoomImage = R.drawable.luxury_bathroom )
 
         addReviewPersonRest("peter", brew, "The box is three times as big as that one.", personImage = R.drawable.man,restRoomImage = R.drawable.handicap )
-        addReviewPersonRest("carlos", brew, "Any day will do.", personImage = R.drawable.weird_hair,restRoomImage = R.drawable.urbanbathroom )
+        addReviewPersonRest("carlos", brew, "Any day will do.", personImage = R.drawable.weird_hair,restRoomImage = R.drawable.green_bathroom )
         addReviewPersonRest("lyle", brew, "Tom answered all the questions on the list.", personImage = R.drawable.old_lady,restRoomImage = R.drawable.cleanbathroom1 )
-        addReviewPersonRest("aidan", brew, "Bigger is not always better.", personImage = R.drawable.girl,restRoomImage = R.drawable.ic_sea_icon_round )
+        addReviewPersonRest("aidan", brew, "Bigger is not always better.", personImage = R.drawable.girl,restRoomImage = R.drawable.futurebathroom )
 
         addReviewPersonRest("peter", dodgerS, "I'm not a big fan of blueberry pancakes.", personImage = R.drawable.man,restRoomImage = R.drawable.cleanbathroom1 )
-        addReviewPersonRest("carlos", dodgerS, "I learned this recipe from my grandma, who learned it from hers.", personImage = R.drawable.weird_hair,restRoomImage = R.drawable.urbanbathroom )
+        addReviewPersonRest("carlos", dodgerS, "I learned this recipe from my grandma, who learned it from hers.", personImage = R.drawable.weird_hair,restRoomImage = R.drawable.bustedbathroom )
         addReviewPersonRest("lyle", dodgerS, "Our competitors don't normally ask us for advice, but when an airline leader reached out, we couldn't ignore it.", personImage = R.drawable.old_lady,restRoomImage = R.drawable.handicap )
-        addReviewPersonRest("aidan", dodgerS, "She tried to make chicken but she must have put the wrong thing in because it came out of the oven bright green.", personImage = R.drawable.girl,restRoomImage = R.drawable.ic_sea_icon_round )
+        addReviewPersonRest("aidan", dodgerS, "She tried to make chicken but she must have put the wrong thing in because it came out of the oven bright green.", personImage = R.drawable.girl,restRoomImage = R.drawable.cloggedtoilet )
 
-        addReviewPersonRest("peter", church, "He uses the snorkel to breathe under water.", personImage = R.drawable.man,restRoomImage = R.drawable.ic_sea_icon_round )
+        addReviewPersonRest("peter", church, "He uses the snorkel to breathe under water.", personImage = R.drawable.man,restRoomImage = R.drawable.luxury_bathroom )
         addReviewPersonRest("carlos", church, "If I could recommend anything to try, it's this", personImage = R.drawable.weird_hair,restRoomImage = R.drawable.urbanbathroom )
         addReviewPersonRest("lyle", church, "The puzzle was taking me so long to put together that I gave up and threw it in the garbage.", personImage = R.drawable.old_lady,restRoomImage = R.drawable.handicap )
         addReviewPersonRest("aidan", church, "The laptop light was the only one light on the room.", personImage = R.drawable.girl,restRoomImage = R.drawable.cleanbathroom1 )
@@ -134,12 +134,12 @@ class Database(){
        dataAdd(locRestRoom, Location_Restroom(restRoomName, locRestRoom))
    }
 
-    fun customerAdd(name:String, password:String, realName:String, zip:Int = 90001){
-        var p = Person(name, realName, password, zip)
+    fun customerAdd(name:String, password:String, realName:String, imageId:Int, zip:Int = 90001){
+        var p = Person(name, realName, password, zip, imageId = imageId)
         userBase[name] = p
 
     }
-
+/*DeFUNT*/
     fun addReviewPersonRest(userName: String, locRestRoom: LatLng, reviewComment: String, personImage: Int, restRoomImage:Int = R.drawable.ic_sea_icon_round){
 
         var review = Review(customerName = userName, restroomLoc = locRestRoom, comments = reviewComment, imageID = personImage, restRoomID = restRoomImage)
@@ -158,14 +158,13 @@ class Database(){
 
 
     }
-
+    /*DeFUNT*/
     fun adminAdd(userName:String, restRoomName:String, password:String, reviewComment:String, locRestRoom:LatLng, realName:String = "johnTEST", restroomImage:Int, personImage:Int = R.drawable.man)
     {
         //add Restroom
         dataAdd(locRestRoom, Location_Restroom(restRoomName, locRestRoom))
 
         //add Customer
-        customerAdd(userName, password, realName)
 
         var review = Review(userName, locRestRoom, reviewComment, personImage)
 

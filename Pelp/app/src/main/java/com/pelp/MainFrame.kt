@@ -78,7 +78,7 @@ fun MainScreen(navController: NavController){
             }
 
             Box(modifier = Modifier
-                .weight(0.15f)
+                .weight(0.14f)
 
             ){
                 MenuTab(navController)
@@ -243,10 +243,10 @@ fun MenuTab(navController: NavController){
 
             ) {
                 FloatingActionButton(
-                    onClick = {navController.navigate(route=Screen.Review.route){
+                    onClick = {/*navController.navigate(route=Screen.Review.route){
                         popUpTo(Screen.Review.route){
                             inclusive=true
-                        }}
+                        }}*/
                     },
                     modifier = Modifier.scale(.7F),
                     backgroundColor = MaterialTheme.colors.surface
@@ -553,6 +553,7 @@ fun MakeScrollComponents(navController: NavController){
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
+                                .padding(2.dp)
 
                                 ,
                             verticalAlignment = Alignment.CenterVertically,
@@ -562,24 +563,29 @@ fun MakeScrollComponents(navController: NavController){
                                 Surface(
                                     modifier = Modifier
                                         /*.size(50.dp, 50.dp)*/
-                                        .weight(.5f)
+                                        .weight(.6f)
                                         .fillMaxHeight()
                                       ,
 
                                     /*.border(2.dp, Color.Blue),*/
                                     shape = RoundedCornerShape(10.dp)
                                 ) {
-
-                                    Image(
-                                        modifier = Modifier
-                                            //.size(50.dp, 50.dp),
-                                            .fillMaxSize(),
-                                        contentScale = ContentScale.Crop,
-                                        painter = painterResource(id = currentRestRoom!!.image_URL[rndsImage]),
-                                        //  painter = painterResource(id = restRoomObj?.userIMG_URL?.get(it)!!),
-                                        contentDescription = "Urban Bathroom"
-                                        /*contentScale = ContentScale.Fit*/
-                                    )
+                                Row( modifier=Modifier.horizontalScroll(rememberScrollState())) {
+                                    repeat(currentRestRoom.image_URL.count()) {
+                                        Box() {
+                                            Image(
+                                                modifier = Modifier
+                                                    //.size(50.dp, 50.dp),
+                                                    .fillMaxSize(),
+                                                contentScale = ContentScale.Inside,
+                                                painter = painterResource(id = currentRestRoom!!.image_URL[it]),
+                                                //  painter = painterResource(id = restRoomObj?.userIMG_URL?.get(it)!!),
+                                                contentDescription = "Urban Bathroom"
+                                                /*contentScale = ContentScale.Fit*/
+                                            )
+                                        }
+                                    }
+                                }
 
 
                                 }
@@ -589,14 +595,14 @@ fun MakeScrollComponents(navController: NavController){
                                     modifier = Modifier
                                         .weight(1.0f)
                                         .fillMaxHeight()
-                                        .padding(2.dp),
+                                        .padding(4.dp),
                                     contentAlignment = Alignment.Center
                                     //.border(2.dp, Color.Red),
                                 ) {
 
                                     //   Text(text = restRoomObj!!.reviewArray[it].customerName,
                                     Text(
-                                        text = "${currentRestRoom!!.reviewArray[rndsComment].customerName.uppercase()}:\n\n\"${currentRestRoom!!.reviewArray[rndsComment].comments}\"",
+                                        text = "${currentRestRoom!!.reviewArray[rndsComment].customerName}:\n\n\"${currentRestRoom!!.reviewArray[rndsComment].comments}\"",
                                        fontSize= 14.sp,
                                         modifier = Modifier.fillMaxWidth()
                                     )

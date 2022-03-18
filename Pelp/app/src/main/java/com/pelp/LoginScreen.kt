@@ -16,6 +16,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -28,7 +29,7 @@ import androidx.navigation.NavController
 import com.pelp.model.data.loginAnimation
 import com.pelp.ui.theme.lightBlue
 
-
+var who:String = ""
 @Composable
 fun LoginScreen(
     navController: NavController ,
@@ -40,8 +41,9 @@ fun LoginScreen(
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(5.dp)) {
 
         Surface(
-            modifier = Modifier.size(120.dp)
-                    .padding(15.dp),
+            modifier = Modifier
+                .size(120.dp)
+                .padding(15.dp),
             shape = CircleShape
         ) {
 
@@ -100,7 +102,7 @@ fun LoginScreen(
         ) {
 
 
-            Button(onClick = {
+            Button(onClick = { who = userName
                 if(Database.data.loginVerify(userName, password)){
                   //  alert = true
                     sizeState += 450.dp
@@ -167,21 +169,30 @@ fun LoginScreen(
 
     val size by animateDpAsState(targetValue = sizeState,
         keyframes {
-            durationMillis = 4000
+            durationMillis = 3000
             sizeState at 0 with FastOutLinearInEasing
             sizeState * 1.5f at 1000 with FastOutLinearInEasing
-            sizeState * 2f at 4000
+            sizeState * 2f at 3000
 
         }
     )
+    var alpha by rememberSaveable{ mutableStateOf(0.3f) }
 
 Log.d(Examples.TAG, "Size is $size")
     if(size>800.dp) {
         navController.navigate(Screen.Main.route) {
             popUpTo(Screen.Main.route) {
-                //           inclusive=true
+                           inclusive=true
             }
         }
+    }
+    if(size>400.dp && size<800.dp){
+        alpha = 0.4f
+
+    }
+    else {
+        alpha=1.0f
+
     }
 
         Box(
@@ -193,14 +204,17 @@ Log.d(Examples.TAG, "Size is $size")
             contentAlignment = Alignment.Center
 
         ) {
+
             Text(
                 text = "Welcome $userName!", modifier = Modifier
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .alpha(alpha),
                 fontSize = 28.sp,
                 fontWeight = FontWeight.Bold,
                 fontStyle= FontStyle.Normal,
                 color = Color.White,
                 textAlign = TextAlign.Center
+
                )
 
         }

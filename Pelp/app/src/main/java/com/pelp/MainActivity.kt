@@ -25,7 +25,7 @@ import Examples.*
 
 class MainActivity : ComponentActivity() {
 
-    lateinit var navController: NavHostController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Database.data.init() // Don't Comment this out! it's in database
@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
              // Don't Comment this out!
             // A surface container using the 'background' color from the theme
 
-
+           var navController: NavHostController
 
             PelpTheme {
                 navController = rememberNavController()

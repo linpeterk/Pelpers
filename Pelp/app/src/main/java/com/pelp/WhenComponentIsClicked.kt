@@ -8,12 +8,14 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -38,10 +40,10 @@ fun Preview(){
 @Composable
 fun SquareImage (navController: NavController, addressLoc:Int) {
     var restRoomObj = Database.dataBase[Database.data.getKeyFromList(addressLoc)]
+    var reviewCount by rememberSaveable { mutableStateOf(restRoomObj!!.reviewArray.count())}
 
-
-    Log.d(Examples.TAG,"AddressLoc is $addressLoc")
-   // val locationRestroom = dataBase [addressLoc]
+    Log.d(Examples.TAG, "AddressLoc is $addressLoc")
+    // val locationRestroom = dataBase [addressLoc]
     //TopAppBar(title = {},Modifier.height(60.dp))
     //Spacer(modifier = Modifier.width(4.dp))
     Surface(color = MaterialTheme.colors.primaryVariant) {
@@ -54,34 +56,35 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
                 modifier = Modifier
                     .horizontalScroll(rememberScrollState())
             ) {
-
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(4.dp), shape = RoundedCornerShape(15.dp), elevation = 8.dp
-                ) {
-                    Box(modifier = Modifier.height(200.dp)) {
-                        Image(
-                            painter = painterResource(restRoomObj?.image_URL?.get(0)!!),
-                            contentDescription = "Urban Bathroom",
-                            contentScale = ContentScale.Fit
-                        )
-
-                        Box(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(10.dp),
-                            contentAlignment = Alignment.BottomCenter
-                        ) {
-                            Text(
-                                text = "URBAN BATHROOM: Clean Grunge!",
-                                style = TextStyle(color = Color.White, fontSize = 16.sp)
+                repeat(restRoomObj?.image_URL?.count()!!) {
+                    Card(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(4.dp), shape = RoundedCornerShape(15.dp), elevation = 8.dp
+                    ) {
+                        Box(modifier = Modifier.height(200.dp)) {
+                            Image(
+                                painter = painterResource(restRoomObj?.image_URL?.get(it)!!),
+                                contentDescription = "Urban Bathroom",
+                                contentScale = ContentScale.Fit
                             )
 
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(10.dp),
+                                contentAlignment = Alignment.BottomCenter
+                            ) {
+                                Text(
+                                    text = "URBAN BATHROOM: Clean Grunge!",
+                                    style = TextStyle(color = Color.White, fontSize = 16.sp)
+                                )
+
+                            }
                         }
                     }
                 }
-
+                /*
                 Card(
                     modifier = Modifier
                         .offset(y = 0.dp)
@@ -135,8 +138,11 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
                         }
                     }
                 }
+                */
             }
-            Column( ) {
+
+
+            Column() {
                 Card(
                     modifier = Modifier
                         .height(60.dp)
@@ -154,11 +160,58 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
                 }
 
 
-                Column(modifier = Modifier
-                    .verticalScroll(rememberScrollState())
+                Column(
+                    modifier = Modifier
+                        .verticalScroll(rememberScrollState())
                     //.border(3.dp, Color.Red)
                 ) {
-                    repeat(restRoomObj!!.userIMG_URL.count())
+                    Column() {
+                        var review by rememberSaveable { mutableStateOf("") }
+                        Surface(
+                            shape = RoundedCornerShape(3.dp),
+                            modifier = Modifier.padding(3.dp)
+
+                        ) {
+                            OutlinedTextField(
+                                value = review,
+                                onValueChange = { review = it },
+                                shape = RoundedCornerShape(3.dp),
+                                label = { Text(text = "How's the Experience?") },
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(120.dp)
+
+                            )
+
+                        }
+                        var enable by remember { mutableStateOf(true) }
+
+                        Box(
+                            contentAlignment = Alignment.CenterEnd,
+                            modifier = Modifier.fillMaxWidth(),
+
+                        ) {
+                            Button(
+                                onClick = {
+                                    Database.data.addReviewPersonRest(who, Database.data.getKeyFromList(addressLoc),review, Database.userBase[who]!!.imageId)
+                                    review = "Review sent"
+                                    reviewCount = restRoomObj!!.reviewArray.count()
+                                    enable = false
+
+                                          },
+                                enabled = enable,
+                                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Red)
+                            ) {
+                                Text(text = "Add Review")
+                            }
+
+                        }
+
+                    }
+
+
+
+                    repeat(reviewCount)
                     {
                         Card(
                             elevation = 10.dp,
@@ -183,14 +236,14 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
                                         modifier = Modifier
                                             /*.size(50.dp, 50.dp)*/
                                             .padding(4.dp),
-                                            /*.border(2.dp, Color.Blue),*/
+                                        /*.border(2.dp, Color.Blue),*/
                                         shape = RoundedCornerShape(10.dp)
                                     ) {
                                         Image(
                                             modifier = Modifier.size(50.dp, 50.dp),
                                             contentScale = ContentScale.Fit,
-                                           // painter = painterResource(id = restRoomObj?.userIMG_URL?.get(it)!!),
-                                            painter = painterResource(id = restRoomObj?.userIMG_URL[it]!!),
+                                            // painter = painterResource(id = restRoomObj?.userIMG_URL?.get(it)!!),
+                                            painter = painterResource(id = restRoomObj?.reviewArray?.get(it)?.imageID!!),
                                             contentDescription = "Urban Bathroom"
                                             /*contentScale = ContentScale.Fit*/
                                         )
@@ -202,13 +255,19 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
                                             .fillMaxWidth()
                                             .height(60.dp),
 
-                                            //.border(2.dp, Color.Red),
+                                        //.border(2.dp, Color.Red),
 
 
-                                        ) {
+                                    ) {
 
-                                        Text(text = restRoomObj!!.reviewArray[it].customerName.uppercase(),
-                                        color = Color.Black,fontWeight = FontWeight.Bold,modifier = Modifier.offset(x=4.dp,y=13.dp))
+
+                                        Text(
+                                            text = restRoomObj!!.reviewArray[it].customerName,
+                                            color = Color.Black,
+                                            fontWeight = FontWeight.Bold,
+                                            modifier = Modifier.offset(x = 4.dp, y = 13.dp)
+                                        )
+
                                         //Spacer(modifier = Modifier.height(30.dp))
                                         //  var str: String = dataBase[addressGlobal.loc]?.reviewArray!!.get(it)
 
@@ -222,7 +281,10 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
                                     var str: String = restRoomObj?.reviewArray!!.get(it).comments
                                     //  var a:Location_Restroom = dataBase[Brew]!!
                                     //Spacer(modifier = Modifier.height(30.dp))
-                                    Text(text = "LOCATION: ${restRoomObj!!.name}  \n \n REVIEWS:\n $str",modifier=Modifier.offset(x=6.dp))
+                                    Text(
+                                        text = "LOCATION: ${restRoomObj!!.name}  \n \n REVIEWS:\n $str",
+                                        modifier = Modifier.offset(x = 6.dp)
+                                    )
                                 }
 
 //                            Card(modifier=Modifier.padding(150.dp,60.dp,150.dp,60.dp).offset(-145.dp,-55.dp)) {
@@ -243,6 +305,7 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
             }
         }
     }
+
 }
 
 
