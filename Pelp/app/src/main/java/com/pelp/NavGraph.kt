@@ -51,6 +51,11 @@ fun SetupNavGraph(
             ProfileScreen(navController = navController)
         }
         composable(
+            route = Screen.Emergency.route
+        ) {
+            emergency(navController = navController)
+        }
+        composable(
             route = Screen.Sort.route
         ){
             SortScreen(navController = navController)

@@ -1,5 +1,6 @@
 package com.pelp
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -26,9 +27,17 @@ fun emergency(navController : NavController) {
             }
         }
         Box(modifier= Modifier.height(50.dp)) {
-            MenuTab(navController = navController)
+            MenuTab(navController)
         }
 
+        Box(modifier = Modifier
+            .weight(0.8f)
+            .background(MaterialTheme.colors.primaryVariant)
+        ){
+            MakeScrollComponents(navController)
+        }
     }
+
+   
 }
 

@@ -172,10 +172,10 @@ fun MenuTab(navController: NavController){
                     )
 
                 }
-                //Text(text = "Hello")
+                //Text(text = "Hello")  WTF IS THIS?
             }
 
-
+            // SORT BUTTON HERE
             Column(modifier = Modifier
                 .padding(horizontal = 15.dp)
 
@@ -204,7 +204,7 @@ fun MenuTab(navController: NavController){
 
           //  Spacer(modifier = Modifier.width(25.dp))
 
-
+            // EMERGENCY BUTTON HERE
             Column(modifier = Modifier
                 .padding(horizontal = 15.dp)
 
@@ -214,8 +214,11 @@ fun MenuTab(navController: NavController){
                 var test by rememberSaveable { mutableStateOf(0)}
 
                 FloatingActionButton(
-                    onClick = {
-                                test++},
+                    onClick = {navController.navigate(route=Screen.Emergency.route){
+                        popUpTo(Screen.Sort.route){
+                            inclusive=true
+                        }}
+                    },
                     modifier = Modifier.scale(.7F),
                     backgroundColor = MaterialTheme.colors.surface
                 ) {

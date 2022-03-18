@@ -9,5 +9,6 @@ sealed class Screen(val route:String){
     object Sort:Screen(route="sort_screen")
     object Review:Screen(route="review_screen")
     object Signup:Screen(route="signup_screen")
+    object Emergency:Screen(route = "emergency_screen")
 
 }
