@@ -58,7 +58,7 @@ fun SetupNavGraph(
         composable( //SearchScreen
             route = Screen.Search.route
         ) {
-            searchAddress(navController = navController)
+            addAddress(navController = navController)
         }
         composable( //ExpertReviewScreen.kt
             route = Screen.Review.route

@@ -50,7 +50,7 @@ fun IconBox(navController: NavController){
     Column(){
         Card(modifier = Modifier
             .height(60.dp)
-            .offset(y = 444.dp)
+            .offset(y = 442.dp)
             //.border(1.dp, Color.Black)
             .padding(4.dp)
             .fillMaxWidth(),

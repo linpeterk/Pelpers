@@ -146,7 +146,7 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
                 Card(
                     modifier = Modifier
                         .height(60.dp)
-                        .offset(y = 5.dp)
+                        .offset(y = 3.dp)
                         //.border(1.dp, Color.Black)
                         .height(10.dp)
                         .padding(3.dp)
@@ -169,7 +169,8 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
                         var review by rememberSaveable { mutableStateOf("") }
                         Surface(
                             shape = RoundedCornerShape(3.dp),
-                            modifier = Modifier.padding(3.dp)
+                            modifier = Modifier.padding(5.dp),
+                            elevation = 2.dp
 
                         ) {
                             OutlinedTextField(
@@ -180,6 +181,8 @@ fun SquareImage (navController: NavController, addressLoc:Int) {
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .height(120.dp)
+                                    .offset(y=-4.dp)
+                                    .padding(5.dp)
 
                             )
 

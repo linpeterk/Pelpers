@@ -25,7 +25,12 @@ class Database(){
         var dataBase: LinkedHashMap<LatLng, Location_Restroom> = LinkedHashMap()
         var userBase:LinkedHashMap<String, Person> = LinkedHashMap()
 
+
         var arrayKeys: MutableList<LatLng> = mutableListOf() // Not used except for mainframe
+
+        var businessBase:LinkedHashMap<String,Business> = LinkedHashMap()
+        var arrayKeys: MutableList<LatLng> = mutableListOf() // Not used
+
 
     }
 
@@ -129,6 +134,11 @@ class Database(){
         reviewArray.add(Review("Peter", restroomLoc=loc, "The best bathroom in town", R.drawable.man))
 
   */
+    }
+
+    fun addBuisness(bname:String,baddress:String,breview:String){
+        var o=Business(bname,baddress,breview)
+        businessBase[bname]=o
     }
 
    fun addRestroom(locRestRoom: LatLng, restRoomName: String){
