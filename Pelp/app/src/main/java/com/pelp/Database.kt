@@ -12,7 +12,7 @@ import java.util.Collections.reverse
 
 //store customers user
 //var  userBase:LinkedHashMap<String, Person> = LinkedHashMap()
- //var arrayKeys: MutableList<LatLng> = mutableListOf()
+//var arrayKeys: MutableList<LatLng> = mutableListOf()
 
 ////val strName = listOf("Japanese American National Museum " , "Toy District", "Brewery", "Dodger Stadium","Our Lady Queen of Angels" )
 private const val TAG = "DatabaseFile"
@@ -54,9 +54,7 @@ class Database(){
         addRestroom(church, "Our Lady Queen of Angels")
 
         /*
-
          Paid Reviews
-
          */
 
         addReviewPersonRest("peter", caliMuseum, "The Best Restroom in Town", personImage = R.drawable.man,restRoomImage = R.drawable.cleanbathroom1 )
@@ -104,36 +102,27 @@ class Database(){
         dataAdd(brew, Location_Restroom(name="Brewery", brew))
         dataAdd(dodgerS, Location_Restroom("Dodger Stadium", dodgerS))
         dataAdd(church, Location_Restroom("Our Lady Queen of Angels", church))
-
          reviewArray.add(Review("Carlos", loc, "It's craptacular",R.drawable.old_lady))
         reviewArray.add(Review("Lyle", loc, "Would poop here again", R.drawable.girl))
         reviewArray.add(Review("Aidan", loc, "Risky Business", R.drawable.weird_hair))
         reviewArray.add(Review("Peter", restroomLoc=loc, "The best bathroom in town", R.drawable.man))
-
    addImage(R.drawable.cleanbathroom1)
         addImage(R.drawable.urbanbathroom)
         addImage(R.drawable.handicap)
-
         customerAdd("peter", "12345", "KC")
-
         customerAdd("carlo", "12345", "carlo")
-
         customerAdd("lyle", "12345", "lyle")
-
         customerAdd("aidan", "12345", "aidan")
-
         customerAdd("admin", "admin", "admin")
-
         initReview()
         */
 
- /*
-   reviewArray.add(Review("Carlos", loc, "It's craptacular",R.drawable.old_lady))
-        reviewArray.add(Review("Lyle", loc, "Would poop here again", R.drawable.girl))
-        reviewArray.add(Review("Aidan", loc, "Risky Business", R.drawable.weird_hair))
-        reviewArray.add(Review("Peter", restroomLoc=loc, "The best bathroom in town", R.drawable.man))
-
-  */
+        /*
+          reviewArray.add(Review("Carlos", loc, "It's craptacular",R.drawable.old_lady))
+               reviewArray.add(Review("Lyle", loc, "Would poop here again", R.drawable.girl))
+               reviewArray.add(Review("Aidan", loc, "Risky Business", R.drawable.weird_hair))
+               reviewArray.add(Review("Peter", restroomLoc=loc, "The best bathroom in town", R.drawable.man))
+         */
     }
 
     fun addBuisness(bname:String,baddress:String,breview:String){
@@ -141,16 +130,33 @@ class Database(){
         businessBase[bname]=o
     }
 
-   fun addRestroom(locRestRoom: LatLng, restRoomName: String){
-       dataAdd(locRestRoom, Location_Restroom(restRoomName, locRestRoom))
-   }
+    fun addRestroom(locRestRoom: LatLng, restRoomName: String){
+        dataAdd(locRestRoom, Location_Restroom(restRoomName, locRestRoom))
+    }
 
     fun customerAdd(name:String, password:String, realName:String, imageId:Int, zip:Int = 90001){
         var p = Person(name, realName, password, zip, imageId = imageId)
         userBase[name] = p
 
     }
-/*DeFUNT*/
+
+    fun getLocName(loc: LatLng):String {
+        return dataBase[loc]?.name.toString()
+    }
+
+    fun getName(user:String):String {
+        return (userBase[user]?.realName.toString())
+    }
+
+    fun getPass(user:String):String {
+        return (userBase[user]?.password.toString())
+    }
+
+    fun getZip(user:String):String{
+        return (userBase[user]?.zip.toString())
+    }
+
+    /*DeFUNT*/
     fun addReviewPersonRest(userName: String, locRestRoom: LatLng, reviewComment: String, personImage: Int, restRoomImage:Int = R.drawable.ic_sea_icon_round){
 
         var review = Review(customerName = userName, restroomLoc = locRestRoom, comments = reviewComment, imageID = personImage, restRoomID = restRoomImage)
@@ -181,11 +187,13 @@ class Database(){
 
         //add to Location_restroom review list
 
-     dataBase[caliMuseum]?.reviewArray?.add(review)
+        dataBase[caliMuseum]?.reviewArray?.add(review)
         // add to person history list
 
-     customerAddHistory(userName, review)
+        customerAddHistory(userName, review)
     }
+
+
 
     fun addReview(userName:String, loc:LatLng, comments:String){
         val review = Review(userName, loc, comments)
@@ -217,9 +225,13 @@ class Database(){
 
     private fun customerAddHistory(name:String, review: Review){
         if(userBase[name]!= null )
-           userBase[name]?.history?.add(review)
+            userBase[name]?.history?.add(review)
 
     }
+
+
+
+
 
     private fun reverseHashMap(){  //get database key of next iteration, in reverse order
         reverse(arrayKeys)
