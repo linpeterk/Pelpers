@@ -44,7 +44,7 @@ class MainActivity : ComponentActivity() {
             }
 
 
-
+            //addAddress(navController = rememberNavController())
 //        SignupScreen(navController = navController)
             //SquareImage (navController, 2)
         //   SetupNavGraph(navController = navController)

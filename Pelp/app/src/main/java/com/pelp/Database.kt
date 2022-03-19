@@ -29,7 +29,7 @@ class Database(){
         var arrayKeys: MutableList<LatLng> = mutableListOf() // Not used except for mainframe
 
         var businessBase:LinkedHashMap<String,Business> = LinkedHashMap()
-        var arrayKeys: MutableList<LatLng> = mutableListOf() // Not used
+        //var arrayKeys: MutableList<LatLng> = mutableListOf() // Not used
 
 
     }
