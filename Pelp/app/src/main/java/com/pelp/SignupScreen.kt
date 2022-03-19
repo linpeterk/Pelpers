@@ -32,30 +32,30 @@ fun SignupScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .verticalScroll(rememberScrollState())
-            .padding(8.dp)
+            .padding(7.dp)
     ) {
         Row (
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(7.dp)
         ) {
             Fields()
         }
         Row (
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp),
+                .padding(7.dp),
             horizontalArrangement = Arrangement.Center
         ) {
             Text(text = "Pelp, Yelp for Poop")
         }
         Spacer(modifier = Modifier
-            .weight(1f)
+            .weight(2f)
         )
         Row (
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp),
+                .padding(7.dp),
             horizontalArrangement = Arrangement.Center
         ){
             Button(onClick = {
@@ -73,74 +73,74 @@ fun Fields() {
     var password by rememberSaveable { mutableStateOf("") }
     var realName by rememberSaveable { mutableStateOf("") }
     var zip by rememberSaveable { mutableStateOf("") }
-    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(5.dp)) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(4.dp)) {
         Surface(
-            modifier = Modifier.size(60.dp),
+            modifier = Modifier.size(59.dp),
             shape = CircleShape
         ) {
             Image(
                 painter = painterResource(id = R.drawable.sea),
                 contentDescription = "Sea World",
                 modifier = Modifier
-                    .size(60.dp)
+                    .size(59.dp)
                     .clip(CircleShape)
             )
         }
-        Spacer(modifier = Modifier.padding(10.dp))
+        Spacer(modifier = Modifier.padding(9.dp))
         Surface (
-            shape = RoundedCornerShape(3.dp)
+            shape = RoundedCornerShape(2.dp)
         ) {
             OutlinedTextField(
                 value = username,
                 onValueChange = {username = it},
-                shape = RoundedCornerShape(3.dp),
+                shape = RoundedCornerShape(2.dp),
                 label = { Text(text = "username")},
-                modifier = Modifier.width(350.dp)
+                modifier = Modifier.width(349.dp)
             )
         }
         Surface (
-            shape = RoundedCornerShape(3.dp)
+            shape = RoundedCornerShape(2.dp)
         ){
             OutlinedTextField(
                 value = password,
                 onValueChange = {password = it},
-                shape = RoundedCornerShape(3.dp),
+                shape = RoundedCornerShape(2.dp),
                 label = { Text(text = "password")},
-                modifier = Modifier.width(350.dp)
+                modifier = Modifier.width(349.dp)
             )
         }
         Surface (
-            shape = RoundedCornerShape(3.dp)
+            shape = RoundedCornerShape(2.dp)
         ){
             OutlinedTextField(
                 value = realName,
                 onValueChange = {realName = it},
-                shape = RoundedCornerShape(3.dp),
+                shape = RoundedCornerShape(2.dp),
                 label = { Text(text = "First and Last Name")},
-                modifier = Modifier.width(350.dp)
+                modifier = Modifier.width(349.dp)
             )
         }
         Surface (
-            shape = RoundedCornerShape(3.dp)
+            shape = RoundedCornerShape(2.dp)
         ){
             OutlinedTextField(
                 value = zip,
                 onValueChange = {zip = it},
-                shape = RoundedCornerShape(3.dp),
+                shape = RoundedCornerShape(2.dp),
                 label = { Text(text = "zip code")},
-                modifier = Modifier.width(350.dp)
+                modifier = Modifier.width(349.dp)
             )
         }
         Surface (
-            shape = RoundedCornerShape(3.dp), modifier = Modifier.padding(10.dp)
+            shape = RoundedCornerShape(2.dp), modifier = Modifier.padding(10.dp)
         ){
             Button(
                 onClick ={
                     Database.data.customerAdd(username, password, realName, zip.toInt())
-                    Database.data.checkCustomerExist(username)
+                    //Database.data.checkCustomerSignup(username)
                 }
             ){
-                Text(text = "Sign Up", modifier = Modifier.padding(2.dp),color=Color.White)
+                Text(text = "Sign Up", modifier = Modifier.padding(1.dp),color=Color.White)
             }
         }
     }
