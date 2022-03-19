@@ -2,14 +2,18 @@ package com.pelp
 
 
 import android.graphics.Paint
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -28,213 +32,151 @@ import coil.compose.rememberImagePainter
 
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import coil.compose.rememberAsyncImagePainter
+import com.pelp.Database.Companion.data
+import com.pelp.Database.Companion.dataBase
+import com.pelp.Database.Companion.userBase
+import com.pelp.model.data.Person
+import com.pelp.model.data.Review
+
 
 @Composable
 fun ProfileScreen( navController: NavController) {
-    val notification = rememberSaveable{ (mutableStateOf(""))}
+    var userName:String = who
+    val notification = rememberSaveable{ (mutableStateOf("")) }
+    var reviewCount = userBase[userName]?.history!!.size
+    //val reviewArray:ArrayList<Review> = ArrayList<Review>()
     if (notification.value.isNotEmpty()) {
         Toast.makeText(LocalContext.current, notification.value, Toast.LENGTH_LONG).show()
     }
     Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .verticalScroll(rememberScrollState())
-            .padding(8.dp)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-        ) {
-            SearchBar()
-        }
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-        ) {
-            ProfileImage()
-        }
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp),
-            horizontalArrangement = Arrangement.Center
-        ) {
-            Text(text = "Name", modifier = Modifier.width(99.dp))
-            Text(text = "Email", modifier = Modifier.width(99.dp))
-            Text(text = "Address", modifier = Modifier.width(99.dp))
-        }
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-        ) {
-            RecentVisit()
-        }
-///PETER'S TEMPORARY BACK BUTTON
-        Spacer(modifier = Modifier.padding(100.dp))
-        Row(
-            modifier = Modifier
-                .size(70.dp)
-             //   .padding(10.dp)
-           // horizontalArrangement = Arrangement.Center
-
-        ) {
-            IconButton(
-
-                onClick = { navController.navigate(route=Screen.Main.route){
-                    popUpTo(Screen.Main.route){
-                        inclusive=true
-                    }
-                }  },
-                // Uses ButtonDefaults.ContentPadding by default
-                modifier=Modifier.fillMaxSize(),
-
-            ) {
-                // Inner content including an icon and a text label
-                Image(
-                    painter = painterResource(id = R.drawable.ic_sea_icon_round),
-                    contentDescription = "Back To Home",
-                    modifier = Modifier.fillMaxSize()
-
-
-
-                )
-
-            }
-        }
-    }
-}
-
-@Composable
-fun SearchBar() {
-    Column(Modifier.padding(16.dp)) {
-        val textState = remember { mutableStateOf(TextFieldValue()) }
-        TextField(
-            value = textState.value,
-            onValueChange = { textState.value = it },
-            placeholder = {Text(text = "Search")},
-        )
-        //Text("The textfield has this text: " + textState.value.text)
-    }
-}
-
-@Composable
-fun RecentVisit() {
-    Column(
-        modifier = Modifier
-            .padding(0.dp)
+            .padding(5.dp)
             .fillMaxWidth()
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center
         ) {
-            Text(text = "Recent Visits")
-        }
-        Row(
+        Surface(
             modifier = Modifier
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center
+                .size(120.dp)
+                .padding(15.dp),
+            shape = CircleShape,
         ) {
-            Text(text = "<lazy list implementation>")
-        }
-        Row(
-            modifier = Modifier
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center
-        ) {
-            Text(text = "Do you recommend this place?")
-        }
-        Row(
-            modifier = Modifier
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center
-        ) {
-            Button(
-
-                onClick = { /* ... */ },
-                // Uses ButtonDefaults.ContentPadding by default
-                contentPadding = PaddingValues(
-                    start = 20.dp,
-                    top = 12.dp,
-                    end = 25.dp,
-                    bottom = 12.dp
-                )
-            ) {
-                // Inner content including an icon and a text label
-                Icon(
-                    Icons.Filled.ThumbUp,
-                    contentDescription = "Yes",
-                    modifier = Modifier.size(ButtonDefaults.IconSize)
-                )
-                Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-                Text("Yes")
+            val imageUri = rememberSaveable{ mutableStateOf("") }
+            val painter = rememberAsyncImagePainter(
+                if (imageUri.value.isEmpty())
+                    R.drawable.ic_user
+                else
+                    imageUri.value
+            )
+            val launcher = rememberLauncherForActivityResult(
+                contract = ActivityResultContracts.GetContent()
+            ){
+                uri: Uri? ->
+                uri?.let { imageUri.value = it.toString()}
             }
-            Button(
-
-                onClick = { /* ... */ },
-                // Uses ButtonDefaults.ContentPadding by default
-                contentPadding = PaddingValues(
-                    start = 20.dp,
-                    top = 12.dp,
-                    end = 20.dp,
-                    bottom = 12.dp
-                )
+            Card (
+                shape = CircleShape,
+                modifier = Modifier
+                    .padding(8.dp)
+                    .size(100.dp)
             ) {
-                Icon(
-                    Icons.Filled.ThumbUp,
-                    contentDescription = "Yes",
-                    modifier = Modifier.size(ButtonDefaults.IconSize)
+                Image (
+                    painter = painter,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .wrapContentSize()
+                        .clickable { launcher.launch("image/*") },
+                    contentScale = ContentScale.Crop
                 )
-                Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-                Text("No")
-
-
             }
+        }
+        Spacer(modifier = Modifier.padding(10.dp))
+        Surface(
+            modifier = Modifier,
+            color = Color.White
+        ) {
+            Text(text = "User: ${Database.data.getName(userName)}",
+                 color = Color.Black)
+        }
+        Surface(
+            modifier = Modifier,
+            color = Color.White
+        ) {
+            Text(text = "Password: ${Database.data.getPass(userName)}",
+                color = Color.Black)
+        }
+        Surface(
+            modifier = Modifier,
+            color = Color.White
+        ) {
+            Text(text = "Home Zip Code: ${Database.data.getZip(userName)}",
+                color = Color.Black)
+        }
+        Surface (
+            modifier = Modifier,
+            color = Color.White
+        ) {
+            Text(text = "Recent History",
+                 color = Color.Black,
+                 style = MaterialTheme.typography.h4)
+        }/*
+        Surface  {
+            Text(text = userBase[userName]?.history?.get(1)?.comments.toString())
+        }*/
+        Column(
+            modifier = Modifier
+                .verticalScroll(rememberScrollState())
+
+        ) {
+            iterate(historyList = userBase[userName]?.history!!, userName = userName)
         }
     }
 }
 
 @Composable
-fun ProfileImage() {
+fun iterate(historyList: MutableList<Review>, userName: String) {
+    for (i in historyList.indices) {
+        reviewCard(loc = data.getLocName(userBase[userName]?.history?.get(i)!!.restroomLoc),
+                   comments = userBase[userName]?.history?.get(i)?.comments.toString())
+    }
+}
 
-    val imageUri = rememberSaveable{ mutableStateOf("") }
-    val painter = rememberImagePainter(
-        if (imageUri.value.isEmpty())
-            R.drawable.ic_user
-        else
-            imageUri.value
-    )
-    Column (
+@Composable
+fun reviewCard(loc:String, comments:String) {
+    Card(
         modifier = Modifier
-            .padding(8.dp)
-            .fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
+            .padding(10.dp)
+            .fillMaxWidth()
+            .wrapContentHeight(),
+        shape = MaterialTheme.shapes.medium,
+        elevation = 5.dp,
+        backgroundColor = MaterialTheme.colors.surface
     ) {
-        Card (
-            shape = CircleShape,
-            modifier = Modifier
-                .padding(8.dp)
-                .size(100.dp)
-        ) {
-            Image (
-                painter = painter,
-                contentDescription = null,
-                modifier = Modifier
-                    .wrapContentSize()
-                    .clickable {},
-                contentScale = ContentScale.Crop
+        Column(Modifier.padding(8.dp)) {
+            Text (
+                text = loc,
+                style = MaterialTheme.typography.h6,
+                color = MaterialTheme.colors.onSurface,
             )
+            Text(
+                //text = location,
+                text = comments,
+                style = MaterialTheme.typography.body2,
+            )/*
+            Text(
+                text = comments,
+                style = MaterialTheme.typography.body1,
+            )*/
         }
-        Text(text = "Change Profile Picture")
-
     }
 }
