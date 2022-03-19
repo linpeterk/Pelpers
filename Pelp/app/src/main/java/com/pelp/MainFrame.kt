@@ -96,12 +96,12 @@ fun MainScreen(navController: NavController){
 
 
     }
-    makeAddressButton()
+    makeAddressButton(navController)
 }
 
 
 @Composable
-fun makeAddressButton(){
+fun makeAddressButton(navController: NavController){
     Column(modifier = Modifier
         .offset(x = 132.dp)
         .padding(5.dp)
@@ -114,7 +114,11 @@ fun makeAddressButton(){
                 .padding(2.dp),
         ) {
             FloatingActionButton(
-                onClick = { /*TODO*/ },
+                onClick = {navController.navigate(route=Screen.Search.route){
+                    popUpTo(Screen.Search.route){
+                        inclusive=true
+                    }}
+                },
                 modifier = Modifier
                     .size(100.dp, 35.dp),
                 backgroundColor = Color.Transparent
