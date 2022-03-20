@@ -1,3 +1,5 @@
+
+/*
 package com.pelp
 
 
@@ -56,9 +58,9 @@ private const val TAG = "MapSampleActivity"
 
 
 @Composable
-fun MainScreen(navController: NavController){
+fun TestScreen(navController: NavController){
 
-   // cardCount =  remember {  mutableStateOf(dataBase.count()) }
+    // cardCount =  remember {  mutableStateOf(dataBase.count()) }
     val composableScope = rememberCoroutineScope()
     Log.d(Examples.TAG,"Hello from Main")
 
@@ -74,7 +76,7 @@ fun MainScreen(navController: NavController){
             ) {
 
 
-                            MakeGoogleMap(true, modifier = Modifier.fillMaxSize())
+                MakeGoogleMap(true, modifier = Modifier.fillMaxSize())
 
 
 
@@ -211,7 +213,7 @@ fun MenuTab(navController: NavController){
                 //Text(text = "Hello")
             }
 
-          //  Spacer(modifier = Modifier.width(25.dp))
+            //  Spacer(modifier = Modifier.width(25.dp))
 
             // EMERGENCY BUTTON HERE
             Column(modifier = Modifier
@@ -273,7 +275,7 @@ fun MenuTab(navController: NavController){
 
             Column(modifier = Modifier
                 .padding(horizontal = 15.dp )
-                ) {
+            ) {
                 FloatingActionButton(
                     onClick = {navController.navigate(route=Screen.Search.route){
                         popUpTo(Screen.Search.route){
@@ -298,7 +300,7 @@ fun MenuTab(navController: NavController){
 
             Column(modifier = Modifier
                 .padding(horizontal = 15.dp )
-                ) {
+            ) {
                 FloatingActionButton(
                     onClick = { navController.navigate(route=Screen.Profile.route){
                         popUpTo(Screen.Profile.route){
@@ -328,7 +330,7 @@ fun MenuTab(navController: NavController){
 //val destObject = mutableListOf<LocationsExample>()
 @Composable
 //pass in true if you want to make markers
- fun MakeGoogleMap(
+fun MakeGoogleMap(
     makeMarker: Boolean = false,
     obj: HashMap<LatLng, Location_Restroom> = Database.dataBase,
     modifier: Modifier
@@ -347,42 +349,42 @@ fun MenuTab(navController: NavController){
 
     var uiSettings by remember { mutableStateOf(MapUiSettings(compassEnabled = false, myLocationButtonEnabled = true, mapToolbarEnabled = true)) }
 
-         GoogleMap(
-            modifier = Modifier.fillMaxSize(),
-            cameraPositionState = cameraPositionState!!,
-            uiSettings = uiSettings,
+    GoogleMap(
+        modifier = Modifier.fillMaxSize(),
+        cameraPositionState = cameraPositionState!!,
+        uiSettings = uiSettings,
 
 
-            onPOIClick = {
-                Log.d(TAG, "POI clicked: ${it.name}")
-            },
+        onPOIClick = {
+            Log.d(TAG, "POI clicked: ${it.name}")
+        },
 
-            onMapLongClick = {
-                /*
-                Log.d(TAG, "lat is : ${it.latitude}")
-                var str:String =  reverseGeocoder(contex, it.latitude, it.longitude)
-                var a: Location_Restroom = Location_Restroom( str, LatLng(it.latitude, it.longitude))
-                */
-                //  destObject.add(a)
-
-
-                // dataAdd(a.loc, a)
-
-                //  cardCount.value++ //force refresh
-                cameraPositionState!!.position =
-                    CameraPosition.fromLatLngZoom(
-                        userCurrentLocation,
-                        15f
-                    )
+        onMapLongClick = {
+            /*
+            Log.d(TAG, "lat is : ${it.latitude}")
+            var str:String =  reverseGeocoder(contex, it.latitude, it.longitude)
+            var a: Location_Restroom = Location_Restroom( str, LatLng(it.latitude, it.longitude))
+            */
+            //  destObject.add(a)
 
 
-            }
-        ) {
-            if(makeMarker)
-                makeMarkers(obj)
+            // dataAdd(a.loc, a)
+
+            //  cardCount.value++ //force refresh
+            cameraPositionState!!.position =
+                CameraPosition.fromLatLngZoom(
+                    userCurrentLocation,
+                    15f
+                )
 
 
         }
+    ) {
+        if(makeMarker)
+            makeMarkers(obj)
+
+
+    }
 
 
 }
@@ -394,10 +396,10 @@ fun makeMarkers(obj:HashMap<LatLng, Location_Restroom> = Database.dataBase){
     val context = LocalContext.current
 
     val markerClick: (Marker) -> Boolean = {
-    //address.loc=it.position
+        //address.loc=it.position
         false
     }
-   // cardCount.value
+    // cardCount.value
     Database.dataBase.forEach(){
         Marker(
             position = it.value.loc,
@@ -455,9 +457,9 @@ fun anotherFunction(){
 @Composable
 fun MakeScrollComponents(navController: NavController){
 
-   // var scrollState:ScrollState =  rememberScrollState()
-   // val context = LocalContext.current
-   // var textFieldCount by remember { mutableStateOf (destObject.count()) }
+    // var scrollState:ScrollState =  rememberScrollState()
+    // val context = LocalContext.current
+    // var textFieldCount by remember { mutableStateOf (destObject.count()) }
 
     //val gradient = Brush.verticalGradient(0f to Color.Gray, 1000f to Color.White)
     Box(
@@ -480,19 +482,19 @@ fun MakeScrollComponents(navController: NavController){
                 //.verticalScroll(rememberScrollState())
                 .padding(horizontal = 10.dp)
 
-                ) {
+        ) {
             var  dataBaseIter:Int
 
             if(Database.dataBase.count()>0){
                 dataBaseIter=Database.dataBase.count()-1}else dataBaseIter = 0
-      //      var entry = Database.dataBase.iterator().next()
+            //      var entry = Database.dataBase.iterator().next()
 
 
-           // cardCount.value // force update components
+            // cardCount.value // force update components
 
             //////////////////////MAKING ALL THE CARDS//////////////////////////////////////////
             repeat(
-               times= Database.dataBase.count()
+                times= Database.dataBase.count()
             ) {
                 var currentRestRoom = Database.dataBase[Database.data.getKeyFromList(dataBaseIter)]
                 Spacer(modifier = Modifier.padding(10.dp))
@@ -521,7 +523,7 @@ fun MakeScrollComponents(navController: NavController){
                             .padding(5.dp)
                             .fillMaxWidth()
 
-                            ,
+                        ,
                         fontWeight = FontWeight.Bold,
                         fontSize = 18.sp,
                         textAlign = TextAlign.Center
@@ -544,7 +546,7 @@ fun MakeScrollComponents(navController: NavController){
 
                         ),
 
-                   shape= RoundedCornerShape(15.dp),
+                    shape= RoundedCornerShape(15.dp),
                     elevation = 10.dp
 
                 ) {
@@ -552,68 +554,68 @@ fun MakeScrollComponents(navController: NavController){
 //////////////////////SECOND CARD COTENTS//////////////////////////////////////////
                     val rndsImage = (0..(currentRestRoom!!.image_URL.count()-1)).random()
                     val rndsComment = (0..(currentRestRoom!!.reviewArray.count()-1)).random()
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(2.dp)
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(2.dp)
 
-                                ,
-                            verticalAlignment = Alignment.CenterVertically,
+                        ,
+                        verticalAlignment = Alignment.CenterVertically,
 
                         ) {
 
-                                Surface(
-                                    modifier = Modifier
-                                        /*.size(50.dp, 50.dp)*/
-                                        .weight(.6f)
-                                        .fillMaxHeight()
-                                      ,
+                        Surface(
+                            modifier = Modifier
+                                /*.size(50.dp, 50.dp)*/
+                                .weight(.6f)
+                                .fillMaxHeight()
+                            ,
 
-                                    /*.border(2.dp, Color.Blue),*/
-                                    shape = RoundedCornerShape(10.dp)
-                                ) {
-                                Row( modifier=Modifier.horizontalScroll(rememberScrollState())) {
-                                    repeat(currentRestRoom.image_URL.count()) {
-                                        Box() {
-                                            Image(
-                                                modifier = Modifier
-                                                    //.size(50.dp, 50.dp),
-                                                    .fillMaxSize(),
-                                                contentScale = ContentScale.Inside,
-                                                painter = painterResource(id = currentRestRoom!!.image_URL[it]),
-                                                //  painter = painterResource(id = restRoomObj?.userIMG_URL?.get(it)!!),
-                                                contentDescription = "Urban Bathroom"
-                                                /*contentScale = ContentScale.Fit*/
-                                            )
-                                        }
+                            /*.border(2.dp, Color.Blue),*/
+                            shape = RoundedCornerShape(10.dp)
+                        ) {
+                            Row( modifier=Modifier.horizontalScroll(rememberScrollState())) {
+                                repeat(currentRestRoom.image_URL.count()) {
+                                    Box() {
+                                        Image(
+                                            modifier = Modifier
+                                                //.size(50.dp, 50.dp),
+                                                .fillMaxSize(),
+                                            contentScale = ContentScale.Inside,
+                                            painter = painterResource(id = currentRestRoom!!.image_URL[it]),
+                                            //  painter = painterResource(id = restRoomObj?.userIMG_URL?.get(it)!!),
+                                            contentDescription = "Urban Bathroom"
+                                            /*contentScale = ContentScale.Fit*/
+                                        )
                                     }
                                 }
+                            }
 
-
-                                }
-                                //  restRoomObj is the current component's location_restroom
-
-                                Box(
-                                    modifier = Modifier
-                                        .weight(1.0f)
-                                        .fillMaxHeight()
-                                        .padding(4.dp),
-                                    contentAlignment = Alignment.Center
-                                    //.border(2.dp, Color.Red),
-                                ) {
-
-                                    //   Text(text = restRoomObj!!.reviewArray[it].customerName,
-                                    Text(
-                                        text = "${currentRestRoom!!.reviewArray[rndsComment].customerName}:\n\n\"${currentRestRoom!!.reviewArray[rndsComment].comments}\"",
-                                       fontSize= 14.sp,
-                                        modifier = Modifier.fillMaxWidth()
-                                    )
-                                    //Spacer(modifier = Modifier.height(30.dp))
-                                    //  var str: String = dataBase[addressGlobal.loc]?.reviewArray!!.get(it)
-
-                                }
 
                         }
+                        //  restRoomObj is the current component's location_restroom
+
+                        Box(
+                            modifier = Modifier
+                                .weight(1.0f)
+                                .fillMaxHeight()
+                                .padding(4.dp),
+                            contentAlignment = Alignment.Center
+                            //.border(2.dp, Color.Red),
+                        ) {
+
+                            //   Text(text = restRoomObj!!.reviewArray[it].customerName,
+                            Text(
+                                text = "${currentRestRoom!!.reviewArray[rndsComment].customerName}:\n\n\"${currentRestRoom!!.reviewArray[rndsComment].comments}\"",
+                                fontSize= 14.sp,
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                            //Spacer(modifier = Modifier.height(30.dp))
+                            //  var str: String = dataBase[addressGlobal.loc]?.reviewArray!!.get(it)
+
+                        }
+
+                    }
 
 
 
@@ -622,12 +624,11 @@ fun MakeScrollComponents(navController: NavController){
 
                 if(dataBaseIter>0) {
                     --dataBaseIter
-                  //  currentRestRoom= Database.dataBase[Database.data.getKeyFromList(dataBaseIter)]
+                    //  currentRestRoom= Database.dataBase[Database.data.getKeyFromList(dataBaseIter)]
                 }
             }
         }
     }
 }
 
-
-
+*/

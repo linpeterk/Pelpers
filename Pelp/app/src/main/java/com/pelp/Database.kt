@@ -125,6 +125,11 @@ class Database(){
          */
     }
 
+    fun addRestroom(bname:String,baddress:String,breview:String){
+        var o=Business(bname,baddress,breview)
+        businessBase[bname]=o
+    }
+
     fun addBuisness(bname:String,baddress:String,breview:String){
         var o=Business(bname,baddress,breview)
         businessBase[bname]=o

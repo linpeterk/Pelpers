@@ -71,6 +71,8 @@ fun ProfileScreen( navController: NavController) {
                 .padding(15.dp),
             shape = CircleShape,
         ) {
+
+
             val imageUri = rememberSaveable{ mutableStateOf("") }
             val painter = rememberAsyncImagePainter(
                 if (imageUri.value.isEmpty())
@@ -139,6 +141,8 @@ fun ProfileScreen( navController: NavController) {
 
         ) {
             iterate(historyList = userBase[userName]?.history!!, userName = userName)
+
+
         }
     }
 }
