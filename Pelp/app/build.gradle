@@ -69,7 +69,7 @@ dependencies {
 
     implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2'
 
-
+    implementation 'de.charlex.compose:bottom-drawer-scaffold:1.0.0-rc01'
     //Google Map
 /*
     // KTX for the Maps SDK for Android library

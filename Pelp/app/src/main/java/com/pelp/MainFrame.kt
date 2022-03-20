@@ -34,6 +34,7 @@ import com.pelp.model.data.Location_Restroom
 import com.pelp.model.data.*
 import com.pelp.ui.theme.Blue300
 import com.pelp.ui.theme.lightBlue
+import de.charlex.compose.BottomDrawerScaffold
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -51,17 +52,76 @@ private const val TAG = "MapSampleActivity"
 
 //var cardCount:MutableState<Int> = mutableStateOf(dataBase.count())
 
+/*
+ isFloatingActionButtonDocked= true,
+        floatingActionButton= { FloatingActionButton(
+            onClick = {navController.navigate(route=Screen.Search.route){
+                popUpTo(Screen.Search.route){
+                    inclusive=true
+                }}
+            }){}},
+ */
 
 
 
-
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MainScreen(navController: NavController){
 
    // cardCount =  remember {  mutableStateOf(dataBase.count()) }
     val composableScope = rememberCoroutineScope()
     Log.d(Examples.TAG,"Hello from Main")
+    var peekHeight = remember { mutableStateOf(250.dp)}
 
+    BottomDrawerScaffold(
+        //scaffoldState = rememberBottomDrawerState(5)
+        drawerModifier = Modifier.size(530.dp),
+        drawerGesturesEnabled = true,
+
+
+        floatingActionButtonPosition= FabPosition.Center,
+        drawerPeekHeight = peekHeight.value,
+        drawerBackgroundColor = Color.Transparent,  //Transparent drawer for custom Drawer shape
+        drawerElevation = 0.dp,
+
+        drawerContent = {
+            Surface(                    //To add Padding to Drawer
+                modifier = Modifier
+                ,
+                shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp),
+             //   elevation = 4.dp
+            ) {
+                Box(modifier = Modifier
+                    .fillMaxSize()
+                    .fillMaxHeight()
+                    .fillMaxWidth()
+                ){
+                    Column() {
+                        Box(modifier = Modifier
+                            .weight(0.09f)
+
+                        ){
+                            MenuTab(navController)
+                        }
+
+
+                        Box(modifier = Modifier
+                            .weight(0.8f)
+                            .background(MaterialTheme.colors.primaryVariant)
+                        ){
+                            MakeScrollComponents(navController)
+                        }
+                    }
+
+
+
+                }
+            }
+        }
+    ){
+        MakeGoogleMap(true, modifier = Modifier.fillMaxSize())
+    }
+          /*
     Box(modifier = Modifier
         .fillMaxSize()
         .fillMaxHeight()
@@ -74,7 +134,7 @@ fun MainScreen(navController: NavController){
             ) {
 
 
-                            MakeGoogleMap(true, modifier = Modifier.fillMaxSize())
+                MakeGoogleMap(true, modifier = Modifier.fillMaxSize())
 
 
 
@@ -100,6 +160,7 @@ fun MainScreen(navController: NavController){
 
     }
     makeAddressButton(navController)
+    */
 }
 
 
@@ -149,17 +210,16 @@ fun MenuTab(navController: NavController){
     Box(modifier = Modifier
 
     ) {
-        Log.d(TAG, "Hello From ")
 
         Row(
             modifier = Modifier
                 .horizontalScroll(rememberScrollState())
 
         ) {
-            Spacer(modifier = Modifier.width(20.dp))
             //Home button
+            Spacer(modifier = Modifier.padding(horizontal = 10.dp))
             Column(modifier = Modifier
-                .padding(horizontal = 15.dp)
+                .padding(horizontal = 20.dp)
 
 
             ) {
@@ -169,7 +229,8 @@ fun MenuTab(navController: NavController){
                             inclusive=true
                         }}
                     },
-                    modifier = Modifier.scale(.7F),
+                    modifier = Modifier.scale(.8F)
+                        .background(Color.Transparent),
                     backgroundColor = MaterialTheme.colors.surface
                 ) {
                     Image(
@@ -177,7 +238,7 @@ fun MenuTab(navController: NavController){
                         contentDescription = "Home!",
                         modifier = Modifier
                             .background(Color.Transparent)
-                            .scale(.8F)
+                            .scale(1f)
                     )
 
                 }
@@ -196,7 +257,7 @@ fun MenuTab(navController: NavController){
                             inclusive=true
                         }}
                     },
-                    modifier = Modifier.scale(.7F),
+                    modifier = Modifier.scale(.8F),
                     backgroundColor = MaterialTheme.colors.surface
                 ) {
                     Image(
@@ -228,7 +289,7 @@ fun MenuTab(navController: NavController){
                             inclusive=true
                         }}
                     },
-                    modifier = Modifier.scale(.7F),
+                    modifier = Modifier.scale(.8F),
                     backgroundColor = MaterialTheme.colors.surface
                 ) {
                     Image(
@@ -255,7 +316,7 @@ fun MenuTab(navController: NavController){
                             inclusive=true
                         }}*/
                     },
-                    modifier = Modifier.scale(.7F),
+                    modifier = Modifier.scale(.8F),
                     backgroundColor = MaterialTheme.colors.surface
                 ) {
                     Image(
@@ -280,7 +341,7 @@ fun MenuTab(navController: NavController){
                             inclusive=true
                         }}
                     },
-                    modifier = Modifier.scale(.7F),
+                    modifier = Modifier.scale(.8F),
                     backgroundColor = MaterialTheme.colors.surface
                 ) {
                     Image(
@@ -305,7 +366,7 @@ fun MenuTab(navController: NavController){
                             inclusive=true
                         }
                     } },
-                    modifier = Modifier.scale(.7F),
+                    modifier = Modifier.scale(.8F),
                     backgroundColor = MaterialTheme.colors.surface
                 ) {
                     Image(
@@ -495,7 +556,7 @@ fun MakeScrollComponents(navController: NavController){
                times= Database.dataBase.count()
             ) {
                 var currentRestRoom = Database.dataBase[Database.data.getKeyFromList(dataBaseIter)]
-                Spacer(modifier = Modifier.padding(10.dp))
+                Spacer(modifier = Modifier.padding(7.dp))
                 //FIRST CARDS
                 Card(
                     modifier = Modifier

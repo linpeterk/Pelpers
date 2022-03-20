@@ -2,6 +2,7 @@ package com.pelp
 
 import Examples.*
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -38,11 +39,11 @@ class MainActivity : ComponentActivity() {
 
             PelpTheme {
                 navController = rememberNavController()
-                SetupNavGraph(navController = navController)
-
+               SetupNavGraph(navController = navController)
+            //    MainScreen(navController = navController)
             }
 
-
+          //  TestScreen(navController)
             //addAddress(navController = rememberNavController())
 //        SignupScreen(navController = navController)
             //SquareImage (navController, 2)
@@ -50,7 +51,7 @@ class MainActivity : ComponentActivity() {
 
 
 
-//            MainScreen(navController = navController)
+       //    MainScreen(navController = navController)
 
            //MainScreen(navController = navController)
 
@@ -99,11 +100,14 @@ class MainActivity : ComponentActivity() {
         _locationPermissionGranted.value = setGranted
     }
 
+    @SuppressLint("MissingPermission")
     fun getDeviceLocation(){
         val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
         try{
             if ( locationPermissionGranted.value == true) {
+
+
                 val locationResult = fusedLocationProviderClient.lastLocation
 
                 locationResult.addOnCompleteListener{

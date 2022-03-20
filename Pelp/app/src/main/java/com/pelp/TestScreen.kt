@@ -1,5 +1,5 @@
 
-/*
+
 package com.pelp
 
 
@@ -10,8 +10,11 @@ import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -36,11 +39,12 @@ import com.pelp.model.data.Location_Restroom
 import com.pelp.model.data.*
 import com.pelp.ui.theme.Blue300
 import com.pelp.ui.theme.lightBlue
+import de.charlex.compose.BottomDrawerScaffold
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import java.io.IOException
 import java.util.*
-
+/*
 
 var cameraPositionState:CameraPositionState?=null
 var addressGlobal: Location_Restroom = Location_Restroom(loc=LatLng(100.0, 100.0))
@@ -57,13 +61,61 @@ private const val TAG = "MapSampleActivity"
 
 
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun TestScreen(navController: NavController){
 
     // cardCount =  remember {  mutableStateOf(dataBase.count()) }
     val composableScope = rememberCoroutineScope()
     Log.d(Examples.TAG,"Hello from Main")
+    var peekHeight = remember { mutableStateOf(250.dp)}
 
+    BottomDrawerScaffold(
+        //scaffoldState = rememberBottomDrawerState(5)
+        drawerModifier = Modifier.size(530.dp),
+        drawerGesturesEnabled = true,
+        drawerPeekHeight = peekHeight.value,
+        drawerBackgroundColor = Color.Transparent,  //Transparent drawer for custom Drawer shape
+        drawerElevation = 0.dp,
+
+        drawerContent = {
+            Surface(                    //To add Padding to Drawer
+                modifier = Modifier
+                ,
+                shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp),
+             //   elevation = 4.dp
+            ) {
+                Box(modifier = Modifier
+                    .fillMaxSize()
+                    .fillMaxHeight()
+                    .fillMaxWidth()
+                ){
+                    Column() {
+                        Box(modifier = Modifier
+                            .weight(0.1f)
+
+                        ){
+                            MenuTab(navController)
+                        }
+
+
+                        Box(modifier = Modifier
+                            .weight(0.8f)
+                            .background(MaterialTheme.colors.primaryVariant)
+                        ){
+                            MakeScrollComponents(navController)
+                        }
+                    }
+
+
+
+                }
+            }
+        }
+    ){
+        MakeGoogleMap(true, modifier = Modifier.fillMaxSize())
+    }
+          /*
     Box(modifier = Modifier
         .fillMaxSize()
         .fillMaxHeight()
@@ -102,7 +154,57 @@ fun TestScreen(navController: NavController){
 
     }
     makeAddressButton(navController)
+    */
+
+
 }
+//    BottomDrawerScaffold(
+//        //scaffoldState = rememberBottomDrawerState(5)
+//
+//
+//        drawerModifier = Modifier,
+//        drawerGesturesEnabled = true,
+//        drawerPeekHeight = 150.dp,
+//        drawerBackgroundColor = Color.Transparent,  //Transparent drawer for custom Drawer shape
+//        drawerElevation = 0.dp,
+//
+//        drawerContent = {
+//            Surface(                    //To add Padding to Drawer
+//                modifier = Modifier
+//                    .padding(
+//                        start = 10.dp,
+//                        end = 10.dp,
+//                        top = 10.dp
+//                    ),
+//                shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp),
+//                elevation = 4.dp
+//            ) {
+//
+//            }
+//        }
+
+
+/*
+    Box(modifier = Modifier
+        .weight(0.14f)
+
+    ){
+        MenuTab(navController)
+    }
+
+
+    Box(modifier = Modifier
+        .weight(0.8f)
+        .background(MaterialTheme.colors.primaryVariant)
+    ){
+        MakeScrollComponents(navController)
+    }
+    */
+
+
+
+  //  makeAddressButton(navController)
+
 
 
 @Composable
