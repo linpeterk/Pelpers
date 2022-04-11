@@ -423,11 +423,11 @@ fun MenuTab(navController: NavController){
                 // dataAdd(a.loc, a)
 
                 //  cardCount.value++ //force refresh
-                cameraPositionState!!.position =
-                    CameraPosition.fromLatLngZoom(
-                        userCurrentLocation,
-                        15f
-                    )
+//                cameraPositionState!!.position =
+//                    CameraPosition.fromLatLngZoom(
+//                        userCurrentLocation,
+//                        15f
+//                    )
 
 
             }

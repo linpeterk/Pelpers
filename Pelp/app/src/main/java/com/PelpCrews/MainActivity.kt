@@ -18,7 +18,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.PelpCrews.model.data.writeFile
 import com.PelpCrews.ui.theme.PelpTheme
 
-lateinit var userCurrentLocation:LatLng
+//lateinit var userCurrentLocation:LatLng
 
 var permission = true
 
@@ -115,7 +115,7 @@ class MainActivity : ComponentActivity() {
                     if(task.isSuccessful()) {
                         val lastLocation = task.result
 
-                        userCurrentLocation = LatLng(lastLocation.latitude, lastLocation.longitude)
+//                        userCurrentLocation = LatLng(lastLocation.latitude, lastLocation.longitude)
 
                         Log.d(TAG, "lat ${lastLocation.latitude} and long ${lastLocation.longitude}")
                     }
